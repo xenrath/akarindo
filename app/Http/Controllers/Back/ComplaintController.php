@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use App\Models\Complaint;
+use App\Models\Produk;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,25 +13,27 @@ class ComplaintController extends Controller
 {
     public function index()
     {
-        $complaints = Complaint::get();
-        return view('back.complaint.index', compact('complaints'));
+        $menunggu = Complaint::where('status', 'Menunggu')->get();
+        $diproses = Complaint::where('status', 'Diproses')->get();
+        $selesai = Complaint::where('status', 'Selesai')->get();
+
+        return view('back.complaint.index', compact('menunggu', 'diproses', 'selesai'));
     }
 
     public function create()
     {
         $users = User::get();
-        $products = User::get();
+        $products = Produk::where('user_id', auth()->user()->id)->get();
+
         return view('back.complaint.create', compact('users', 'products'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required',
             'product_id' => 'required',
             'description' => 'required'
         ], [
-            'user_id.required' => 'Pilih nama client terlebih dahulu!',
             'product_id.required' => 'Pilih produk terlebih dahulu!',
             'description.required' => 'Deskripsi tidak boleh kosong!',
         ]);
@@ -38,17 +41,23 @@ class ComplaintController extends Controller
         $now = Carbon::now()->format('d-m-Y');
 
         Complaint::create(array_merge($request->all(), [
+            'user_id' => auth()->user()->id,
             'code' => $this->generateCode(),
             'status' => 'Menunggu',
             'start_date' => $now
         ]));
 
-        return redirect('complaint')->with('status', 'Berhasil menambahkan complaint');
+        if (auth()->user()->role_id == 1) {
+            return redirect('complaint')->with('status', 'Berhasil menambahkan complaint');
+        } else {
+            return redirect('dashboard')->with('status', 'Berhasil menambahkan complaint');
+        }
     }
 
-    public function show()
+    public function show($id)
     {
-        // return view('back.complaint.show');
+        $complaint = Complaint::where('id', $id)->first();
+        return view('back.complaint.show', compact('complaint'));
     }
 
     public function edit($id)
@@ -110,5 +119,24 @@ class ComplaintController extends Controller
         ]);
 
         return redirect('complaint')->with('status', 'Berhasil memperbarui status pengaduan');
+    }
+
+    public function statusDiproses($id) {
+        Complaint::where('id', $id)->update([
+            'status' => 'Diproses'
+        ]);
+
+        return redirect('complaint')->with('status', 'Berhasil memproses tiket');
+    }
+
+    public function statusSelesai($id) {
+        $now = Carbon::now()->format('d-m-Y');
+        
+        Complaint::where('id', $id)->update([
+            'status' => 'Selesai',
+            'end_date' => $now
+        ]);
+
+        return redirect('complaint')->with('status', 'Berhasil menyelesaikan tiket');
     }
 }

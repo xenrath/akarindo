@@ -10,7 +10,7 @@ class RoleController extends Controller
 {
     public function index()
     {
-        $roles = Role::get();
+        $roles = Role::paginate(3);
         return view('back.role.index', compact('roles'));
     }
 

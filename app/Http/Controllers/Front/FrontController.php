@@ -11,4 +11,9 @@ class FrontController extends Controller
     {
         return view('front.index');
     }
+
+    public function login()
+    {
+        return view('front.login');
+    }
 }
