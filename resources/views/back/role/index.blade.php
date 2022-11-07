@@ -19,36 +19,36 @@
     <h5 class="card-header d-flex align-items-start justify-content-between">
       Data Role
       <a href="{{ url('role/create') }}" class="btn btn-sm rounded-pill btn-primary">
-        <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah Role</a>
+        <span class="d-none d-sm-block">Tambah User</span>
+        <i class="tf-icons bx bx-plus d-block d-sm-none"></i>
+      </a>
     </h5>
     <div class="table-responsive text-nowrap">
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
-            <th>No</th>
+            <th class="text-center">No.</th>
             <th>Role</th>
-            <th>Opsi</th>
+            <th class="text-center">Opsi</th>
           </tr>
         </thead>
-        <tbody class="table-border-bottom-0">
+        <tbody>
           @foreach ($roles as $role)
           <tr>
-            <td>{{ $loop->iteration }}</td>
+            <td class="text-center">{{ $loop->iteration }}</td>
             <td>{{ $role->role }}</td>
-            <td>
-              <form method="post" action="{{ url('role/' . $role->id) }}"
-                onsubmit="return confirm('Apakah anda yakin akan menghapus data ini?')">
+            <td class="text-center">
+              <form method="post" action="{{ url('role/' . $role->id) }}">
                 @csrf
                 @method('delete')
-                {{-- <a href="{{ url('role/show') }}" class="btn rounded-pill btn-info btn-sm text-white">
-                  <span class="tf-icons bx bx-show"></span>&nbsp; Detail
-                </a> --}}
                 <a href="{{ url('role/' . $role->id . '/edit') }}"
-                  class="btn rounded-pill btn-warning btn-sm text-white">
-                  <span class="tf-icons bx bxs-edit"></span>&nbsp; Ubah
+                  class="btn rounded-pill btn-secondary btn-sm text-white">
+                  <span class="d-none d-sm-block">Edit</span>
+                  <i class="tf-icons bx bxs-edit d-block d-sm-none"></i>
                 </a>
                 <button type="submit" class="btn rounded-pill btn-danger btn-sm text-white">
-                  <span class="tf-icons bx bx-trash-alt"></span>&nbsp; Hapus
+                  <span class="d-none d-sm-block">Hapus</span>
+                  <i class="tf-icons bx bx-trash-alt d-block d-sm-none"></i>
                 </button>
               </form>
             </td>

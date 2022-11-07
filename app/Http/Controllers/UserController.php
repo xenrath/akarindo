@@ -17,33 +17,41 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = Role::all();
-        return view('back.user.create', compact('roles'));
+        return view('back.user.create');
     }
-
 
     public function store(Request $request)
     {
         $request->validate([
-            'role_id' => 'required',
-            'name' => 'required',
-            'phone' => 'required',
-            'gambar' => 'required|nullable|image|mimes:jpeg,jpg,png|max:2048',
+            'nama' => 'required',
+            'email' => 'required|email|unique:users',
+            'role' => 'required',
+            'telp' => 'unique:users',
+            'foto' => 'image|mimes:jpeg,jpg,png|max:2048',
+        ], [
+            'nama.required' => 'Nama user harus diisi!',
+            'email.required' => 'Email harus diisi!',
+            'email.unique' => 'Email sudah digunakan!',
+            'email.email' => 'Email salah!',
+            'role.required' => 'Role harus dipilih!',
+            'telp.unique' => 'Nomor telepon sudah digunakan!',
+            'foto.image' => 'Foto harus berformat jpeg, jpg, png!'
         ]);
 
-        $fileName = '';
-        if ($request->file('gambar')->isValid()) {
-            $gambar = $request->file('gambar');
-            $extention = $gambar->getClientOriginalExtension();
-            $fileName = "user/" . date('ymdHis') . "." . $extention;
-            $upload_path = 'public/storage/uploads/user';
-            $request->file('gambar')->move($upload_path, $fileName);
-            $input['gambar'] = $fileName;
+        if ($request->foto) {
+            $foto = str_replace(' ', '', $request->foto->getClientOriginalName());
+            $namafoto = "user/" . date('YmdHis') . "." . $foto;
+            $request->foto->storeAs('public/uploads', $namafoto);
+        } else {
+            $namafoto = null;
         }
+
+        $kode = $this->kodeUser();
+
         User::create(array_merge($request->all(), [
-            'gambar' => $fileName,
-            'email' => '',
-            'password' => ''
+            'kode' => $kode,
+            'password' => bcrypt($kode),
+            'foto' => $namafoto,
         ]));
 
         return redirect('user')->with('status', 'Berhasil menambahkan user');
@@ -51,8 +59,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $roles = Role::all();
-        return view('.back.user.edit', compact('user', 'roles'));
+        return view('.back.user.edit', compact('user'));
     }
 
 
@@ -93,5 +100,12 @@ class UserController extends Controller
         $data = User::find($id);
         $data->delete();
         return redirect('user')->with('status', 'User berhasil dihapus');
+    }
+
+    public function kodeUser()
+    {
+        $karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
+        $kode  = substr(str_shuffle($karakter), 0, 10);
+        return $kode;
     }
 }

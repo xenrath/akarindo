@@ -31,7 +31,6 @@
 
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="{{ asset('sneat/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
-
   <link rel="stylesheet" href="{{ asset('sneat/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
   <!-- Page CSS -->
@@ -52,7 +51,7 @@
 
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo">
-          <a href="index.html" class="app-brand-link">
+          <a href="{{ url('/') }}" class="app-brand-link">
             <span class="app-brand-logo demo">
               <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -108,50 +107,47 @@
         <div class="menu-inner-shadow"></div>
         <ul class="menu-inner py-1">
           <!-- Dashboard -->
-          <li class="menu-item active">
+          <li class="menu-item {{ request()->is('dashboard') ? 'active' : '' }}">
             <a href="{{ url('/dashboard') }}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
               <div data-i18n="Analytics">Dashboard</div>
             </a>
           </li>
-          @if (auth()->user()->isAdmin()))
+          @if (auth()->user()->isAdmin())
+          <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Data Tiket</span>
+          </li>
+          <li class="menu-item {{ request()->is('tiket*') ? 'active' : '' }}">
+            <a href="{{ url('tiket') }}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-detail"></i>
+              <div data-i18n="Basic">Tiket</div>
+            </a>
+          </li>
           <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Data Master</span>
           </li>
-          <li class="menu-item">
+          <li class="menu-item {{ request()->is('user*') ? 'active' : '' }}">
             <a href="{{ url('user') }}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-user"></i>
               <div data-i18n="Basic">User</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="{{ url('role') }}" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Role</div>
-            </a>
-          </li>
-          <li class="menu-item">
+          <li class="menu-item {{ request()->is('level*') ? 'active' : '' }}">
             <a href="{{ url('level') }}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic">Level</div>
             </a>
           </li>
-          <li class="menu-item">
+          <li class="menu-item {{ request()->is('layanan*') ? 'active' : '' }}">
             <a href="{{ url('layanan') }}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic">Layanan</div>
             </a>
           </li>
-          <li class="menu-item">
+          <li class="menu-item {{ request()->is('produk*') ? 'active' : '' }}">
             <a href="{{ url('produk') }}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic">Produk</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="{{ url('complaint') }}" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Basic">Pengaduan</div>
             </a>
           </li>
           @endif
@@ -175,8 +171,13 @@
               <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                   <div class="avatar">
+                    @if (auth()->user()->foto == "" || auth()->user()->foto == null)
                     <img src="{{ asset('sneat/assets/img/avatars/1.png') }}" alt
-                      class="w-px-40 h-auto rounded-circle" />
+                      class="w-px-40 h-px-40 rounded-circle" />
+                    @else
+                    <img src="{{ asset('storage/uploads/' . auth()->user()->foto) }}" alt
+                      class="w-px-40 h-px-40 rounded-circle" />
+                    @endif
                   </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -185,12 +186,17 @@
                       <div class="d-flex">
                         <div class="flex-shrink-0 me-3">
                           <div class="avatar">
+                            @if (auth()->user()->foto == "")
                             <img src="{{ asset('sneat/assets/img/avatars/1.png') }}" alt
-                              class="w-px-40 h-auto rounded-circle" />
+                              class="w-px-40 h-px-40 rounded-circle" />
+                            @else
+                            <img src="{{ asset('storage/uploads/' . auth()->user()->foto) }}" alt
+                              class="w-px-40 h-px-40 rounded-circle" />
+                            @endif
                           </div>
                         </div>
                         <div class="flex-grow-1">
-                          <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
+                          <span class="fw-semibold d-block">{{ auth()->user()->nama }}</span>
                           <small class="text-muted">Admin</small>
                         </div>
                       </div>
@@ -200,9 +206,9 @@
                     <div class="dropdown-divider"></div>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{ url('profile') }}">
                       <i class="bx bx-user me-2"></i>
-                      <span class="align-middle">My Profile</span>
+                      <span class="align-middle">Profil Saya</span>
                     </a>
                   </li>
                   <li>
@@ -297,6 +303,7 @@
 
   <!-- Page JS -->
   <script src="{{ asset('sneat/assets/js/dashboards-analytics.js') }}"></script>
+  <script src="{{ asset('sneat/assets/js/pages-account-settings-account.js') }}"></script>
 
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

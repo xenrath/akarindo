@@ -22,9 +22,13 @@ class LevelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'level' => 'required',
+            'nama' => 'required',
             'pengerjaan' => 'required',
             'perbaikan' => 'required',
+        ], [
+            'nama.required' => 'Nama level harus diisi!',
+            'pengerjaan.required' => 'Lama pengerjaan harus diisi!',
+            'perbaikan.required' => 'Lama perbaikan harus diisi!',
         ]);
 
         Level::create($request->all());
@@ -34,24 +38,24 @@ class LevelController extends Controller
 
     public function edit(Level $level)
     {
-        return view('.back.level.edit', compact('level'));
+        return view('back.level.edit', compact('level'));
     }
 
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'level' => 'required',
+            'nama' => 'required',
             'pengerjaan' => 'required',
             'perbaikan' => 'required',
         ], [
-            'level.required' => 'Level tidak boleh kosong!',
-            'pengerjaan.required' => 'Pengerjaan tidak boleh kosong!',
-            'perbaikan.required' => 'Perbaikan tidak boleh kosong!',
+            'nama.required' => 'Nama level harus diisi!',
+            'pengerjaan.required' => 'Lama pengerjaan harus diisi!',
+            'perbaikan.required' => 'Lama perbaikan harus diisi!',
         ]);
 
         Level::where('id', $id)->update([
-            'level' => $request->level,
+            'nama' => $request->nama,
             'pengerjaan' => $request->pengerjaan,
             'perbaikan' => $request->perbaikan
         ]);
@@ -61,7 +65,7 @@ class LevelController extends Controller
 
     public function show(Level $level)
     {
-        return view('.back.level.show', compact('level'));
+        return view('back.level.show', compact('level'));
     }
 
     public function destroy($id)

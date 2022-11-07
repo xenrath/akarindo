@@ -16,52 +16,76 @@
     <h5 class="card-header d-flex align-items-start justify-content-between">
       Data User
       <a href="{{ url('layanan/create') }}" class="btn btn-sm rounded-pill btn-primary">
-        <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah Layanan</a>
+        <i class="tf-icons bx bx-plus"></i>
+        <span class="d-none d-md-inline">&nbsp;Tambah Layanan</span>
+      </a>
     </h5>
-    <div class="table-responsive text-nowrap">
-      <table class="table">
+    <div class="card-body p-0 table-responsive">
+      <table class="table table-hover">
         <thead>
           <tr>
-            <th>No</th>
+            <th class="text-center">No.</th>
             <th>Layanan</th>
             <th>Keterangan</th>
-            <th>Gambar</th>
-            <th>Level</th>
-            <th>Action</th>
+            <th class="text-center">Opsi</th>
           </tr>
         </thead>
-        <tbody class="table-border-bottom-0">
-          @foreach ($layanans as $layanan)
+        <tbody>
+          @foreach ($layanans as $key => $layanan)
           <tr>
-            <td>{{ $loop->iteration }}</td>
-              <td>{{ $layanan->layanan }}</td>
-              <td>{{ $layanan->keterangan }}</td>    
-              <td>
-                <img class="img-thumbnail" src="{{ asset('storage/uploads/'.$layanan->gambar) }}" width="100px">
-                </td>              
-              <td>{{ $layanan->level['level'] }}</td>
-              <td>
-              <form method="post" action="{{ route('layanan.destroy', $layanan->id) }}"
-                onsubmit="return confirm('Apakah anda yakin akan menghapus data ini?')">
-                @csrf
-                @method('delete')
-                <a href="{{ route('layanan.show', $layanan->id)}}" class="btn rounded-pill btn-info btn-sm text-white">
-                  <span class="tf-icons bx bx-show"></span>&nbsp; Detail
-                </a>
-                <a href="{{ url('layanan/' . $layanan->id . '/edit') }}"
-                  class="btn rounded-pill btn-warning btn-sm text-white">
-                  <span class="tf-icons bx bxs-edit"></span>&nbsp; Ubah
-                </a>
-                <button type="submit" class="btn rounded-pill btn-danger btn-sm text-white">
-                  <span class="tf-icons bx bx-trash-alt"></span>&nbsp; Hapus
-                </button>
-              </form>
+            <td class="text-center">{{ $layanans->firstItem() + $key }}</td>
+            <td>{{ $layanan->layanan }}</td>
+            <td>{{ $layanan->keterangan }}</td>
+            <td class="text-center">
+              <a href="{{ url('layanan/' . $layanan->id) }}" class="btn rounded-pill btn-info btn-sm text-white">
+                <i class="tf-icons bx bx-show"></i>
+                <span class="d-none d-md-inline">Detail</span>
+              </a>
+              <a href="{{ url('layanan/' . $layanan->id . '/edit') }}"
+                class="btn rounded-pill btn-secondary btn-sm text-white">
+                <i class="tf-icons bx bxs-edit"></i>
+                <span class="d-none d-md-inline">Edit</span>
+              </a>
+              <a href="" class="btn rounded-pill btn-danger btn-sm text-white" data-bs-toggle="modal"
+                data-bs-target="#modalDelete{{ $layanan->id }}">
+                <i class="tf-icons bx bx-trash-alt"></i>
+                <span class="d-none d-md-inline">Hapus</span>
+              </a>
+              <div class="modal fade" id="modalDelete{{ $layanan->id }}" aria-labelledby="modalToggleLabel" tabindex="-1"
+                style="display: none" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalToggleLabel">Hapus</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">Yakin hapus layanan <strong>{{ $layanan->name }}</strong>?</div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Batal
+                      </button>
+                      <button type="button" class="btn btn-primary"
+                        onclick="event.preventDefault(); document.getElementById('delete{{ $layanan->id }}').submit();">
+                        Ya
+                      </button>
+                      <form action="{{ url('layanan/' . $layanan->id) }}" method="POST" id="delete{{ $layanan->id }}">
+                        @csrf
+                        @method('delete')
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
           @endforeach
         </tbody>
       </table>
-      {{ $layanans->appends(Request::all())->links('pagination::bootstrap-4') }}
+      <div class="card-footer">
+        <div class="pagination float-end">
+          {{ $layanans->appends(Request::all())->links('pagination::bootstrap-4') }}
+        </div>
+      </div>
     </div>
   </div>
   <!--/ Basic Bootstrap Table -->

@@ -4,64 +4,99 @@
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data Master /</span> Produk</h4>
+  <h4 class="fw-bold py-3 mb-4">
+    <span class="text-muted fw-light">Data Master /</span>
+    Produk
+  </h4>
   @if (session('status'))
-  <div class="alert alert-primary alert-dismissible" produk="alert">
+  <div class="alert alert-primary alert-dismissible" user="alert">
     {{ session('status') }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   @endif
   <!-- Basic Bootstrap Table -->
   <div class="card">
-    <h5 class="card-header d-flex align-items-start justify-content-between">
-      Data Produk
+    <div class="card-header d-flex align-items-start justify-content-between">
+      <h5>Data Produk</h5>
       <a href="{{ url('produk/create') }}" class="btn btn-sm rounded-pill btn-primary">
-        <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah Produk</a>
-    </h5>
-    <div class="table-responsive text-nowrap">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Produk</th>
-            <th>User</th>
-            <th>Layanan</th>
-            <th>Url</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody class="table-border-bottom-0">
-          @foreach ($produks as $produk)
-          <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $produk->produk}}</td>
-            <td>{{ $produk->user['name'] }}</td>
-            <td>{{ $produk->layanan['layanan'] }}</td>
-            <td>{{ $produk->url }}</td>
-            <td>
-              <form method="post" action="{{ route('user.destroy', $produk->id) }}"
-                onsubmit="return confirm('Apakah anda yakin akan menghapus data ini?')">
-                @csrf
-                @method('delete')
-                <a href="{{ route('produk.show', $produk->id)}}" class="btn rounded-pill btn-info btn-sm text-white">
-                  <span class="tf-icons bx bx-show"></span>&nbsp; Detail
+        <i class="tf-icons bx bx-plus"></i>
+        <span class="d-none d-md-inline">Tambah Produk</span>
+      </a>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="text-center">No.</th>
+              <th>Nama Produk</th>
+              <th>Client</th>
+              <th>Layanan</th>
+              <th class="text-center">Opsi</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            @foreach ($produks as $key => $produk)
+            <tr>
+              <td class="text-center">{{ $produks->firstItem() + $key }}</td>
+              <td>{{ $produk->nama }}</td>
+              <td>{{ $produk->user->nama }}</td>
+              <td>{{ $produk->layanan->layanan }}</td>
+              <td class="text-center">
+                <a href="{{ url('produk/' . $produk->id) }}" class="btn rounded-pill btn-info btn-sm text-white">
+                  <i class="tf-icons bx bx-show"></i>
+                  <span class="d-none d-md-inline">Detail</span>
                 </a>
                 <a href="{{ url('produk/' . $produk->id . '/edit') }}"
-                  class="btn rounded-pill btn-warning btn-sm text-white">
-                  <span class="tf-icons bx bxs-edit"></span>&nbsp; Ubah
+                  class="btn rounded-pill btn-secondary btn-sm text-white">
+                  <i class="tf-icons bx bxs-edit"></i>
+                  <span class="d-none d-md-inline">Edit</span>
                 </a>
-                <button type="submit" class="btn rounded-pill btn-danger btn-sm text-white">
-                  <span class="tf-icons bx bx-trash-alt"></span>&nbsp; Hapus
-                </button>
-              </form>
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-      {{ $produks->appends(Request::all())->links('pagination::bootstrap-4') }}
+                <a href="" class="btn rounded-pill btn-danger btn-sm text-white" data-bs-toggle="modal"
+                  data-bs-target="#modalDelete{{ $produk->id }}">
+                  <i class="tf-icons bx bx-trash-alt"></i>
+                  <span class="d-none d-md-inline">Hapus</span>
+                </a>
+                <div class="modal fade" id="modalDelete{{ $produk->id }}" aria-labelledby="modalToggleLabel" tabindex="-1"
+                  style="display: none" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalToggleLabel">Hapus</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">Yakin hapus Produk <strong>{{ $produk->nama }}</strong>?</div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                          Batal
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                          onclick="event.preventDefault(); document.getElementById('delete{{ $produk->id }}').submit();">
+                          Ya
+                        </button>
+                        <form action="{{ url('produk/' . $produk->id) }}" method="POST" id="delete{{ $produk->id }}">
+                          @csrf
+                          @method('delete')
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- / Card Body -->
+    <div class="card-footer">
+      <div class="pagination float-end">
+        {{ $produks->appends(Request::all())->links('pagination::bootstrap-4') }}
+      </div>
     </div>
   </div>
   <!--/ Basic Bootstrap Table -->
 </div>
+<!-- Modal Logout -->
 @endsection

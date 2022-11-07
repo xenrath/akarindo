@@ -17,11 +17,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'role_id',
-        'name',
+        'kode',
+        'nama',
+        'role',
         'email',
-        'phone',
-        'gambar',
+        'telp',
+        'foto',
+        'alamat',
         'password',
     ];
 
@@ -44,11 +46,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class, "role_id", "id");
-    }
-
     public function produk()
     {
         return $this->hasMany(Produk::class);
@@ -56,7 +53,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        if ($this->role_id == '1') {
+        if ($this->role == 'admin') {
             return true;
         }
         return false;
@@ -64,7 +61,7 @@ class User extends Authenticatable
 
     public function isClient()
     {
-        if ($this->role_id == '2') {
+        if ($this->role == 'client') {
             return true;
         }
         return false;

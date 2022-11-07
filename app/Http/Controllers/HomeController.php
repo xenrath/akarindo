@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Complaint;
+use App\Models\Tiket;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,23 +26,23 @@ class HomeController extends Controller
     public function index()
     {
         if (auth()->user()->role_id == 1) {
-            $menunggu = Complaint::where('status', 'Menunggu')->get();
-            $diproses = Complaint::where('status', 'Diproses')->get();
-            $selesai = Complaint::where('status', 'Selesai')->get();
+            $menunggu = Tiket::where('status', 'Menunggu')->get();
+            $diproses = Tiket::where('status', 'Diproses')->get();
+            $selesai = Tiket::where('status', 'Selesai')->get();
 
             return view('back.dashboard.index', compact('menunggu', 'diproses', 'selesai'));
         } else {
-            $menunggu = Complaint::where([
+            $menunggu = Tiket::where([
                 ['user_id', auth()->user()->id],
                 ['status', 'Menunggu']
             ])->get();
 
-            $diproses = Complaint::where([
+            $diproses = Tiket::where([
                 ['user_id', auth()->user()->id],
                 ['status', 'Diproses']
             ])->get();
 
-            $selesai = Complaint::where([
+            $selesai = Tiket::where([
                 ['user_id', auth()->user()->id],
                 ['status', 'Selesai']
             ])->get();

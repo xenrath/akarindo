@@ -16,44 +16,72 @@
         <div class="card-header d-flex justify-content-between align-items-center">
           <h5 class="mb-0">Tambah Data</h5>
         </div>
-        <div class="card-body">
-          <form action="{{ url('layanan') }}" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-3">
-              <label class="form-label" for="layanan">Layanan</label>
-              <input type="text" class="form-control" name="layanan" id="layanan" placeholder="Masukan layanan"
-                required />
+        <hr class="my-1" />
+        <form action="{{ url('layanan') }}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label" for="layanan">Layanan *</label>
+                  <input type="text" class="form-control @error('layanan') is-invalid @enderror" name="layanan"
+                    id="layanan" value="{{ old('layanan') }}" autocomplete="off" placeholder="Masukan layanan" />
+                  @error('layanan')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label" for="level_id">Level *</label>
+                  <select class="form-select @error('level_id') is-invalid @enderror" id="level_id" name="level_id">
+                    <option value="">- Pilih -</option>
+                    @foreach ($levels as $level)
+                    <option value="{{ $level->id }}" {{ old('level_id')==$level->id ? 'selected' : null }}>{{
+                      ucfirst($level->nama) }}</option>
+                    @endforeach
+                  </select>
+                  @error('level_id')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="level_id">Level</label>
-              <select class="form-control @error('level_id') is-invalid @enderror" id="level_id" name="level_id">
-                <option value="">- Pilih -</option>
-                @foreach ($levels as $k)
-                <option value="{{ $k->id }}" {{ old('level_id')==$k->id ? 'selected' : null }}>{{ $k->level }}</option>
-                @endforeach
-              </select>
-              @error('level_id')
-              <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label" for="keterangan">Keterangan *</label>
+                  <textarea class="form-control @error('keterangan') is-invalid @enderror" id="keterangan"
+                    name="keterangan" rows="3" placeholder="Masukan keterangan">{{ old('keterangan') }}</textarea>
+                  @error('keterangan')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="gambar" class="form-label">Gambar *</label>
+                  <input type="file" class="form-control @error('gambar') is-invalid @enderror" name="gambar"
+                    id="gambar" accept="image/*">
+                  @error('gambar')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
             </div>
-            <div class="mb-3">
-              <label class="form-label" for="deskripsi">Keterangan</label>
-              <textarea class="form-control" id="keterangan" name="keterangan">{{ old('keterangan') }}</textarea>
-            </div>
-
-            <div class="mb-3">
-              <label for="formFile" class="form-label">Gambar</label>
-              <input class="form-control" type="file" name="gambar" id="gambar">
-            </div>
-
-            <div class="modal-footer">
-              <a type="button" class="btn btn-secondary" href="{{ url('layanan') }}">Tutup</a>
-              <button type="submit" class="btn btn-primary float-end">
-                <span class="tf-icons bx bx-send"></span>&nbsp; Kirim</a>
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <hr class="my-1" />
+          <div class="card-footer float-end">
+            <button type="submit" class="btn btn-primary me-1">
+              <i class="tf-icons bx bx-save"></i>
+              <span class="d-none d-md-inline">&nbsp;Simpan</span>
+            </button>
+            <button type="reset" class="btn btn-secondary">
+              <i class="tf-icons bx bx-reset"></i>
+              <span class="d-none d-md-inline">&nbsp;Reset</span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

@@ -13,6 +13,7 @@ class ProdukController extends Controller
     function index()
     {
         $produks = Produk::paginate(3);
+        
         return view('back.produk.index', compact('produks'));
     }
 
@@ -26,11 +27,11 @@ class ProdukController extends Controller
     function store(Request $request)
     {
         $request->validate([
-            'produk' => 'required',
+            'nama' => 'required',
             'user_id' => 'required',
             'layanan_id' => 'required',
             'url' => 'required',
-            'pedoman' => 'required|nullable|mimes:doc,pdf,xls,xlsx,ppt,pptx',
+            'pedoman' => 'required|mimes:doc,pdf,xls,xlsx,ppt,pptx',
         ]);
 
         $fileName = '';
@@ -59,11 +60,11 @@ class ProdukController extends Controller
     public function update(Request $request, Produk $produk)
     {
         $request->validate([
-            'produk' => 'required',
+            'nama' => 'required',
             'user_id' => 'required',
             'layanan_id' => 'required',
             'url' => 'required',
-            'pedoman' => 'required|nullable|mimes:doc,pdf,xls,xlsx,ppt,pptx',
+            'pedoman' => 'nullable|mimes:doc,pdf,xls,xlsx,ppt,pptx',
         ]);
         if ($request->pedoman) {
             Storage::disk('local')->delete('public/uploads/' . $produk->pedoman);
@@ -74,7 +75,7 @@ class ProdukController extends Controller
             $namaGambar = $produk->pedoman;
         }
         Produk::where('id', $produk->id)->update([
-            'produk' => $request->produk,
+            'nama' => $request->nama,
             'user_id' => $request->user_id,
             'layanan_id' => $request->layanan_id,
             'url' => $request->url,

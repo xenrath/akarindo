@@ -16,48 +16,76 @@
     <h5 class="card-header d-flex align-items-start justify-content-between">
       Data Level
       <a href="{{ url('level/create') }}" class="btn btn-sm rounded-pill btn-primary">
-        <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah Level</a>
+        <i class="tf-icons bx bx-plus"></i>
+        <span class="d-none d-md-inline">&nbsp;Tambah Level</span>
+      </a>
     </h5>
-    <div class="table-responsive text-nowrap">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Level</th>
-            <th>Pengerjaan</th>
-            <th>Perbaikan</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody class="table-border-bottom-0">
-          @foreach ($levels as $level)
-          <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $level->level}}</td>
-            <td>{{ $level->pengerjaan }}</td>
-            <td>{{ $level->perbaikan }}</td>
-            <td>
-              <form method="post" action="{{ route('user.destroy', $level->id) }}"
-                onsubmit="return confirm('Apakah anda yakin akan menghapus data ini?')">
-                @csrf
-                @method('delete')
-                <a href="{{ route('level.show', $level->id)}}" class="btn rounded-pill btn-info btn-sm text-white">
-                  <span class="tf-icons bx bx-show"></span>&nbsp; Detail
-                </a>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="text-center">No.</th>
+              <th>Nama Level</th>
+              <th>Pengerjaan</th>
+              <th>Perbaikan</th>
+              <th class="text-center">Opsi</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            @foreach ($levels as $key => $level)
+            <tr>
+              <td class="text-center">{{ $levels->firstItem() + $key }}</td>
+              <td>{{ ucfirst($level->nama) }}</td>
+              <td>{{ $level->pengerjaan }} Hari</td>
+              <td>{{ $level->perbaikan }} Hari</td>
+              <td class="text-center">
                 <a href="{{ url('level/' . $level->id . '/edit') }}"
                   class="btn rounded-pill btn-warning btn-sm text-white">
-                  <span class="tf-icons bx bxs-edit"></span>&nbsp; Ubah
+                  <i class="tf-icons bx bxs-edit"></i>
+                  <span class="d-none d-md-inline">&nbsp;Ubah</span>
                 </a>
-                <button type="submit" class="btn rounded-pill btn-danger btn-sm text-white">
-                  <span class="tf-icons bx bx-trash-alt"></span>&nbsp; Hapus
-                </button>
-              </form>
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-      {{ $levels->appends(Request::all())->links('pagination::bootstrap-4') }}
+                <a href="" class="btn rounded-pill btn-danger btn-sm text-white" data-bs-toggle="modal"
+                  data-bs-target="#modalDelete{{ $level->id }}">
+                  <i class="tf-icons bx bx-trash-alt"></i>
+                  <span class="d-none d-md-inline">Hapus</span>
+                </a>
+                <div class="modal fade" id="modalDelete{{ $level->id }}" aria-labelledby="modalToggleLabel"
+                  tabindex="-1" style="display: none" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalToggleLabel">Hapus</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">Yakin hapus level <strong>{{ $level->nama }}</strong>?</div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                          Batal
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                          onclick="event.preventDefault(); document.getElementById('delete{{ $level->id }}').submit();">
+                          Ya
+                        </button>
+                        <form action="{{ url('level/' . $level->id) }}" method="POST" id="delete{{ $level->id }}">
+                          @csrf
+                          @method('delete')
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="pagination float-end">
+        {{ $levels->appends(Request::all())->links('pagination::bootstrap-4') }}
+      </div>
     </div>
   </div>
   <!--/ Basic Bootstrap Table -->

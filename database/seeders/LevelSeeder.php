@@ -15,12 +15,26 @@ class LevelSeeder extends Seeder
     public function run()
     {
         $levels = [
-            'id' => '1',
-            'level' => 'sulit',
-            'pengerjaan' => 'pengerjaan website',
-            'perbaikan' => 'perbaikan website',
+            [
+                'id' => '1',
+                'nama' => 'mudah',
+                'pengerjaan' => '30',
+                'perbaikan' => '7',
+            ],
+            [
+                'id' => '2',
+                'nama' => 'menengah',
+                'pengerjaan' => '60',
+                'perbaikan' => '14',
+            ],
+            [
+                'id' => '3',
+                'nama' => 'sulit',
+                'pengerjaan' => '90',
+                'perbaikan' => '30',
+            ]
         ];
-        
+
         Level::insert($levels);
     }
 }

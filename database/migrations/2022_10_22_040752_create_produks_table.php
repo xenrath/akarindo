@@ -15,11 +15,9 @@ class CreateProduksTable extends Migration
     {
         Schema::create('produks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('produk');
+            $table->string('nama');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedInteger('layanan_id');
-            $table->foreign('layanan_id')->references('id')->on('layanans');
             $table->string('url');
             $table->string('pedoman');
             $table->timestamps();

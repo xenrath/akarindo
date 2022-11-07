@@ -21,14 +21,18 @@ class LayananController extends Controller
         return view('back.layanan.create', compact('levels'));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
             'layanan' => 'required',
-            'keterangan' => 'required',
-            'gambar' => 'required|nullable|image|mimes:jpeg,jpg,png|max:2048',
             'level_id' => 'required',
+            'keterangan' => 'required',
+            'gambar' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+        ], [
+            'layanan.required' => 'Layanan tidak boleh kosong!',
+            'level_id.required' => 'Level harus dipilih!',
+            'keterangan.required' => 'Keterangan tidak boleh kosong!',
+            'gambar.required' => 'Gambar harus disertakan!',
         ]);
 
         $fileName = '';

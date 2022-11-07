@@ -16,35 +16,59 @@
         <div class="card-header d-flex justify-content-between align-items-center">
           <h5 class="mb-0">Tambah Data</h5>
         </div>
-        <div class="card-body">
-          <form action="{{ url('level') }}" method="post">
-            @csrf
-
-            <div>
-              <label class="form-label" for="level">Level</label>
-              <input type="text" class="form-control" name="level" id="level" placeholder="Masukan Level" required />
+        <hr class="my-1" />
+        <form action="{{ url('level') }}" method="post">
+          @csrf
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label" for="nama">Level</label>
+                  <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama"
+                    value="{{ old('nama') }}" autocomplete="off" placeholder="Masukan level" />
+                  @error('nama')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label" for="pengerjaan">Pengerjaan / Hari</label>
+                  <input type="number" class="form-control @error('pengerjaan') is-invalid @enderror" name="pengerjaan"
+                    id="pengerjaan" placeholder="Masukan lama pengerjaan" value="{{ old('pengerjaan') }}"
+                    autocomplete="off" />
+                  @error('pengerjaan')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
             </div>
-
-            <div>
-              <label class="form-label" for="pengerjaan">Pengerjaan</label>
-              <input type="text" class="form-control" name="pengerjaan" id="pengerjaan" placeholder="Masukan Pengerjaan"
-                required />
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label" for="perbaikan">Perbaikan / Hari</label>
+                  <input type="number" class="form-control @error('perbaikan') is-invalid @enderror" name="perbaikan"
+                    id="perbaikan" placeholder="Masukan lama perbaikan" value="{{ old('perbaikan') }}"
+                    autocomplete="off" />
+                  @error('perbaikan')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
             </div>
-
-            <div>
-              <label class="form-label" for="perbaikan">Perbaikan</label>
-              <input type="text" class="form-control" name="perbaikan" id="perbaikan" placeholder="Masukan Perbaikan"
-                required />
-            </div>
-
-            <div class="modal-footer">
-              <a type="button" class="btn btn-secondary" href="{{ url('pengerjaan') }}">Tutup</a>
-              <button type="submit" class="btn btn-primary float-end">
-                <span class="tf-icons bx bx-send"></span>&nbsp; Kirim</a>
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <hr class="my-1" />
+          <div class="card-footer float-end">
+            <button type="submit" class="btn btn-primary me-1">
+              <i class="tf-icons bx bx-save"></i>
+              <span class="d-none d-md-inline">&nbsp;Simpan</span>
+            </button>
+            <button type="reset" class="btn btn-secondary">
+              <i class="tf-icons bx bx-reset"></i>
+              <span class="d-none d-md-inline">&nbsp;Reset</span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
