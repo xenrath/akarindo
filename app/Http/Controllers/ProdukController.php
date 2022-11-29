@@ -53,7 +53,7 @@ class ProdukController extends Controller
     {
         $users = User::all();
         $layanans = Layanan::all();
-        return view('.back.produk.edit', compact('produk', 'users', 'layanans'));
+        return view('back.produk.edit', compact('produk', 'users', 'layanans'));
     }
 
 
@@ -87,7 +87,7 @@ class ProdukController extends Controller
 
     public function show(Produk $produk)
     {
-        return view('.back.produk.show', compact('produk'));
+        return view('back.produk.show', compact('produk'));
     }
 
     public function destroy($id)

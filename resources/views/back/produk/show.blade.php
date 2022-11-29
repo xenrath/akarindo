@@ -18,13 +18,13 @@
           <div class="row mb-2">
             <label class="col-sm-2 col-form-label">Nama Client</label>
             <div class="col-sm-10">
-              <p>{{ $produk->user->name }}</p>
+              <p>{{ $produk->user->nama }}</p>
             </div>
           </div>
           <div class="row mb-2">
             <label class="col-sm-2 col-form-label">Produk</label>
             <div class="col-sm-10">
-              <p>{{ $produk->produk }}</p>
+              <p>{{ $produk->nama }}</p>
             </div>
           </div>
           <div class="row mb-2">
@@ -36,7 +36,9 @@
           <div class="row mb-2">
             <label class="col-sm-2 col-form-label">URL</label>
             <div class="col-sm-10">
-              <p>{{ $produk->url }}</p>
+              <p>
+                <a href="{{ $produk->url }}" target="_blank">{{ $produk->url }}</a>
+              </p>
             </div>
           </div>
         </div>

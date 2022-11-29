@@ -23,9 +23,9 @@ class TiketController extends Controller
     public function create()
     {
         $users = User::get();
-        $products = Produk::where('user_id', auth()->user()->id)->get();
+        $produks = Produk::where('user_id', auth()->user()->id)->get();
 
-        return view('back.tiket.create', compact('users', 'products'));
+        return view('back.tiket.create', compact('users', 'produks'));
     }
 
     public function store(Request $request)
@@ -33,13 +33,13 @@ class TiketController extends Controller
         $now = Carbon::now()->format('d-m-Y');
 
         Tiket::create(array_merge($request->all(), [
-            'user_id' => auth()->user()->id,
             'kode' => $this->generateCode(),
+            'user_id' => auth()->user()->id,
             'status' => 'Menunggu',
             'tanggal_awal' => $now
         ]));
 
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user()->isAdmin()) {
             return redirect('tiket')->with('status', 'Berhasil menambahkan tiket');
         } else {
             return redirect('dashboard')->with('status', 'Berhasil menambahkan tiket');

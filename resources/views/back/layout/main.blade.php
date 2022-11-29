@@ -41,6 +41,8 @@
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="{{ asset('sneat/assets/js/config.js') }}"></script>
+
+  <link rel="stylesheet" href="assets/vendor/libs/select2/select2.css " />
 </head>
 
 <body>
@@ -197,7 +199,7 @@
                         </div>
                         <div class="flex-grow-1">
                           <span class="fw-semibold d-block">{{ auth()->user()->nama }}</span>
-                          <small class="text-muted">Admin</small>
+                          <small class="text-muted">{{ ucfirst(auth()->user()->role) }}</small>
                         </div>
                       </div>
                     </a>
@@ -307,5 +309,8 @@
 
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  <script src="assets/vendor/libs/select2/select2.js"></script>
+  <script>$(".select2").select2();</script>
 </body>
 </html>

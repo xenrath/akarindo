@@ -17,12 +17,13 @@
           <form action="{{ url('tiket') }}" method="post">
             @csrf
             <div class="mb-3">
-              <label class="form-label" for="product_id">Produk</label>
-              <select class="form-select @error('product_id') is-invalid @enderror" id="product_id" name="product_id">
+              <label class="form-label" for="produk_id">Produk</label>
+              <select class="select2 form-select @error('produk') is-invalid @enderror" id="produk_id"
+                name="produk_id">
                 <option value="">- Pilih -</option>
                 @foreach ($produks as $produk)
-                <option value="{{ $produk->id }}" {{ old('produk_id') == $produk->id ? 'selected' : null }}>{{
-                  $produk->produk }}</option>
+                <option value="{{ $produk->id }}" {{ old('produk_id')==$produk->id ? 'selected' : null }}>{{
+                  $produk->nama }}</option>
                 @endforeach
               </select>
               @error('produk_id')

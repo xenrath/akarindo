@@ -51,10 +51,10 @@
               @foreach ($menunggu as $m)
               <tr>
                 <td class="text-center">{{ $loop->iteration }}</td>
-                <td>{{ $m->code }}</td>
-                <td>{{ $m->product->name }}</td>
-                <td>{{ $m->description }}</td>
-                <td>{{ $m->start_date }}</td>
+                <td>{{ $m->kode }}</td>
+                <td>{{ $m->produk->nama }}</td>
+                <td>{{ $m->pengaduan }}</td>
+                <td>{{ $m->tanggal_awal }}</td>
                 <td class="text-center">
                   <a href="{{ url('complaint/' . $m->id) }}" class="btn rounded-pill btn-secondary btn-sm text-white"
                     data-bs-toggle="modal" data-bs-target="#modalMenunggu{{ $m->id }}">
@@ -70,7 +70,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <span class="fw-bold">{{ $m->code }}</span>
+                        <span class="fw-bold">{{ $m->kode }}</span>
                         <br>
                         {{ $m->user->name }} | {{ $m->product_id }}
                       </div>
@@ -104,10 +104,10 @@
               @foreach ($diproses as $d)
               <tr>
                 <td class="text-center">{{ $loop->iteration }}</td>
-                <td>{{ $d->code }}</td>
-                <td>{{ $d->product->name }}</td>
-                <td>{{ $d->description }}</td>
-                <td>{{ $d->start_date }}</td>
+                <td>{{ $d->kode }}</td>
+                <td>{{ $d->produk->nama }}</td>
+                <td>{{ $d->pengaduan }}</td>
+                <td>{{ $d->tanggal_awal }}</td>
                 <td class="text-center">
                   <a href="{{ url('complaint/' . $d->id) }}" class="btn rounded-pill btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalDiproses{{ $d->id }}">
                     Selesaikan Tiket
@@ -122,9 +122,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <span class="fw-bold">{{ $d->code }}</span>
+                        <span class="fw-bold">{{ $d->kode }}</span>
                         <br>
-                        {{ $d->user->name }} | {{ $d->product_id }}
+                        {{ $d->user->name }} | {{ $d->produk_id }}
                       </div>
                       <div class="modal-footer">
                         <a href="{{ url('status-selesai/' . $d->id) }}" class="btn btn-primary">Selesaikan Tiket</a>
@@ -155,11 +155,11 @@
               @foreach ($selesai as $s)
               <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $s->code }}</td>
-                <td>{{ $s->product->name }}</td>
-                <td>{{ $s->description }}</td>
-                <td>{{ $s->start_date }}</td>
-                <td>{{ $s->end_date }}</td>
+                <td>{{ $s->kode }}</td>
+                <td>{{ $s->produk->nama }}</td>
+                <td>{{ $s->pengaduan }}</td>
+                <td>{{ $s->tanggal_awal }}</td>
+                <td>{{ $s->tanggal_akhir }}</td>
               </tr>
               @endforeach
             </tbody>

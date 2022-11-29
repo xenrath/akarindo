@@ -17,7 +17,7 @@ class CreateTiketsTable extends Migration
             $table->id();
             $table->string('kode')->unique();
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('produk_id');
             $table->string('pengaduan');
             $table->string('status');
             $table->string('tanggal_awal');

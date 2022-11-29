@@ -7,7 +7,7 @@
   @if (auth()->user()->isClient())
   <h4 class="fw-bold py-3 mb-4 d-flex align-items-start justify-content-between">
     Dashboard
-    <a href="{{ url('complaint/create') }}" class="btn btn-sm rounded-pill btn-primary">
+    <a href="{{ url('tiket/create') }}" class="btn btn-sm rounded-pill btn-primary">
       <span class="tf-icons bx bx-plus"></span>&nbsp; Buat Pengaduan
     </a>
   </h4>
@@ -47,10 +47,10 @@
               @foreach ($menunggu as $m)
               <tr>
                 <td class="text-center">{{ $loop->iteration }}</td>
-                <td>{{ $m->code }}</td>
-                <td>{{ $m->product->name }}</td>
-                <td>{{ $m->description }}</td>
-                <td>{{ $m->start_date }}</td>
+                <td>{{ $m->kode }}</td>
+                <td>{{ $m->produk->nama }}</td>
+                <td>{{ $m->pengaduan }}</td>
+                <td>{{ $m->tanggal_awal }}</td>
               </tr>
               @endforeach
             </tbody>
@@ -73,10 +73,10 @@
               @foreach ($diproses as $d)
               <tr>
                 <td class="text-center">{{ $loop->iteration }}</td>
-                <td>{{ $d->code }}</td>
-                <td>{{ $d->product->name }}</td>
-                <td>{{ $d->description }}</td>
-                <td>{{ $d->start_date }}</td>
+                <td>{{ $d->kode }}</td>
+                <td>{{ $d->produk->nama }}</td>
+                <td>{{ $d->pengaduan }}</td>
+                <td>{{ $d->tanggal_awal }}</td>
               </tr>
               @endforeach
             </tbody>
@@ -93,16 +93,18 @@
                 <th>Produk</th>
                 <th>Deskripsi</th>
                 <th>Tanggal Dibuat</th>
+                <th>Tanggal Selesai</th>
               </tr>
             </thead>
             <tbody class="table-border-bottom-0">
               @foreach ($selesai as $s)
               <tr>
                 <td class="text-center">{{ $loop->iteration }}</td>
-                <td>{{ $s->code }}</td>
-                <td>{{ $s->product->name }}</td>
-                <td>{{ $s->description }}</td>
-                <td>{{ $s->start_date }}</td>
+                <td>{{ $s->kode }}</td>
+                <td>{{ $s->produk->nama }}</td>
+                <td>{{ $s->pengaduan }}</td>
+                <td>{{ $s->tanggal_awal }}</td>
+                <td>{{ $s->tanggal_akhir }}</td>
               </tr>
               @endforeach
             </tbody>

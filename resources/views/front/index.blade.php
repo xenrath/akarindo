@@ -90,7 +90,7 @@
     </div>
 
     @if (auth()->check())
-    <a href="{{ url('login') }}" class="btn btn-outline-primary px-3 d-none d-lg-block">{{ auth()->user()->name }}</a>
+    <a href="{{ url('login') }}" class="btn btn-outline-primary px-3 d-none d-lg-block">Halo, {{ auth()->user()->nama }}</a>
     @else
     <a href="{{ url('login') }}" class="btn btn-primary px-3 d-none d-lg-block">Login</a>
     @endif

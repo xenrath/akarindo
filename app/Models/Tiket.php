@@ -12,7 +12,7 @@ class Tiket extends Model
     protected $fillable = [
         'kode',
         'user_id',
-        'product_id',
+        'produk_id',
         'pengaduan',
         'status',
         'tanggal_awal',
@@ -24,8 +24,8 @@ class Tiket extends Model
         return $this->belongsTo(User::class);
     }
     
-    public function product()
+    public function produk()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Produk::class);
     }
 }
