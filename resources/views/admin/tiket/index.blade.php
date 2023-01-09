@@ -54,9 +54,9 @@
                 <td>{{ $m->kode }}</td>
                 <td>{{ $m->produk->nama }}</td>
                 <td>{{ $m->pengaduan }}</td>
-                <td>{{ $m->tanggal_awal }}</td>
+                <td>{{ date('d M Y', strtotime($m->tanggal_awal)) }}</td>
                 <td class="text-center">
-                  <a href="{{ url('tiket/' . $m->id) }}" class="btn rounded-pill btn-secondary btn-sm text-white"
+                  <a href="{{ url('admin/tiket/' . $m->id) }}" class="btn rounded-pill btn-secondary btn-sm text-white"
                     data-bs-toggle="modal" data-bs-target="#modalMenunggu{{ $m->id }}">
                     Proses Tiket
                   </a>
@@ -72,10 +72,10 @@
                       <div class="modal-body">
                         <span class="fw-bold">{{ $m->kode }}</span>
                         <br>
-                        {{ $m->client->nama }} | {{ $m->produk }}
+                        {{ $m->client->nama }} | {{ $m->produk->nama }}
                       </div>
                       <div class="modal-footer">
-                        <a href="{{ url('status-diproses/' . $m->id) }}" class="btn btn-secondary">Proses
+                        <a href="{{ url('admin/status-diproses/' . $m->id) }}" class="btn btn-secondary">Proses
                           Tiket</a>
                       </div>
                     </div>
@@ -109,7 +109,8 @@
                 <td>{{ $d->pengaduan }}</td>
                 <td>{{ $d->tanggal_awal }}</td>
                 <td class="text-center">
-                  <a href="{{ url('tiket/' . $d->id) }}" class="btn rounded-pill btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalDiproses{{ $d->id }}">
+                  <a href="{{ url('admin/tiket/' . $d->id) }}" class="btn rounded-pill btn-primary btn-sm text-white"
+                    data-bs-toggle="modal" data-bs-target="#modalDiproses{{ $d->id }}">
                     Selesaikan Tiket
                   </a>
                 </td>
@@ -127,7 +128,8 @@
                         {{ $d->client->nama }} | {{ $d->produk_id }}
                       </div>
                       <div class="modal-footer">
-                        <a href="{{ url('status-selesai/' . $d->id) }}" class="btn btn-primary">Selesaikan Tiket</a>
+                        <a href="{{ url('admin/status-selesai/' . $d->id) }}" class="btn btn-primary">Selesaikan
+                          Tiket</a>
                       </div>
                     </div>
                   </div>

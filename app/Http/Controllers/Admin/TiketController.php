@@ -35,7 +35,7 @@ class TiketController extends Controller
         Tiket::create(array_merge($request->all(), [
             'kode' => $this->generateCode(),
             'user_id' => auth()->user()->id,
-            'status' => 'Menunggu',
+            'status' => 'menunggu',
             'tanggal_awal' => $now
         ]));
 
@@ -115,7 +115,7 @@ class TiketController extends Controller
 
     public function statusDiproses($id) {
         Tiket::where('id', $id)->update([
-            'status' => 'Diproses'
+            'status' => 'proses'
         ]);
 
         return redirect('tiket')->with('status', 'Berhasil memproses tiket');
@@ -125,7 +125,7 @@ class TiketController extends Controller
         $now = Carbon::now()->format('d-m-Y');
         
         Tiket::where('id', $id)->update([
-            'status' => 'Selesai',
+            'status' => 'selesai',
             'tanggal_akhir' => $now
         ]);
 
