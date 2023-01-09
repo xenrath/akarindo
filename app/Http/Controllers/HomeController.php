@@ -25,29 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->role_id == 1) {
-            $menunggu = Tiket::where('status', 'Menunggu')->get();
-            $diproses = Tiket::where('status', 'Diproses')->get();
-            $selesai = Tiket::where('status', 'Selesai')->get();
-
-            return view('back.dashboard.index', compact('menunggu', 'diproses', 'selesai'));
-        } else {
-            $menunggu = Tiket::where([
-                ['user_id', auth()->user()->id],
-                ['status', 'Menunggu']
-            ])->get();
-
-            $diproses = Tiket::where([
-                ['user_id', auth()->user()->id],
-                ['status', 'Diproses']
-            ])->get();
-
-            $selesai = Tiket::where([
-                ['user_id', auth()->user()->id],
-                ['status', 'Selesai']
-            ])->get();
-
-            return view('back.dashboard.index', compact('menunggu', 'diproses', 'selesai'));
+        if (auth()->user()->isAdmin()) {
+            return redirect('admin');
+        } elseif (auth()->user()->isCS()) {
+            return redirect('cs');
+        } elseif (auth()->user()->isTeknisi()) {
+            return redirect('teknisi');
+        } elseif (auth()->user()->isClient()) {
+            return redirect('client');
         }
     }
 }

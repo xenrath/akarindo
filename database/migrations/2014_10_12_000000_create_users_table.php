@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('kode')->unique();
             $table->string('nama');
-            $table->enum('role', ['admin', 'client']);
+            $table->enum('role', ['admin', 'cs', 'teknisi', 'client']);
             $table->string('email')->unique();
             $table->string('telp')->unique()->nullable();
             $table->string('foto')->nullable();

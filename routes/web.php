@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Back\RoleController;
 use App\Http\Controllers\Back\TiketController;
+use App\Http\Controllers\Client\DashboardController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LayananController;
@@ -35,21 +36,60 @@ Auth::routes();
 
 Route::get('home', [HomeController::class, 'index'])->name('home');
 
-Route::resource('tiket', TiketController::class);
-
-Route::resource('produk', ProdukController::class);
-
-Route::resource('user', UserController::class);
-
-Route::resource('layanan', LayananController::class);
-
-Route::resource('produk', ProdukController::class);
-
-Route::resource('level', LevelController::class);
-
-Route::resource('tiket', TiketController::class);
-Route::get('status-diproses/{id}', [TiketController::class, 'statusDiproses']);
-Route::get('status-selesai/{id}', [TiketController::class, 'statusSelesai']);
+Route::prefix('admin')->middleware('admin')->group(function () {
+  Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index']);
+  Route::resource('tiket', \App\Http\Controllers\Admin\TiketController::class);
+  Route::resource('user', \App\Http\Controllers\Admin\UserController::class);
+  Route::resource('level', \App\Http\Controllers\Admin\LevelController::class);
+  Route::resource('layanan', \App\Http\Controllers\Admin\LayananController::class);
+  Route::resource('produk', \App\Http\Controllers\Admin\ProdukController::class);
+  Route::get('status-diproses/{id}', [TiketController::class, 'statusDiproses']);
+  Route::get('status-selesai/{id}', [TiketController::class, 'statusSelesai']);
+});
 
 Route::get('profile', [ProfileController::class, 'index']);
 Route::post('profile/update', [ProfileController::class, 'update']);
+
+Route::prefix('cs')->middleware('cs')->group(function () {
+  Route::get('/', [\App\Http\Controllers\CS\DashboardController::class, 'index']);
+
+  Route::get('tiket/menunggu', [\App\Http\Controllers\CS\TiketController::class, 'menunggu']);
+  Route::post('tiket/jawab/{id}', [\App\Http\Controllers\CS\TiketController::class, 'jawab']);
+  Route::post('tiket/alihkan/{id}', [\App\Http\Controllers\CS\TiketController::class, 'alihkan']);
+
+  Route::get('tiket/proses', [\App\Http\Controllers\CS\TiketController::class, 'proses']);
+  Route::get('tiket/konfirmasi/{id}', [\App\Http\Controllers\CS\TiketController::class, 'konfirmasi']);
+
+  Route::get('tiket/selesai', [\App\Http\Controllers\CS\TiketController::class, 'selesai']);
+
+  Route::resource('tiket', \App\Http\Controllers\CS\TiketController::class);
+});
+
+Route::prefix('teknisi')->middleware('teknisi')->group(function () {
+  Route::get('/', [\App\Http\Controllers\Teknisi\DashboardController::class, 'index']);
+
+  Route::get('tiket/menunggu', [\App\Http\Controllers\Teknisi\TiketController::class, 'menunggu']);
+  Route::get('tiket/kerjakan/{id}', [\App\Http\Controllers\Teknisi\TiketController::class, 'kerjakan']);
+  Route::post('tiket/alihkan/{id}', [\App\Http\Controllers\Teknisi\TiketController::class, 'alihkan']);
+
+  Route::get('tiket/proses', [\App\Http\Controllers\Teknisi\TiketController::class, 'proses']);
+  Route::get('tiket/konfirmasi/{id}', [\App\Http\Controllers\Teknisi\TiketController::class, 'konfirmasi']);
+
+  Route::get('tiket/selesai', [\App\Http\Controllers\Teknisi\TiketController::class, 'selesai']);
+
+  Route::resource('tiket', \App\Http\Controllers\Teknisi\TiketController::class);
+});
+
+
+Route::prefix('client')->middleware('client')->group(function () {
+  Route::get('/', [\App\Http\Controllers\Client\DashboardController::class, 'index']);
+
+  Route::get('tiket/menunggu', [\App\Http\Controllers\Client\TiketController::class, 'menunggu']);
+
+  Route::get('tiket/proses', [\App\Http\Controllers\Client\TiketController::class, 'proses']);
+  Route::get('tiket/konfirmasi/{id}', [\App\Http\Controllers\Client\TiketController::class, 'konfirmasi']);
+
+  Route::get('tiket/riwayat', [\App\Http\Controllers\Client\TiketController::class, 'riwayat']);
+
+  Route::resource('tiket', \App\Http\Controllers\Client\TiketController::class);
+});

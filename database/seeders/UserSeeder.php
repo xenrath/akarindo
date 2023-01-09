@@ -18,42 +18,52 @@ class UserSeeder extends Seeder
             [
                 'kode' => $this->kodeUser(),
                 'role' => 'admin',
-                'nama' => 'admin',
+                'nama' => 'Argantara Reynand',
                 'email' => 'admin@gmail.com',
-                'telp' => '812345678901',
-                'alamat' => 'Kota Tegal',
-                'foto' => 'user/admin1.png',
+                'telp' => null,
+                'alamat' => null,
+                'foto' => null,
                 'password' =>  bcrypt('admin')
             ],
             [
                 'kode' => $this->kodeUser(),
-                'role' => 'client',
-                'nama' => 'Marzuki',
-                'email' => 'marzuki@gmail.com',
-                'telp' => '823456789012',
-                'alamat' => 'Kota Tegal',
-                'foto' => 'user/marzuki.jpeg',
-                'password' =>  bcrypt('marzuki')
+                'role' => 'cs',
+                'nama' => 'Syera Jehani',
+                'email' => 'cs@gmail.com',
+                'telp' => '81234567890',
+                'alamat' => 'Semarang',
+                'foto' => 'user/syera.png',
+                'password' =>  bcrypt('cs')
+            ],
+            [
+                'kode' => $this->kodeUser(),
+                'role' => 'teknisi',
+                'nama' => 'Aldi Mahendra',
+                'email' => 'teknisi@gmail.com',
+                'telp' => '82345678901',
+                'alamat' => 'Semarang',
+                'foto' => 'user/aldi.png',
+                'password' =>  bcrypt('teknisi')
             ],
             [
                 'kode' => $this->kodeUser(),
                 'role' => 'client',
-                'nama' => 'Hanif',
-                'email' => 'hanif@gmail.com',
-                'telp' => '82345678090',
-                'alamat' => 'Kota Tegal',
-                'foto' => 'user/hanif.png',
-                'password' =>  bcrypt('hanif')
+                'nama' => 'Johan Adibaskara',
+                'email' => 'client1@gmail.com',
+                'telp' => '83456789012',
+                'alamat' => 'Tegal',
+                'foto' => 'user/johan.png',
+                'password' =>  bcrypt('client1')
             ],
             [
                 'kode' => $this->kodeUser(),
                 'role' => 'client',
-                'nama' => 'Anjani',
-                'email' => 'anjani@gmail.com',
-                'telp' => '823456789080',
-                'alamat' => 'Kota Tegal',
-                'foto' => 'user/anjani.png',
-                'password' => bcrypt('anjani')
+                'nama' => 'Andre Galaksa',
+                'email' => 'client2@gmail.com',
+                'telp' => '84567890123',
+                'alamat' => 'Tegal',
+                'foto' => 'user/andre.png',
+                'password' =>  bcrypt('client2')
             ],
         ];
 

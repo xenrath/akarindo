@@ -59,6 +59,22 @@ class User extends Authenticatable
         return false;
     }
 
+    public function isCS()
+    {
+        if ($this->role == 'cs') {
+            return true;
+        }
+        return false;
+    }
+
+    public function isTeknisi()
+    {
+        if ($this->role == 'teknisi') {
+            return true;
+        }
+        return false;
+    }
+
     public function isClient()
     {
         if ($this->role == 'client') {

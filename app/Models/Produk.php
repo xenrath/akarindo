@@ -11,13 +11,13 @@ class Produk extends Model
 
     protected $fillable = [
         'nama',
-        'user_id',
+        'client_id',
         'layanan_id',
         'url',
         'pedoman',
     ];
 
-    public function user()
+    public function client()
     {
         return $this->belongsTo(User::class);
     }

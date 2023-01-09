@@ -12,12 +12,12 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(3);
-        return view('back.user.index', compact('users'));
+        return view('admin.user.index', compact('users'));
     }
 
     public function create()
     {
-        return view('back.user.create');
+        return view('admin.user.create');
     }
 
     public function store(Request $request)

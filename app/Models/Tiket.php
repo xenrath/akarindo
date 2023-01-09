@@ -11,15 +11,23 @@ class Tiket extends Model
 
     protected $fillable = [
         'kode',
-        'user_id',
+        'client_id',
+        'teknisi_id',
         'produk_id',
         'pengaduan',
+        'gambar',
         'status',
+        'jawaban',
         'tanggal_awal',
         'tanggal_akhir'
     ];
     
-    public function user()
+    public function client()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function teknisi()
     {
         return $this->belongsTo(User::class);
     }

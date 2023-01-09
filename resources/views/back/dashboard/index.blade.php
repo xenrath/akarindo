@@ -123,7 +123,7 @@
             <h5 class="card-title text-primary">Tiket Menunggu</h5>
             <p class="mb-4">
               <span class="fw-bold">{{ count($menunggu) }}</span>&nbsp; data
-            </p>            
+            </p>
           </div>
         </div>
       </div>
@@ -135,7 +135,7 @@
             <h5 class="card-title text-primary">Tiket Diproses</h5>
             <p class="mb-4">
               <span class="fw-bold">{{ count($diproses) }}</span>&nbsp; data
-            </p>            
+            </p>
           </div>
         </div>
       </div>
@@ -147,7 +147,7 @@
             <h5 class="card-title text-primary">Tiket Selesai</h5>
             <p class="mb-4">
               <span class="fw-bold">{{ count($selesai) }}</span>&nbsp; data
-            </p>            
+            </p>
           </div>
         </div>
       </div>

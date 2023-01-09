@@ -70,8 +70,11 @@ trait AuthenticatesUsers
     protected function validateLogin(Request $request)
     {
         $request->validate([
-            $this->username() => 'required|string',
+            $this->username() => 'required|string|email',
             'password' => 'required|string',
+        ], [
+            $this->username() . '.required' => 'Email tidak boleh kosong!',
+            'password.required' => 'Password tidak boleh kosong!'
         ]);
     }
 
@@ -143,7 +146,7 @@ trait AuthenticatesUsers
     protected function sendFailedLoginResponse(Request $request)
     {
         throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')],
+            $this->username() => [trans('Email atau Password salah!')],
         ]);
     }
 

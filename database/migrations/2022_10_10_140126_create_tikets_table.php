@@ -16,10 +16,13 @@ class CreateTiketsTable extends Migration
         Schema::create('tikets', function (Blueprint $table) {
             $table->id();
             $table->string('kode')->unique();
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('client_id');
+            $table->unsignedInteger('teknisi_id')->nullable();
             $table->unsignedInteger('produk_id');
             $table->string('pengaduan');
-            $table->string('status');
+            $table->string('gambar')->nullable();
+            $table->enum('status', ['menunggu', 'proses', 'selesai']);
+            $table->string('jawaban')->nullable();
             $table->string('tanggal_awal');
             $table->string('tanggal_akhir')->nullable();
             $table->timestamps();

@@ -18,56 +18,51 @@ class ProdukSeeder extends Seeder
             [
                 'id' => '1',
                 'nama' => 'Sistem Informasi Rental Mobil',
-                'user_id' => '2',
+                'client_id' => '4',
                 'layanan_id' => '1',
-                'url' => 'https://webdevelopment.com',
-                'pedoman' => 'file',
+                'url' => 'https://sirenmo.com',
+                'pedoman' => 'produk/siremo.pdf',
             ],
             [
                 'id' => '2',
-                'nama' => 'Sistem Informasi Jasa Loundry',
-                'user_id' => '2',
+                'nama' => 'Sistem Informasi Jasa Laundry',
+                'client_id' => '5',
                 'layanan_id' => '1',
-                'url' => 'https://webdevelopment.com',
-                'pedoman' => 'file',
+                'url' => 'https://sijalo.com',
+                'pedoman' => 'produk/sijalo.pdf',
             ],
-
             [
                 'id' => '3',
                 'nama' => 'Sistem Informasi Penjualan Lahan Tanah',
-                'user_id' => '3',
+                'client_id' => '4',
                 'layanan_id' => '2',
-                'url' => 'https://androiddevelopment.com',
-                'pedoman' => 'file',
+                'url' => 'https://siplata.com',
+                'pedoman' => 'produk/siplata.pdf',
             ],
-
             [
                 'id' => '4',
                 'nama' => 'Sistem Informasi Penyewaan Lapangan Futsal',
-                'user_id' => '3',
+                'client_id' => '5',
                 'layanan_id' => '2',
-                'url' => 'https://androiddevelopment.com',
-                'pedoman' => 'file',
+                'url' => 'https://siplafu.com',
+                'pedoman' => 'produk/siplafu.pdf',
             ],
-
             [
                 'id' => '5',
-                'nama' => 'Pendirian PT.Hidup Jaya',
-                'user_id' => '4',
+                'nama' => 'Pendirian PT Hidup Jaya',
+                'client_id' => '4',
                 'layanan_id' => '6',
-                'url' => 'https://pendirianpt.com',
-                'pedoman' => 'file',
+                'url' => 'https://hidupjaya.com',
+                'pedoman' => 'produk/hidupjaya.pdf',
             ],
-
             [
                 'id' => '6',
                 'nama' => 'Pembuatan Desain Rumah',
-                'user_id' => '2',
+                'client_id' => '5',
                 'layanan_id' => '8',
-                'url' => 'https://desaingrafis.com',
-                'pedoman' => 'file',
+                'url' => null,
+                'pedoman' => null,
             ],
-
         ];
 
         Produk::insert($produks);

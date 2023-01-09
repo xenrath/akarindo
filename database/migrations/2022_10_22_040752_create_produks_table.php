@@ -16,10 +16,10 @@ class CreateProduksTable extends Migration
         Schema::create('produks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('client_id');
             $table->unsignedInteger('layanan_id');
-            $table->string('url');
-            $table->string('pedoman');
+            $table->string('url')->nullable();
+            $table->string('pedoman')->nullable();
             $table->timestamps();
         });
     }

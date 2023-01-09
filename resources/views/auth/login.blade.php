@@ -180,14 +180,12 @@
             </div>
             <!-- /Logo -->
             <h4 class="mb-2">Selamat Datang di E-Tiketing! 👋</h4>
-            <p class="mb-4">Masukan username dan password untuk melanjutkan.</p>
-
+            <p class="mb-4">Masukan email dan password untuk melanjutkan.</p>
             <form class="mb-3" action="{{ route('login') }}" method="POST">
               @csrf
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" id="email" name="email"
-                  placeholder="Masukan email" autofocus />
+                <input type="text" class="form-control" id="email" name="email" placeholder="masukan email" autofocus />
               </div>
               <div class="mb-3 form-password-toggle">
                 <div class="d-flex justify-content-between">
