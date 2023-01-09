@@ -90,7 +90,8 @@
     </div>
 
     @if (auth()->check())
-    <a href="{{ url('login') }}" class="btn btn-outline-primary px-3 d-none d-lg-block">Halo, {{ auth()->user()->nama }}</a>
+    <a href="{{ url('login') }}" class="btn btn-outline-primary px-3 d-none d-lg-block">Halo, {{ auth()->user()->nama
+      }}</a>
     @else
     <a href="{{ url('login') }}" class="btn btn-primary px-3 d-none d-lg-block">Login</a>
     @endif
@@ -198,150 +199,24 @@
           </h1>
         </div>
         <div class="row g-4 justify-content-center">
+          @foreach ($layanans as $layanan)
           <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="service-item rounded h-100 p-5">
               <div class="d-flex align-items-center ms-n5 mb-4">
                 <div class="service-icon flex-shrink-0 bg-primary rounded-end me-4">
-                  <img class="img-fluid" src="{{ asset('image/front/web-development.png') }}" alt="" />
+                  <img class="img-fluid" src="{{ asset('storage/uploads/' . $layanan->gambar) }}"
+                    alt="{{ $layanan->nama }}" />
                 </div>
-                <h4 class="mb-0">Web Development</h4>
+                <h4 class="mb-0">{{ $layanan->layanan }}</h4>
               </div>
-              <p class="mb-4">
-                Aliqu diam amet eos erat ipsum et lorem et sit, sed stet lorem
-                sit clita duo justo erat amet
-              </p>
-              <a class="btn btn-light px-3" href="">
+              <p class="mb-4">{{ $layanan->keterangan }}</p>
+              <a class="btn btn-light px-3" href="#">
                 Info Detail
                 <i class="fas fa-chevron-right"></i>
               </a>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-            <div class="service-item rounded h-100 p-5">
-              <div class="d-flex align-items-center ms-n5 mb-4">
-                <div class="service-icon flex-shrink-0 bg-primary rounded-end me-4">
-                  <img class="img-fluid" src="{{ asset('image/front/android-development.png') }}" alt="" />
-                </div>
-                <h4 class="mb-0">Android Development</h4>
-              </div>
-              <p class="mb-4">
-                Aliqu diam amet eos erat ipsum et lorem et sit, sed stet lorem
-                sit clita duo justo erat amet
-              </p>
-              <a class="btn btn-light px-3" href="">
-                Info Detail
-                <i class="fas fa-chevron-right"></i>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-            <div class="service-item rounded h-100 p-5">
-              <div class="d-flex align-items-center ms-n5 mb-4">
-                <div class="service-icon flex-shrink-0 bg-primary rounded-end me-4">
-                  <img class="img-fluid" src="{{ asset('image/front/software-development.png') }}" alt="" />
-                </div>
-                <h4 class="mb-0">Software Development</h4>
-              </div>
-              <p class="mb-4">
-                Aliqu diam amet eos erat ipsum et lorem et sit, sed stet lorem
-                sit clita duo justo erat amet
-              </p>
-              <a class="btn btn-light px-3" href="">
-                Info Detail
-                <i class="fas fa-chevron-right"></i>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="service-item rounded h-100 p-5">
-              <div class="d-flex align-items-center ms-n5 mb-4">
-                <div class="service-icon flex-shrink-0 bg-primary rounded-end me-4">
-                  <img class="img-fluid" src="{{ asset('image/front/digital-marketing.png') }}" alt="" />
-                </div>
-                <h4 class="mb-0">Digital Marketing</h4>
-              </div>
-              <p class="mb-4">
-                Aliqu diam amet eos erat ipsum et lorem et sit, sed stet lorem
-                sit clita duo justo erat amet
-              </p>
-              <a class="btn btn-light px-3" href="">
-                Info Detail
-                <i class="fas fa-chevron-right"></i>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-            <div class="service-item rounded h-100 p-5">
-              <div class="d-flex align-items-center ms-n5 mb-4">
-                <div class="service-icon flex-shrink-0 bg-primary rounded-end me-4">
-                  <img class="img-fluid" src="{{ asset('image/front/courses.png') }}" alt="" />
-                </div>
-                <h4 class="mb-0">Courses</h4>
-              </div>
-              <p class="mb-4">
-                Aliqu diam amet eos erat ipsum et lorem et sit, sed stet lorem
-                sit clita duo justo erat amet
-              </p>
-              <a class="btn btn-light px-3" href="">
-                Info Detail
-                <i class="fas fa-chevron-right"></i>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-            <div class="service-item rounded h-100 p-5">
-              <div class="d-flex align-items-center ms-n5 mb-4">
-                <div class="service-icon flex-shrink-0 bg-primary rounded-end me-4">
-                  <img class="img-fluid" src="{{ asset('image/front/curriculum-vitae.png') }}" alt="" />
-                </div>
-                <h4 class="mb-0">Digital Curriculum Vitae (CV)</h4>
-              </div>
-              <p class="mb-4">
-                Aliqu diam amet eos erat ipsum et lorem et sit, sed stet lorem
-                sit clita duo justo erat amet
-              </p>
-              <a class="btn btn-light px-3" href="">
-                Info Detail
-                <i class="fas fa-chevron-right"></i>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-            <div class="service-item rounded h-100 p-5">
-              <div class="d-flex align-items-center ms-n5 mb-4">
-                <div class="service-icon flex-shrink-0 bg-primary rounded-end me-4">
-                  <img class="img-fluid" src="{{ asset('image/front/company.png') }}" alt="" />
-                </div>
-                <h4 class="mb-0">Pendirian PT (Perusahaan)</h4>
-              </div>
-              <p class="mb-4">
-                Aliqu diam amet eos erat ipsum et lorem et sit, sed stet lorem
-                sit clita duo justo erat amet
-              </p>
-              <a class="btn btn-light px-3" href="">
-                Info Detail
-                <i class="fas fa-chevron-right"></i>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-            <div class="service-item rounded h-100 p-5">
-              <div class="d-flex align-items-center ms-n5 mb-4">
-                <div class="service-icon flex-shrink-0 bg-primary rounded-end me-4">
-                  <img class="img-fluid" src="{{ asset('image/front/design-graph.png') }}" alt="" />
-                </div>
-                <h4 class="mb-0">Desain Grafis</h4>
-              </div>
-              <p class="mb-4">
-                Aliqu diam amet eos erat ipsum et lorem et sit, sed stet lorem
-                sit clita duo justo erat amet
-              </p>
-              <a class="btn btn-light px-3" href="">
-                Info Detail
-                <i class="fas fa-chevron-right"></i>
-              </a>
-            </div>
-          </div>
+          @endforeach
         </div>
       </div>
     </div>

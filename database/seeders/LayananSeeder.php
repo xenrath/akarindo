@@ -16,59 +16,57 @@ class LayananSeeder extends Seeder
     {
         $layanans = [
             [
-                'id' => '1',
                 'layanan' => 'Web Development',
-                'keterangan' => 'menerima pembuatan web dan perbaikan web',
-                'gambar' => 'layanan/jasawebsite.jpeg',
+                'keterangan' => 'Tak perlu lama menunggu Tim kami akan memberikan layanan supercepat dan dukungan SEO yang optimal dari website yang kami buat.',
+                'gambar' => 'layanan/web-development.png',
                 'level_id' => '3'
             ],
             [
-                'id' => '2',
                 'layanan' => 'Android Development',
-                'keterangan' => 'menerima pembuatan mobile dan perbaikan mobile',
-                'gambar' => 'layanan/jasamobile.jpeg',
+                'keterangan' => 'Tertarik memiliki aplikasi sendiri? buat saja sesuai kebutuhanmu, kami akan bantu hingga aplikasi dapat diunduh di App Store (IOS) dan Playstore (Android)',
+                'gambar' => 'layanan/android-development.png',
                 'level_id' => '3'
             ],
             [
-                'id' => '3',
                 'layanan' => 'Sofware Development',
-                'keterangan' => 'menerima jasa pembuatan web maupun mobile',
-                'gambar' => 'layanan/sofware.jpeg',
+                'keterangan' => 'Software yang kami buat kami sesuaikan dengan kebutuhan anda. tidak perlu cemas karena kami akan menyederhanakan setiap tahapan yang menjadi masalah anda.',
+                'gambar' => 'layanan/software-development.png',
                 'level_id' => '3'
             ],
             [
-                'id' => '4',
                 'layanan' => 'Digital Marketing',
-                'keterangan' => 'Menerima jasa promosi produk dll',
-                'gambar' => 'layanan/digitalmarketing.jpeg',
+                'keterangan' => 'Ngiklan sendiri ribet? Tim kami siap membantu memasarkan produk anda dengan taregt yang spesifik dan terukur. laporan kami sajikan secara realtime.',
+                'gambar' => 'layanan/digital-marketing.png',
                 'level_id' => '1'
             ],
             [
-                'id' => '5',
                 'layanan' => 'Courses',
-                'keterangan' => 'menerima kursus pembuatan website',
-                'gambar' => 'layanan/courses.jpeg',
+                'keterangan' => 'Belajar Teknologi langsung dengan ahlinya, dapatkan ilmu terapan dan studi kasus secara nyata sehingga menghadirkan pengalaman yang tidak didapat dari tempat lainnya.',
+                'gambar' => 'layanan/courses.png',
                 'level_id' => '2'
             ],
             [
-                'id' => '6',
                 'layanan' => 'Digital Curriculum Vitae (CV)',
-                'keterangan' => 'menerima jasa pembuatan cv',
-                'gambar' => 'layanan/cv.png',
+                'keterangan' => 'Buat HRD Perusahaan yang anda lamar tekesima dan biarkan mereka memberikan nilai plus dengan anda melalui diigtal CV (daftar riwayat hidup) online.',
+                'gambar' => 'layanan/curriculum-vitae.png',
                 'level_id' => '1'
             ],
             [
-                'id' => '7',
                 'layanan' => 'Pendirian PT',
-                'keterangan' => 'menerima jasa bantu pendirian PT',
-                'gambar' => 'layanan/pendirianpt.jpeg',
-                'level_id' => '3'
+                'keterangan' => 'Kita juga bisa membantu pendirian usaha anda agar memiliki legalitas usaha. harga murah penuh dengan fasilitas yang dapat anda gunakan secara langsung.',
+                'gambar' => 'layanan/company.png',
+                'level_id' => '2'
             ],
             [
-                'id' => '8',
                 'layanan' => 'Desain Grafis',
-                'keterangan' => 'menerima pembuatan desain grafis',
-                'gambar' => 'layanan/desain.jpeg',
+                'keterangan' => 'Design profesional untuk membuat produk serta calon customer anda melirik anda. Buat magnet dari ilustrasi produk atau jasa yang anda jual bersama akarindo.id',
+                'gambar' => 'layanan/design-graph.png',
+                'level_id' => '2'
+            ],
+            [
+                'layanan' => 'Social Media Management',
+                'keterangan' => 'Sibuk tak ada waktu mengelola media sosial. serahkan semua ke tim kami. caption, foto, design, jadwal tayarang, penargetan, semua kami yang kelola.',
+                'gambar' => 'layanan/social-media.png',
                 'level_id' => '2'
             ],
         ];

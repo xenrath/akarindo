@@ -25,7 +25,7 @@ class TiketController extends Controller
         $users = User::get();
         $produks = Produk::where('user_id', auth()->user()->id)->get();
 
-        return view('back.tiket.create', compact('users', 'produks'));
+        return view('admin.tiket.create', compact('users', 'produks'));
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class TiketController extends Controller
         ]));
 
         if (auth()->user()->isAdmin()) {
-            return redirect('tiket')->with('status', 'Berhasil menambahkan tiket');
+            return redirect('admin/tiket')->with('status', 'Berhasil menambahkan tiket');
         } else {
             return redirect('dashboard')->with('status', 'Berhasil menambahkan tiket');
         }
@@ -49,13 +49,13 @@ class TiketController extends Controller
     public function show($id)
     {
         $tiket = Tiket::where('id', $id)->first();
-        return view('back.tiket.show', compact('tiket'));
+        return view('admin.tiket.show', compact('tiket'));
     }
 
     public function edit($id)
     {
         $tiket = Tiket::where('id', $id)->first();
-        return view('back.tiket.edit', compact('tiket'));
+        return view('admin.tiket.edit', compact('tiket'));
     }
 
     public function update(Request $request, $id)
@@ -70,14 +70,14 @@ class TiketController extends Controller
             'tiket' => $request->tiket
         ]);
 
-        return redirect('tiket')->with('status', 'Berhasil mengubah tiket');
+        return redirect('admin/tiket')->with('status', 'Berhasil mengubah tiket');
     }
 
     public function destroy($id)
     {
         $tiket = Tiket::find($id);
         $tiket->delete();
-        return redirect('tiket')->with('status', 'Berhasil menghapus tiket');
+        return redirect('admin/tiket')->with('status', 'Berhasil menghapus tiket');
     }
 
     public function generateCode()
@@ -110,7 +110,7 @@ class TiketController extends Controller
             'status' => $status
         ]);
 
-        return redirect('tiket')->with('status', 'Berhasil memperbarui status pengaduan');
+        return redirect('admin/tiket')->with('status', 'Berhasil memperbarui status pengaduan');
     }
 
     public function statusDiproses($id) {
@@ -118,7 +118,7 @@ class TiketController extends Controller
             'status' => 'proses'
         ]);
 
-        return redirect('tiket')->with('status', 'Berhasil memproses tiket');
+        return redirect('admin/tiket')->with('status', 'Berhasil memproses tiket');
     }
 
     public function statusSelesai($id) {
@@ -129,6 +129,6 @@ class TiketController extends Controller
             'tanggal_akhir' => $now
         ]);
 
-        return redirect('tiket')->with('status', 'Berhasil menyelesaikan tiket');
+        return redirect('admin/tiket')->with('status', 'Berhasil menyelesaikan tiket');
     }
 }
