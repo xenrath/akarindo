@@ -9,7 +9,7 @@
     Tiket
   </h4>
   @if (session('status'))
-  <div class="alert alert-primary alert-dismissible" complaint="alert">
+  <div class="alert alert-primary alert-dismissible" tiket="alert">
     {{ session('status') }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
@@ -56,7 +56,7 @@
                 <td>{{ $m->pengaduan }}</td>
                 <td>{{ $m->tanggal_awal }}</td>
                 <td class="text-center">
-                  <a href="{{ url('complaint/' . $m->id) }}" class="btn rounded-pill btn-secondary btn-sm text-white"
+                  <a href="{{ url('tiket/' . $m->id) }}" class="btn rounded-pill btn-secondary btn-sm text-white"
                     data-bs-toggle="modal" data-bs-target="#modalMenunggu{{ $m->id }}">
                     Proses Tiket
                   </a>
@@ -72,7 +72,7 @@
                       <div class="modal-body">
                         <span class="fw-bold">{{ $m->kode }}</span>
                         <br>
-                        {{ $m->user->name }} | {{ $m->product_id }}
+                        {{ $m->client->nama }} | {{ $m->produk }}
                       </div>
                       <div class="modal-footer">
                         <a href="{{ url('status-diproses/' . $m->id) }}" class="btn btn-secondary">Proses
@@ -109,7 +109,7 @@
                 <td>{{ $d->pengaduan }}</td>
                 <td>{{ $d->tanggal_awal }}</td>
                 <td class="text-center">
-                  <a href="{{ url('complaint/' . $d->id) }}" class="btn rounded-pill btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalDiproses{{ $d->id }}">
+                  <a href="{{ url('tiket/' . $d->id) }}" class="btn rounded-pill btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalDiproses{{ $d->id }}">
                     Selesaikan Tiket
                   </a>
                 </td>
@@ -124,7 +124,7 @@
                       <div class="modal-body">
                         <span class="fw-bold">{{ $d->kode }}</span>
                         <br>
-                        {{ $d->user->name }} | {{ $d->produk_id }}
+                        {{ $d->client->nama }} | {{ $d->produk_id }}
                       </div>
                       <div class="modal-footer">
                         <a href="{{ url('status-selesai/' . $d->id) }}" class="btn btn-primary">Selesaikan Tiket</a>
