@@ -43,8 +43,8 @@ Route::prefix('admin')->middleware('admin')->group(function () {
   Route::resource('level', \App\Http\Controllers\Admin\LevelController::class);
   Route::resource('layanan', \App\Http\Controllers\Admin\LayananController::class);
   Route::resource('produk', \App\Http\Controllers\Admin\ProdukController::class);
-  Route::get('status-diproses/{id}', [TiketController::class, 'statusDiproses']);
-  Route::get('status-selesai/{id}', [TiketController::class, 'statusSelesai']);
+  Route::get('status-diproses/{id}', [\App\Http\Controllers\Admin\TiketController::class, 'statusDiproses']);
+  Route::get('status-selesai/{id}', [\App\Http\Controllers\Admin\TiketController::class, 'statusSelesai']);
 });
 
 Route::get('profile', [ProfileController::class, 'index']);

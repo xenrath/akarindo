@@ -115,7 +115,7 @@ class TiketController extends Controller
 
     public function statusDiproses($id) {
         Tiket::where('id', $id)->update([
-            'status' => 'Diproses'
+            'status' => 'proses'
         ]);
 
         return redirect('tiket')->with('status', 'Berhasil memproses tiket');
