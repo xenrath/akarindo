@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->text('alamat')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedInteger('layanan_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

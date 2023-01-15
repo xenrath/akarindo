@@ -11,9 +11,49 @@ use Illuminate\Http\Request;
 
 class TiketController extends Controller
 {
+    // Tiket Menunggu
+
+    public function menunggu()
+    {
+        $tikets = Tiket::where('status', 'menunggu')->get();
+        return view('admin.tiket.menunggu', compact('tikets'));
+    }
+
+    public function proses()
+    {
+        $tikets = Tiket::where('status', 'proses')->get();
+        return view('admin.tiket.proses', compact('tikets'));
+    }
+
+    public function selesai()
+    {
+        $tikets = Tiket::where('status', 'selesai')->get();
+        return view('admin.tiket.selesai', compact('tikets'));
+    }
+
+    public function konfirmasi_proses($id)
+    {
+        Tiket::where('id', $id)->update([
+            'status' => 'proses'
+        ]);
+
+        return back()->with('success', 'Berhasil memproses Tiket');
+    }
+
+    public function konfirmasi_selesai($id)
+    {
+        $now = Carbon::now()->format('d-m-Y');
+
+        Tiket::where('id', $id)->update([
+            'status' => 'selesai',
+            'tanggal_akhir' => $now
+        ]);
+
+        return back()->with('success', 'Berhasil menyelesaikan Tiket');
+    }
+
     public function index()
     {
-        $menunggu = Tiket::where('status', 'menunggu')->get();
         $diproses = Tiket::where('status', 'proses')->get();
         $selesai = Tiket::where('status', 'selesai')->get();
 
@@ -40,9 +80,9 @@ class TiketController extends Controller
         ]));
 
         if (auth()->user()->isAdmin()) {
-            return redirect('admin/tiket')->with('status', 'Berhasil menambahkan tiket');
+            return redirect('admin/tiket')->with('success', 'Berhasil menambahkan tiket');
         } else {
-            return redirect('dashboard')->with('status', 'Berhasil menambahkan tiket');
+            return redirect('dashboard')->with('success', 'Berhasil menambahkan tiket');
         }
     }
 
@@ -70,14 +110,14 @@ class TiketController extends Controller
             'tiket' => $request->tiket
         ]);
 
-        return redirect('admin/tiket')->with('status', 'Berhasil mengubah tiket');
+        return redirect('admin/tiket')->with('success', 'Berhasil mengubah tiket');
     }
 
     public function destroy($id)
     {
         $tiket = Tiket::find($id);
         $tiket->delete();
-        return redirect('admin/tiket')->with('status', 'Berhasil menghapus tiket');
+        return redirect('admin/tiket')->with('success', 'Berhasil menghapus tiket');
     }
 
     public function generateCode()
@@ -110,25 +150,6 @@ class TiketController extends Controller
             'status' => $status
         ]);
 
-        return redirect('admin/tiket')->with('status', 'Berhasil memperbarui status pengaduan');
-    }
-
-    public function statusDiproses($id) {
-        Tiket::where('id', $id)->update([
-            'status' => 'proses'
-        ]);
-
-        return redirect('admin/tiket')->with('status', 'Berhasil memproses tiket');
-    }
-
-    public function statusSelesai($id) {
-        $now = Carbon::now()->format('d-m-Y');
-        
-        Tiket::where('id', $id)->update([
-            'status' => 'selesai',
-            'tanggal_akhir' => $now
-        ]);
-
-        return redirect('admin/tiket')->with('status', 'Berhasil menyelesaikan tiket');
+        return redirect('admin/tiket')->with('success', 'Berhasil memperbarui status pengaduan');
     }
 }

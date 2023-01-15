@@ -16,22 +16,16 @@ class LevelSeeder extends Seeder
     {
         $levels = [
             [
-                'id' => '1',
                 'nama' => 'mudah',
-                'pengerjaan' => '30',
-                'perbaikan' => '7',
+                'lama' => '1',
             ],
             [
-                'id' => '2',
                 'nama' => 'menengah',
-                'pengerjaan' => '60',
-                'perbaikan' => '14',
+                'lama' => '2',
             ],
             [
-                'id' => '3',
                 'nama' => 'sulit',
-                'pengerjaan' => '90',
-                'perbaikan' => '30',
+                'lama' => '3',
             ]
         ];
 

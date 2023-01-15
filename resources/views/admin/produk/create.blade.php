@@ -3,94 +3,89 @@
 @section('title', 'Tambah Produk')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-  <h4 class="fw-bold py-3 mb-4">
-    <span class="text-muted fw-light">
-      <a href="{{ url('admin/produk') }}">Produk</a> /
-    </span> Tambah Produk
-  </h4>
-  @if (session('error'))
-  <div class="alert alert-danger alert-dismissible" client="alert">
-    <h5 class="text-danger">Error!</h5>
-    <p>
-      @foreach (session('error') as $error)
-      -&nbsp; {{ $error }} <br>
-      @endforeach
-    </p>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  @endif
-  <div class="card mb-4">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <h5 class="mb-0">Tambah Data</h5>
-    </div>
-    <hr class="my-1" />
-    <form action="{{ url('admin/produk') }}" method="post" enctype="multipart/form-data" autocomplete="off">
-      @csrf
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group mb-3">
-              <label class="form-label" for="nama">Nama Produk</label>
-              <input type="text" class="form-control" name="nama" id="nama"
-                value="{{ old('nama') }}" placeholder="masukan nama produk" />
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group mb-3">
-              <label class="form-label" for="client_id">Client</label>
-              <select class="form-select" id="client_id" name="client_id">
-                <option value="">- Pilih -</option>
-                @foreach ($clients as $client)
-                <option value="{{ $client->id }}" {{ old('client_id')==$client->id ? 'selected' : null }}>{{ $client->nama
-                  }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group mb-3">
-              <label class="form-label" for="layanan_id">Layanan</label>
-              <select class="form-select" id="layanan_id"
-                name="layanan_id">
-                <option value="">- Pilih -</option>
-                @foreach ($layanans as $layanan)
-                <option value="{{ $layanan->id }}" {{ old('layanan_id')==$layanan->id ? 'selected' : null }}>{{
-                  $layanan->layanan }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group mb-3">
-              <label class="form-label" for="url">URL</label>
-              <input type="text" class="form-control" name="url" id="url"
-                value="{{ old('url') }}" placeholder="masukan url" />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group mb-3">
-              <label for="pedoman" class="form-label">Pedoman</label>
-              <input type="file" class="form-control" name="pedoman"
-                id="pedoman" accept="application/pdf">
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr class="my-1" />
-      <div class="card-footer float-end">
-        <button type="reset" class="btn btn-secondary me-1">
-          <span class="d-none d-md-inline">Reset</span>
-        </button>
-        <button type="submit" class="btn btn-primary">
-          <span class="d-none d-md-inline">Simpan</span>
-        </button>
-      </div>
-    </form>
-  </div>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Produk</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="{{ url('admin/produk') }}">Produk</a></li>
+          <li class="breadcrumb-item active">Tambah</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
 </div>
+<!-- /.content-header -->
+
+<section class="content">
+  <div class="container-fluid">
+    @if (session('error'))
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h5>
+        <i class="icon fas fa-ban"></i> Error!
+      </h5>
+      @foreach (session('error') as $error)
+      - {{ $error }} <br>
+      @endforeach
+    </div>
+    @endif
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Tambah Produk</h3>
+      </div>
+      <!-- /.card-header -->
+      <form action="{{ url('admin/produk') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+        @csrf
+        <div class="card-body">
+          <div class="form-group">
+            <label for="client_id">Client</label>
+            <select class="form-control select2bs4" id="client_id" name="client_id">
+              <option value="">- Pilih Client -</option>
+              @foreach ($clients as $client)
+              <option value="{{ $client->id }}" {{ old('client_id')==$client->id ? 'selected' : '' }}>{{ $client->nama
+                }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="nama">Nama Produk</label>
+            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan nama produk"
+              value="{{ old('nama') }}">
+          </div>
+          <div class="form-group">
+            <label for="sublayanan_id">Layanan</label>
+            <select class="form-control select2bs4" id="sublayanan_id" name="sublayanan_id">
+              <option value="">- Pilih Layanan -</option>
+              @foreach ($sublayanans as $sublayanan)
+              <option value="{{ $sublayanan->id }}" {{ old('sublayanan_id')==$sublayanan->id ? 'selected' : '' }}>{{
+                $sublayanan->nama }} ({{ $sublayanan->layanan->layanan }})</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="url">URL</label>
+            <input type="text" class="form-control" id="url" name="url" placeholder="Masukan url produk"
+              value="{{ old('url') }}">
+          </div>
+          <div class="form-group">
+            <label for="pedoman">Pedoman</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="pedoman" name="pedoman" accept="application/pdf">
+              <label class="custom-file-label" for="pedoman">Pilih Pedoman</label>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-right">
+          <button type="reset" class="btn btn-secondary">Reset</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
 @endsection

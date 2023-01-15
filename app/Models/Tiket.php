@@ -19,17 +19,18 @@ class Tiket extends Model
         'status',
         'jawaban',
         'tanggal_awal',
+        'tanggal_pengerjaan',
         'tanggal_akhir'
     ];
     
     public function client()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'client_id', 'id');
     }
 
     public function teknisi()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'teknisi_id', 'id');
     }
     
     public function produk()

@@ -22,15 +22,6 @@ class TiketController extends Controller
         return view('teknisi.tiket.menunggu', compact('tikets'));
     }
 
-    public function kerjakan($id)
-    {
-        Tiket::where('id', $id)->update([
-            'status' => 'proses'
-        ]);
-
-        return back()->with('success', 'Berhasil mengkonfirmasi Pengaduan.');
-    }
-
     public function proses()
     {
         $tikets = Tiket::where([
@@ -40,17 +31,7 @@ class TiketController extends Controller
 
         return view('teknisi.tiket.proses', compact('tikets'));
     }
-
-    public function konfirmasi($id)
-    {
-        Tiket::where('id', $id)->update([
-            'tanggal_akhir' => Carbon::now()->format('d-m-Y'),
-            'status' => 'selesai'
-        ]);
-
-        return back()->with('success', 'Berhasil menyelesaikan Pengaduan.');
-    }
-
+    
     public function selesai()
     {
         $tikets = Tiket::where([
@@ -59,6 +40,26 @@ class TiketController extends Controller
         ])->get();
 
         return view('teknisi.tiket.selesai', compact('tikets'));
+    }
+
+    public function konfirmasi_kerjakan($id)
+    {
+        Tiket::where('id', $id)->update([
+            'status' => 'proses',
+            'tanggal_pengerjaan' => Carbon::now()->format('d-m-Y')
+        ]);
+
+        return back()->with('success', 'Berhasil mengkonfirmasi Tiket');
+    }
+
+    public function konfirmasi_selesai($id)
+    {
+        Tiket::where('id', $id)->update([
+            'tanggal_akhir' => Carbon::now()->format('d-m-Y'),
+            'status' => 'selesai'
+        ]);
+
+        return back()->with('success', 'Berhasil menyelesaikan Tiket');
     }
 
     public function generateCode()

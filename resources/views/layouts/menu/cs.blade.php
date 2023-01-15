@@ -1,28 +1,49 @@
-<!-- Dashboard -->
-<li class="menu-item {{ request()->is('cs') ? 'active' : '' }}">
-  <a href="{{ url('dashboard') }}" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-    <div data-i18n="Analytics">Dashboard</div>
+<li class="nav-header">Dashboard</li>
+<li class="nav-item">
+  <a href="{{ url('cs') }}" class="nav-link {{ request()->is('cs') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-home"></i>
+    <p>
+      Dashboard
+      {{-- <span class="right badge badge-danger">New</span> --}}
+    </p>
   </a>
 </li>
-<li class="menu-header small text-uppercase">
-  <span class="menu-header-text">Menu Tiket</span>
-</li>
-<li class="menu-item {{ request()->is('cs/tiket/menunggu') ? 'active' : '' }}">
-  <a href="{{ url('cs/tiket/menunggu') }}" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-detail"></i>
-    <div data-i18n="Basic">Menunggu</div>
+@php
+$menunggus = \App\Models\Tiket::where('status', 'menunggu')->get();
+$proseses = \App\Models\Tiket::where('status', 'proses')->get();
+$selesais = \App\Models\Tiket::where('status', 'selesai')->get();
+@endphp
+<li class="nav-header">Tiket</li>
+<li class="nav-item">
+  <a href="{{ url('cs/tiket/menunggu') }}" class="nav-link {{ request()->is('cs/tiket/menunggu') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-ticket-alt"></i>
+    <p>
+      Menunggu
+      @if (count($menunggus) > 0)
+      <span class="right badge badge-info">{{ count($menunggus) }}</span>
+      @endif
+    </p>
   </a>
 </li>
-<li class="menu-item {{ request()->is('cs/tiket/proses') ? 'active' : '' }}">
-  <a href="{{ url('cs/tiket/proses') }}" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-detail"></i>
-    <div data-i18n="Basic">Proses</div>
+<li class="nav-item">
+  <a href="{{ url('cs/tiket/proses') }}" class="nav-link {{ request()->is('cs/tiket/proses') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-ticket-alt"></i>
+    <p>
+      Proses
+      @if (count($proseses) > 0)
+      <span class="right badge badge-info">{{ count($proseses) }}</span>
+      @endif
+    </p>
   </a>
 </li>
-<li class="menu-item {{ request()->is('cs/tiket/selesai') ? 'active' : '' }}">
-  <a href="{{ url('cs/tiket/selesai') }}" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-detail"></i>
-    <div data-i18n="Basic">Selesai</div>
+<li class="nav-item">
+  <a href="{{ url('cs/tiket/selesai') }}" class="nav-link {{ request()->is('cs/tiket/selesai') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-ticket-alt"></i>
+    <p>
+      Selesai
+      @if (count($selesais) > 0)
+      <span class="right badge badge-info">{{ count($selesais) }}</span>
+      @endif
+    </p>
   </a>
 </li>

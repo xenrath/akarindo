@@ -15,14 +15,20 @@ class Layanan extends Model
         'gambar',
         'level_id'
     ];
+    
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
 
-    public function produk()
+    public function teknisis()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function produks()
     {
         return $this->hasMany(Produk::class);
     }
 
-    public function level()
-    {
-        return $this->belongsTo(Level::class, "level_id", "id");
-    }
 }

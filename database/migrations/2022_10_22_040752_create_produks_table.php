@@ -17,7 +17,7 @@ class CreateProduksTable extends Migration
             $table->increments('id');
             $table->string('nama');
             $table->unsignedInteger('client_id');
-            $table->unsignedInteger('layanan_id');
+            $table->unsignedInteger('sublayanan_id');
             $table->string('url')->nullable();
             $table->string('pedoman')->nullable();
             $table->timestamps();

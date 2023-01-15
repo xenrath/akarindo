@@ -1,37 +1,79 @@
-<!-- Dashboard -->
-<li class="menu-item {{ request()->is('client') ? 'active' : '' }}">
-  <a href="{{ url('client') }}" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-    <div data-i18n="Analytics">Dashboard</div>
+<li class="nav-header">Dashboard</li>
+<li class="nav-item">
+  <a href="{{ url('client') }}" class="nav-link {{ request()->is('client') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-home"></i>
+    <p>
+      Dashboard
+    </p>
   </a>
 </li>
-<li class="menu-header small text-uppercase">
-  <span class="menu-header-text">Menu Pengaduan</span>
-</li>
-<li class="menu-item {{ request()->is('client/tiket/create') ? 'active' : '' }}">
-  <a href="{{ url('client/tiket/create') }}" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-detail"></i>
-    <div data-i18n="Basic">Buat Pengaduan</div>
+<li class="nav-header">Pengaduan</li>
+<li class="nav-item">
+  <a href="{{ url('client/tiket/create') }}"
+    class="nav-link {{ request()->is('client/tiket/create') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-clipboard"></i>
+    <p>
+      Buat Pengaduan
+    </p>
   </a>
 </li>
-<li class="menu-header small text-uppercase">
-  <span class="menu-header-text">Menu Tiket</span>
-</li>
-<li class="menu-item {{ request()->is('client/tiket/menunggu') ? 'active' : '' }}">
-  <a href="{{ url('client/tiket/menunggu') }}" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-detail"></i>
-    <div data-i18n="Basic">Menunggu</div>
+@php
+$menunggus = \App\Models\Tiket::where([
+['client_id', auth()->user()->id],
+['status', 'menunggu']
+])->get();
+$proseses = \App\Models\Tiket::where([
+['client_id', auth()->user()->id],
+['status', 'proses']
+])->get();
+$selesais = \App\Models\Tiket::where([
+['client_id', auth()->user()->id],
+['status', 'selesai']
+])->get();
+@endphp
+<li class="nav-header">Tiket</li>
+<li class="nav-item">
+  <a href="{{ url('client/tiket/menunggu') }}"
+    class="nav-link {{ request()->is('client/tiket/menunggu') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-ticket-alt"></i>
+    <p>
+      Menunggu
+      @if (count($menunggus) > 0)
+      <span class="right badge badge-info">{{ count($menunggus) }}</span>
+      @endif
+    </p>
   </a>
 </li>
-<li class="menu-item {{ request()->is('client/tiket/proses') ? 'active' : '' }}">
-  <a href="{{ url('client/tiket/proses') }}" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-detail"></i>
-    <div data-i18n="Basic">Proses</div>
+<li class="nav-item">
+  <a href="{{ url('client/tiket/proses') }}"
+    class="nav-link {{ request()->is('client/tiket/proses') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-ticket-alt"></i>
+    <p>
+      Proses
+      @if (count($proseses) > 0)
+      <span class="right badge badge-info">{{ count($proseses) }}</span>
+      @endif
+    </p>
   </a>
 </li>
-<li class="menu-item {{ request()->is('client/tiket/riwayat') ? 'active' : '' }}">
-  <a href="{{ url('client/tiket/riwayat') }}" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-detail"></i>
-    <div data-i18n="Basic">Riwayat</div>
+<li class="nav-item">
+  <a href="{{ url('client/tiket/selesai') }}"
+    class="nav-link {{ request()->is('client/tiket/selesai') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-ticket-alt"></i>
+    <p>
+      Selesai
+      @if (count($selesais) > 0)
+      <span class="right badge badge-info">{{ count($selesais) }}</span>
+      @endif
+    </p>
+  </a>
+</li>
+<li class="nav-header">Lainnya</li>
+<li class="nav-item">
+  <a href="{{ url('client/faq') }}" class="nav-link {{ request()->is('client/faq*') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-question-circle"></i>
+    <p>
+      FAQ
+    </p>
   </a>
 </li>

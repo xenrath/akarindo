@@ -13,7 +13,7 @@ class LayananController extends Controller
 {
     public function index()
     {
-        $layanans = Layanan::paginate(3);
+        $layanans = Layanan::get();
         return view('admin.layanan.index', compact('layanans'));
     }
 
@@ -52,7 +52,7 @@ class LayananController extends Controller
             'gambar' => $namagambar
         ]));
 
-        return redirect('admin/layanan')->with('status', 'Berhasil menambahkan Layanan');
+        return redirect('admin/layanan')->with('success', 'Berhasil menambahkan Layanan');
     }
 
     public function show(Layanan $layanan)
@@ -104,7 +104,7 @@ class LayananController extends Controller
                 'gambar' => $namagambar,
             ]);
 
-        return redirect('admin/layanan')->with('status', 'Berhasil mengubah Layanan');
+        return redirect('admin/layanan')->with('success', 'Berhasil mengubah Layanan');
     }
 
     public function destroy($id)
@@ -112,6 +112,6 @@ class LayananController extends Controller
         $layanan = Layanan::find($id);
         Storage::disk('local')->delete('public/uploads/' . $layanan->gambar);
         $layanan->delete();
-        return redirect('admin/layanan')->with('status', 'Berhasil menghapus Layanan');
+        return redirect('admin/layanan')->with('success', 'Berhasil menghapus Layanan');
     }
 }

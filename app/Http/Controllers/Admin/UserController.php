@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(3);
+        $users = User::get();
         return view('admin.user.index', compact('users'));
     }
 
@@ -38,6 +38,7 @@ class UserController extends Controller
                 'role.required' => 'Role harus dipilih!',
                 'telp.unique' => 'Nomor telepon sudah digunakan!',
                 'foto.image' => 'Foto harus berformat jpeg, jpg, png!',
+                'foto.mimes' => 'Foto harus berformat jpeg, jpg, png!',
             ]);
         } else {
             $validator = Validator::make($request->all(), [
@@ -82,7 +83,7 @@ class UserController extends Controller
             'foto' => $namafoto,
         ]));
 
-        return redirect('admin/user')->with('status', 'Berhasil menambahkan User');
+        return redirect('admin/user')->with('success', 'Berhasil menambahkan User');
     }
 
     public function show(User $user)
@@ -180,7 +181,7 @@ class UserController extends Controller
                 'alamat' => $request->alamat,
             ]);
 
-        return redirect('admin/user')->with('status', 'Berhasil mengubah User');
+        return redirect('admin/user')->with('success', 'Berhasil mengubah User');
     }
 
     public function destroy($id)
@@ -188,7 +189,7 @@ class UserController extends Controller
         $user = User::find($id);
         Storage::disk('local')->delete('public/uploads/' . $user->foto);
         $user->delete();
-        return redirect('admin/user')->with('status', 'Berhasil menghapus User');
+        return redirect('admin/user')->with('success', 'Berhasil menghapus User');
     }
 
     public function kodeUser()

@@ -10,21 +10,21 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $menunggu = Tiket::where([
+        $menunggus = Tiket::where([
             ['client_id', auth()->user()->id],
-            ['status', 'Menunggu']
+            ['status', 'menunggu']
         ])->get();
 
-        $diproses = Tiket::where([
+        $proseses = Tiket::where([
             ['client_id', auth()->user()->id],
-            ['status', 'Diproses']
+            ['status', 'proses']
         ])->get();
 
-        $selesai = Tiket::where([
+        $selesais = Tiket::where([
             ['client_id', auth()->user()->id],
-            ['status', 'Selesai']
+            ['status', 'selesai']
         ])->get();
 
-        return view('client.dashboard.index', compact('menunggu', 'diproses', 'selesai'));
+        return view('client.dashboard.index', compact('menunggus', 'proseses', 'selesais'));
     }
 }

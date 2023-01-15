@@ -12,7 +12,7 @@ class Produk extends Model
     protected $fillable = [
         'nama',
         'client_id',
-        'layanan_id',
+        'sublayanan_id',
         'url',
         'pedoman',
     ];
@@ -22,8 +22,8 @@ class Produk extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function layanan()
+    public function sublayanan()
     {
-        return $this->belongsTo(Layanan::class);
+        return $this->belongsTo(SubLayanan::class);
     }
 }

@@ -12,6 +12,46 @@ use Illuminate\Support\Facades\Validator;
 
 class TiketController extends Controller
 {
+    public function menunggu()
+    {
+        $tikets = Tiket::where([
+            ['client_id', auth()->user()->id],
+            ['status', 'menunggu']
+        ])->get();
+
+        return view('client.tiket.menunggu', compact('tikets'));
+    }
+
+    public function proses()
+    {
+        $tikets = Tiket::where([
+            ['client_id', auth()->user()->id],
+            ['status', 'proses']
+        ])->get();
+
+        return view('client.tiket.proses', compact('tikets'));
+    }
+
+    public function selesai()
+    {
+        $tikets = Tiket::where([
+            ['client_id', auth()->user()->id],
+            ['status', 'selesai']
+        ])->get();
+
+        return view('client.tiket.selesai', compact('tikets'));
+    }
+
+    public function konfirmasi_selesai($id)
+    {
+        Tiket::where('id', $id)->update([
+            'status' => 'selesai',
+            'tanggal_akhir' => Carbon::now()
+        ]);
+
+        return back()->with('success', 'Berhasil menyelesaikan Tiket.');
+    }
+
     public function create()
     {
         $produks = Produk::where('client_id', auth()->user()->id)->get();
@@ -53,46 +93,7 @@ class TiketController extends Controller
             'tanggal_awal' => $now
         ]));
 
-        return back()->with('success', 'Berhasil membuat Pengaduan.');
-    }
-
-    public function menunggu()
-    {
-        $tikets = Tiket::where([
-            ['client_id', auth()->user()->id],
-            ['status', 'menunggu']
-        ])->get();
-
-        return view('client.tiket.menunggu', compact('tikets'));
-    }
-
-    public function proses()
-    {
-        $tikets = Tiket::where([
-            ['client_id', auth()->user()->id],
-            ['status', 'proses']
-        ])->get();
-
-        return view('client.tiket.proses', compact('tikets'));
-    }
-
-    public function konfirmasi($id)
-    {
-        Tiket::where('id', $id)->update([
-            'status' => 'selesai'
-        ]);
-
-        return back()->with('success', 'Berhasil menyelesaikan Pengaduan.');
-    }
-
-    public function riwayat()
-    {
-        $tikets = Tiket::where([
-            ['client_id', auth()->user()->id],
-            ['status', 'selesai']
-        ])->get();
-
-        return view('client.tiket.riwayat', compact('tikets'));
+        return back()->with('success', 'Berhasil membuat Tiket.');
     }
 
     public function destroy($id)
@@ -101,7 +102,7 @@ class TiketController extends Controller
         Storage::disk('local')->delete('public/uploads/' . $tiket->gambar);
         $tiket->delete();
 
-        return back()->with('success', 'Berhasil menghapus Pengaduan');
+        return back()->with('success', 'Berhasil menghapus Tiket');
     }
 
     public function generateCode()

@@ -11,7 +11,7 @@ class LevelController extends Controller
 {
     public function index()
     {
-        $levels = Level::paginate(3);
+        $levels = Level::get();
         return view('admin.level.index', compact('levels'));
     }
 
@@ -24,12 +24,10 @@ class LevelController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'pengerjaan' => 'required',
-            'perbaikan' => 'required',
+            'lama' => 'required',
         ], [
             'nama.required' => 'Nama level harus diisi!',
-            'pengerjaan.required' => 'Lama pengerjaan harus diisi!',
-            'perbaikan.required' => 'Lama perbaikan harus diisi!',
+            'lama.required' => 'Lama perbaikan harus diisi!',
         ]);
 
         if ($validator->fails()) {
@@ -39,7 +37,7 @@ class LevelController extends Controller
 
         Level::create($request->all());
 
-        return redirect('admin/level')->with('status', 'Berhasil menambahkan Level');
+        return redirect('admin/level')->with('success', 'Berhasil menambahkan Level');
     }
 
     public function show(Level $level)
@@ -57,12 +55,10 @@ class LevelController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'pengerjaan' => 'required',
-            'perbaikan' => 'required',
+            'lama' => 'required',
         ], [
             'nama.required' => 'Nama level harus diisi!',
-            'pengerjaan.required' => 'Lama pengerjaan harus diisi!',
-            'perbaikan.required' => 'Lama perbaikan harus diisi!',
+            'lama.required' => 'Lama perbaikan harus diisi!',
         ]);
 
         if ($validator->fails()) {
@@ -72,17 +68,16 @@ class LevelController extends Controller
 
         Level::where('id', $id)->update([
             'nama' => $request->nama,
-            'pengerjaan' => $request->pengerjaan,
-            'perbaikan' => $request->perbaikan
+            'lama' => $request->lama,
         ]);
 
-        return redirect('admin/level')->with('status', 'Berhasil mengubah Level');
+        return redirect('admin/level')->with('success', 'Berhasil mengubah Level');
     }
 
     public function destroy($id)
     {
         $data = Level::find($id);
         $data->delete();
-        return redirect('admin/level')->with('status', 'Berhasil menghapus Level');
+        return redirect('admin/level')->with('success', 'Berhasil menghapus Level');
     }
 }

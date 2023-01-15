@@ -24,6 +24,7 @@ class CreateTiketsTable extends Migration
             $table->enum('status', ['menunggu', 'proses', 'selesai']);
             $table->string('jawaban')->nullable();
             $table->string('tanggal_awal');
+            $table->string('tanggal_pengerjaan')->nullable();
             $table->string('tanggal_akhir')->nullable();
             $table->timestamps();
         });

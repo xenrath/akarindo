@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Layanan;
 use App\Models\Produk;
+use App\Models\SubLayanan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +15,7 @@ class ProdukController extends Controller
 {
     function index()
     {
-        $produks = Produk::paginate(3);
+        $produks = Produk::get();
 
         return view('admin.produk.index', compact('produks'));
     }
@@ -22,9 +23,9 @@ class ProdukController extends Controller
     function create()
     {
         $clients = User::where('role', 'client')->get();
-        $layanans = Layanan::all();
+        $sublayanans = SubLayanan::get();
 
-        return view('admin.produk.create', compact('clients', 'layanans'));
+        return view('admin.produk.create', compact('clients', 'sublayanans'));
     }
 
     function store(Request $request)
@@ -32,12 +33,12 @@ class ProdukController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
             'client_id' => 'required',
-            'layanan_id' => 'required',
+            'sublayanan_id' => 'required',
             'pedoman' => 'nullable|mimes:doc,pdf,xls,xlsx,ppt,pptx',
         ], [
             'nama.required' => 'Nama produk harus diisi!',
             'client_id.required' => 'Client harus dipilih!',
-            'layanan_id.required' => 'Layanan harus dipilih!',
+            'sublayanan_id.required' => 'Layanan harus dipilih!',
             'pedoman.mimes' => 'Pedoman yang dimasukan salah!'
         ]);
 
@@ -58,7 +59,7 @@ class ProdukController extends Controller
             'pedoman' => $namapedoman
         ]));
 
-        return redirect('admin/produk')->with('status', 'Berhasil menambahkan Produk');
+        return redirect('admin/produk')->with('success', 'Berhasil menambahkan Produk');
     }
 
     public function show(Produk $produk)
@@ -69,9 +70,9 @@ class ProdukController extends Controller
     public function edit(Produk $produk)
     {
         $clients = User::where('role', 'client')->get();
-        $layanans = Layanan::all();
+        $sublayanans = SubLayanan::get();
 
-        return view('admin.produk.edit', compact('produk', 'clients', 'layanans'));
+        return view('admin.produk.edit', compact('produk', 'clients', 'sublayanans'));
     }
 
 
@@ -80,12 +81,12 @@ class ProdukController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
             'client_id' => 'required',
-            'layanan_id' => 'required',
+            'sublayanan_id' => 'required',
             'pedoman' => 'nullable|mimes:doc,pdf,xls,xlsx,ppt,pptx',
         ], [
             'nama.required' => 'Nama produk harus diisi!',
             'client_id.required' => 'Client harus dipilih!',
-            'layanan_id.required' => 'Layanan harus dipilih!',
+            'sublayanan_id.required' => 'Layanan harus dipilih!',
             'pedoman.mimes' => 'Pedoman yang dimasukan salah!'
         ]);
 
@@ -105,12 +106,12 @@ class ProdukController extends Controller
         Produk::where('id', $produk->id)->update([
             'nama' => $request->nama,
             'client_id' => $request->client_id,
-            'layanan_id' => $request->layanan_id,
+            'sublayanan_id' => $request->sublayanan_id,
             'url' => $request->url,
             'pedoman' => $namapedoman,
         ]);
 
-        return redirect('admin/produk')->with('status', 'Berhasil mengubah Produk');
+        return redirect('admin/produk')->with('success', 'Berhasil mengubah Produk');
     }
 
     public function destroy($id)
@@ -118,6 +119,6 @@ class ProdukController extends Controller
         $produk = Produk::find($id);
         Storage::disk('local')->delete('public/uploads/' . $produk->pedoman);
         $produk->delete();
-        return redirect('admin/produk')->with('status', 'Berhasil menghapus Produk');
+        return redirect('admin/produk')->with('success', 'Berhasil menghapus Produk');
     }
 }

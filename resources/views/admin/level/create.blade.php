@@ -3,67 +3,66 @@
 @section('title', 'Tambah Level')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-  <h4 class="fw-bold py-3 mb-4">
-    <span class="text-muted fw-light">
-      <a href="{{ url('admin/level') }}">Level</a> /
-    </span> Tambah Level
-  </h4>
-  @if (session('error'))
-  <div class="alert alert-danger alert-dismissible" user="alert">
-    <h5 class="text-danger">Error!</h5>
-    <p>
-      @foreach (session('error') as $error)
-      -&nbsp; {{ $error }} <br>
-      @endforeach
-    </p>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  @endif
-  <div class="card mb-4">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <h5 class="mb-0">Tambah Data</h5>
-    </div>
-    <hr class="my-1" />
-    <form action="{{ url('admin/level') }}" method="post" autocomplete="off">
-      @csrf
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group mb-3">
-              <label class="form-label" for="nama">Level</label>
-              <input type="text" class="form-control" name="nama" id="nama"
-                value="{{ old('nama') }}" placeholder="masukan level" />
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group mb-3">
-              <label class="form-label" for="pengerjaan">Pengerjaan / Hari</label>
-              <input type="number" class="form-control" name="pengerjaan"
-                id="pengerjaan" placeholder="masukan lama pengerjaan" value="{{ old('pengerjaan') }}" />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group mb-3">
-              <label class="form-label" for="perbaikan">Perbaikan / Hari</label>
-              <input type="number" class="form-control" name="perbaikan"
-                id="perbaikan" placeholder="masukan lama perbaikan" value="{{ old('perbaikan') }}" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr class="my-1" />
-      <div class="card-footer float-end">
-        <button type="reset" class="btn btn-secondary me-1">
-          <span class="d-none d-md-inline">Reset</span>
-        </button>
-        <button type="submit" class="btn btn-primary">
-          <span class="d-none d-md-inline">Simpan</span>
-        </button>
-      </div>
-    </form>
-  </div>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Level</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="{{ url('admin/level') }}">Level</a></li>
+          <li class="breadcrumb-item active">Tambah</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
 </div>
+<!-- /.content-header -->
+
+<section class="content">
+  <div class="container-fluid">
+    @if (session('error'))
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h5>
+        <i class="icon fas fa-ban"></i> Error!
+      </h5>
+      @foreach (session('error') as $error)
+      - {{ $error }} <br>
+      @endforeach
+    </div>
+    @endif
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Tambah Level</h3>
+      </div>
+      <!-- /.card-header -->
+      <form action="{{ url('admin/level') }}" method="post" autocomplete="off">
+        @csrf
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="nama">Nama Level</label>
+                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan nama level" value="{{ old('nama') }}">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="lama">Lama Perbaikan / Hari</label>
+                <input type="number" class="form-control" id="lama" name="lama" placeholder="Masukan lama perbaikan" value="{{ old('lama') }}">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-right">
+          <button type="reset" class="btn btn-secondary">Reset</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
 @endsection

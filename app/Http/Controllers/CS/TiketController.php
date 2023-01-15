@@ -15,12 +15,25 @@ class TiketController extends Controller
     public function menunggu()
     {
         $tikets = Tiket::where('status', 'Menunggu')->with('client')->get();
-        $teknisis = User::where('role', 'teknisi')->get();
 
-        return view('cs.tiket.menunggu', compact('tikets', 'teknisis'));
+        return view('cs.tiket.menunggu', compact('tikets'));
     }
 
-    public function jawab(Request $request, $id)
+    public function proses()
+    {
+        $tikets = Tiket::where('status', 'proses')->get();
+
+        return view('cs.tiket.proses', compact('tikets'));
+    }
+
+    public function selesai()
+    {
+        $tikets = Tiket::where('status', 'selesai')->get();
+
+        return view('cs.tiket.selesai', compact('tikets'));
+    }
+
+    public function konfirmasi_jawab(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'jawaban' => 'required'
@@ -38,10 +51,10 @@ class TiketController extends Controller
             'status' => 'proses'
         ]);
 
-        return back()->with('success', 'Berhasil mengirimkan jawaban');
+        return back()->with('success', 'Berhasil mengirimkan Jawaban');
     }
 
-    public function alihkan(Request $request, $id)
+    public function konfirmasi_alihkan(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'teknisi_id' => 'required'
@@ -58,31 +71,17 @@ class TiketController extends Controller
             'teknisi_id' => $request->teknisi_id,
         ]);
 
-        return back()->with('success', 'Berhasil mengalihkan ke teknisi');
+        return back()->with('success', 'Berhasil mengalihkan ke Teknisi');
     }
 
-    public function proses()
-    {
-        $tikets = Tiket::where('status', 'proses')->get();
-
-        return view('cs.tiket.proses', compact('tikets'));
-    }
-
-    public function konfirmasi($id)
+    public function konfirmasi_selesai($id)
     {
         Tiket::where('id', $id)->update([
             'tanggal_akhir' => Carbon::now()->format('d-m-Y'),
             'status' => 'selesai',
         ]);
 
-        return back()->with('success', 'Berhasil menyelesaikan Pengaduan');
-    }
-
-    public function selesai()
-    {
-        $tikets = Tiket::where('status', 'selesai')->get();
-
-        return view('cs.tiket.selesai', compact('tikets'));
+        return back()->with('success', 'Berhasil menyelesaikan Tiket');
     }
 
     public function generateCode()

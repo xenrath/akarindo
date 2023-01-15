@@ -25,6 +25,7 @@ class User extends Authenticatable
         'foto',
         'alamat',
         'password',
+        'layanan_id'
     ];
 
     /**
@@ -49,6 +50,16 @@ class User extends Authenticatable
     public function produks()
     {
         return $this->hasMany(Produk::class);
+    }
+
+    public function tiket_teknisis()
+    {
+        return $this->hasMany(Tiket::class, 'teknisi_id', 'id');
+    }
+
+    public function layanan()
+    {
+        return $this->belongsTo(Layanan::class);
     }
 
     public function isAdmin()
