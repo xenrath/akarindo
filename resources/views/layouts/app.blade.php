@@ -66,7 +66,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
+      <a href="" class="brand-link">
         <img src="{{ asset('storage/uploads/logo.png') }}" alt="EHR-Tiketing" class="brand-image">
         <span class="brand-text font-wight-bold">EHR-Tiketing</span>
       </a>
@@ -146,10 +146,10 @@
     </div>
 
     <footer class="main-footer">
-      <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-      All rights reserved.
+      <strong>Copyright © 2021. All right reserved. <a href="https://pse.kominfo.go.id/tdpse-detail/3010">EHR System
+          Terdaftar Di Kominfo.</a>.</strong>
       <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.2.0
+        <b>No. 001922.01/DJAI.PSE/01/2022</b>
       </div>
     </footer>
 

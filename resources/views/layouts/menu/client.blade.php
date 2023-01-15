@@ -77,3 +77,12 @@ $selesais = \App\Models\Tiket::where([
     </p>
   </a>
 </li>
+<li class="nav-header">Profile</li>
+<li class="nav-item">
+  <a href="{{ url('profile') }}" class="nav-link {{ request()->is('profile') ? 'active' : '' }}">
+    <i class="fas fa-user-edit"></i>
+    <p>
+      Update Profile
+    </p>
+  </a>
+</li>

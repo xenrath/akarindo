@@ -109,7 +109,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                    <a href="{{ url('teknisi/tiket/konfirmasi_selesaikan/' . $tiket->id) }}" class="btn btn-primary">Selesaikan</a>
+                    <a href="{{ url('teknisi/tiket/konfirmasi_selesai/' . $tiket->id) }}" class="btn btn-primary">Selesaikan</a>
                   </div>
                 </div>
               </div>

@@ -20,16 +20,16 @@ class ProfileController extends Controller
     {
         $user = User::find(auth()->user()->id);
 
-        // $request->validate([
-        //     'nama' => 'required',
-        //     'email' => 'required|unique:users,email,' . $user->id . ',id',
-        //     'telp' => 'required|unique:users,telp,' . $user->id . ',id',
-        //     'password' => 'sometimes|nullable|confirmed'
-        // ], [
-        //     'nama.required' => 'Nama harus diisi!',
-        //     'email.required' => 'Email harus diisi!',
-        //     'telp.required' => 'Nomor telepon harus diisi!',
-        // ]);
+        $request->validate([
+            'nama' => 'required',
+            'email' => 'required|unique:users,email,' . $user->id . ',id',
+            'telp' => 'required|unique:users,telp,' . $user->id . ',id',
+            'password' => 'sometimes|nullable|confirmed'
+        ], [
+            'nama.required' => 'Nama harus diisi!',
+            'email.required' => 'Email harus diisi!',
+            'telp.required' => 'Nomor telepon harus diisi!',
+        ]);
 
         if ($request->password) {
             $password = bcrypt($request->password);
@@ -55,6 +55,6 @@ class ProfileController extends Controller
             'password' => $password
         ]);
 
-        return redirect()->back()->with('status', 'Berhasil memperbarui profile');
+        return redirect()->back()->with('success', 'Berhasil memperbarui Profile');
     }
 }
