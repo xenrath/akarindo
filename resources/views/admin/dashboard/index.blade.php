@@ -76,4 +76,7 @@
   <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+<script>
+  
+</script>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Layanan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,8 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('admin.user.create');
+        $layanans = Layanan::get();
+        return view('admin.user.create', compact('layanans'));
     }
 
     public function store(Request $request)
@@ -39,6 +41,28 @@ class UserController extends Controller
                 'telp.unique' => 'Nomor telepon sudah digunakan!',
                 'foto.image' => 'Foto harus berformat jpeg, jpg, png!',
                 'foto.mimes' => 'Foto harus berformat jpeg, jpg, png!',
+            ]);
+        } elseif ($request->role == 'teknisi') {
+            $validator = Validator::make($request->all(), [
+                'nama' => 'required',
+                'email' => 'required|email|unique:users',
+                'role' => 'required',
+                'layanan_id' => 'required',
+                'telp' => 'required|unique:users',
+                'foto' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+                'alamat' => 'required',
+            ], [
+                'nama.required' => 'Nama user harus diisi!',
+                'email.required' => 'Email harus diisi!',
+                'email.unique' => 'Email sudah digunakan!',
+                'email.email' => 'Email yang dimasukan salah!',
+                'role.required' => 'Role harus dipilih!',
+                'layanan_id.required' => 'Kategori teknisi harus dipilih!',
+                'telp.required' => 'Nomor telepon harus diisi!',
+                'telp.unique' => 'Nomor telepon sudah digunakan!',
+                'foto.required' => 'Foto harus ditambahkan!',
+                'foto.image' => 'Foto harus berformat jpeg, jpg, png!',
+                'alamat.required' => 'Alamat harus diisi!',
             ]);
         } else {
             $validator = Validator::make($request->all(), [
@@ -93,7 +117,8 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('admin.user.edit', compact('user'));
+        $layanans = Layanan::get();
+        return view('admin.user.edit', compact('user', 'layanans'));
     }
 
     public function update(Request $request, User $user)
@@ -116,24 +141,47 @@ class UserController extends Controller
             ]);
         } else {
             if ($user->foto) {
-                $validator = Validator::make($request->all(), [
-                    'nama' => 'required',
-                    'email' => 'required|email|unique:users,email,' . $user->id,
-                    'role' => 'required',
-                    'telp' => 'required|unique:users,telp,' . $user->id,
-                    'foto' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
-                    'alamat' => 'required',
-                ], [
-                    'nama.required' => 'Nama user harus diisi!',
-                    'email.required' => 'Email harus diisi!',
-                    'email.unique' => 'Email sudah digunakan!',
-                    'email.email' => 'Email yang dimasukan salah!',
-                    'role.required' => 'Role harus dipilih!',
-                    'telp.required' => 'Nomor telepon harus diisi!',
-                    'telp.unique' => 'Nomor telepon sudah digunakan!',
-                    'foto.image' => 'Foto harus berformat jpeg, jpg, png!',
-                    'alamat.required' => 'Alamat harus diisi!',
-                ]);
+                if ($request->role == 'teknisi') {
+                    $validator = Validator::make($request->all(), [
+                        'nama' => 'required',
+                        'email' => 'required|email|unique:users,email,' . $user->id,
+                        'role' => 'required',
+                        'layanan_id' => 'required',
+                        'telp' => 'required|unique:users,telp,' . $user->id,
+                        'foto' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+                        'alamat' => 'required',
+                    ], [
+                        'nama.required' => 'Nama user harus diisi!',
+                        'email.required' => 'Email harus diisi!',
+                        'email.unique' => 'Email sudah digunakan!',
+                        'email.email' => 'Email yang dimasukan salah!',
+                        'role.required' => 'Role harus dipilih!',
+                        'layanan_id.required' => 'Kategori teknisi harus dipilih!',
+                        'telp.required' => 'Nomor telepon harus diisi!',
+                        'telp.unique' => 'Nomor telepon sudah digunakan!',
+                        'foto.image' => 'Foto harus berformat jpeg, jpg, png!',
+                        'alamat.required' => 'Alamat harus diisi!',
+                    ]);
+                } else {
+                    $validator = Validator::make($request->all(), [
+                        'nama' => 'required',
+                        'email' => 'required|email|unique:users,email,' . $user->id,
+                        'role' => 'required',
+                        'telp' => 'required|unique:users,telp,' . $user->id,
+                        'foto' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+                        'alamat' => 'required',
+                    ], [
+                        'nama.required' => 'Nama user harus diisi!',
+                        'email.required' => 'Email harus diisi!',
+                        'email.unique' => 'Email sudah digunakan!',
+                        'email.email' => 'Email yang dimasukan salah!',
+                        'role.required' => 'Role harus dipilih!',
+                        'telp.required' => 'Nomor telepon harus diisi!',
+                        'telp.unique' => 'Nomor telepon sudah digunakan!',
+                        'foto.image' => 'Foto harus berformat jpeg, jpg, png!',
+                        'alamat.required' => 'Alamat harus diisi!',
+                    ]);
+                }
             } else {
                 $validator = Validator::make($request->all(), [
                     'nama' => 'required',
@@ -176,6 +224,7 @@ class UserController extends Controller
                 'nama' => $request->nama,
                 'email' => $request->email,
                 'role' => $request->role,
+                'layanan_id' => $request->layanan_id,
                 'telp' => $request->telp,
                 'foto' => $namafoto,
                 'alamat' => $request->alamat,

@@ -50,49 +50,50 @@
       <form action="{{ url('profile/update') }}" method="post" enctype="multipart/form-data" autocomplete="off">
         @csrf
         <div class="card-body">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="nama">Nama User</label>
-                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan nama user"
-                  value="{{ old('nama', $user->nama) }}">
+          <div class="form-group">
+            <label for="nama">Nama User</label>
+            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan nama user"
+              value="{{ old('nama', $user->nama) }}">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Masukan email"
+              value="{{ old('email', $user->email) }}">
+          </div>
+          @if ($user->role == 'teknisi')
+          <div class="form-group">
+            <label for="layanan_id">Kategori</label>
+            <select class="custom-select form-control" id="layanan_id" name="layanan_id">
+              <option value="">- Pilih Kategori -</option>
+              @foreach ($layanans as $layanan)
+              <option value="{{ $layanan->id }}" {{ old('layanan_id', $user->layanan_id)==$layanan->id ? 'selected' :
+                '' }}>{{
+                $layanan->layanan }}</option>
+              @endforeach
+            </select>
+          </div>
+          @endif
+          <div class="form-group">
+            <label for="telp">No. Telepon</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">+62</span>
               </div>
+              <input type="text" id="telp" name="telp" class="form-control" placeholder="Masukan nomor telepon"
+                value="{{ old('telp', $user->telp) }}">
             </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="Masukan email"
-                  value="{{ old('email', $user->email) }}">
-              </div>
+          </div>
+          <div class="form-group">
+            <label for="foto">Foto</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="foto" name="foto" accept="image/*">
+              <label class="custom-file-label" for="foto">Pilih Foto</label>
             </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="telp">No. Telepon</label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">+62</span>
-                  </div>
-                  <input type="text" id="telp" name="telp" class="form-control" placeholder="Masukan nomor telepon"
-                    value="{{ old('telp', $user->telp) }}">
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="foto">Foto</label>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="foto" name="foto" accept="image/*">
-                  <label class="custom-file-label" for="foto">Pilih Foto</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="alamat">Alamat</label>
-                <textarea class="form-control" id="alamat" name="alamat" rows="3"
-                  placeholder="Masukan alamat">{{ old('alamat', $user->alamat) }}</textarea>
-              </div>
-            </div>
+          </div>
+          <div class="form-group">
+            <label for="alamat">Alamat</label>
+            <textarea class="form-control" id="alamat" name="alamat" rows="3"
+              placeholder="Masukan alamat">{{ old('alamat', $user->alamat) }}</textarea>
           </div>
           <hr>
           <div class="row">
@@ -100,6 +101,14 @@
               <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control" value="{{ old('password') }}">
+                <small>(Kosongkan saja jika tidak ingin diubah)</small>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="password_confirmation">Konfirmasi Password</label>
+                <input type="password" id="password" name="password_confirmation" class="form-control"
+                  value="{{ old('password_confirmation') }}">
               </div>
             </div>
           </div>

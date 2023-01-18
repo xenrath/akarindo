@@ -29,32 +29,63 @@
     }
   </style>
 </head>
-<body onload="window.print();">
-  <p style="text-align: right;">{{ Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>
+<body>
   <p style="font-weight: bold; align-content: center">Laporan Pengaduan</p>
   <table style="width: 100%;" cellpadding="10" cellspacing="0">
     <tr>
-      <td class="td">No.</td>
-      <td class="td">Nama Client</td>
-      <td class="td">Produk</td>
+      <td class="td">Client</td>
       <td class="td">Pengaduan</td>
-      <td class="td">Tanggal Pengaduan</td>
-      <td class="td">Tanggal Dikerjakan</td>
-      <td class="td">Tanggal Selesai</td>
-      <td class="td">Teknisi</td>
-      <td class="td">Jawaban</td>
+      <td class="td">Waktu Pengaduan</td>
+      <td class="td">Penyelesaian</td>
     </tr>
     @foreach ($tikets as $tiket)
     <tr>
-      <td class="td">{{ $loop->iteration }}</td>
-      <td class="td">{{ $tiket->client->nama }}</td>
-      <td class="td">{{ $tiket->produk->nama }}</td>
+      <td class="td" style="width: 180px">
+        {{ $tiket->client->nama }}
+        <br>
+        ({{ $tiket->produk->nama }})
+      </td>
       <td class="td">{{ $tiket->pengaduan }}</td>
-      <td class="td">{{ $tiket->tanggal_awal }}</td>
-      <td class="td">{{ $tiket->tanggal_pengerjaan }}</td>
-      <td class="td">{{ $tiket->tanggal_akhir }}</td>
-      <td class="td">{{ $tiket->teknisi->nama }}</td>
-      <td class="td">{{ $tiket->jawaban }}</td>
+      <td class="td">
+        Tanggal Dibuat :
+        <br>
+        {{ date('d M Y', strtotime($tiket->tanggal_awal)) }}
+        <br>
+        @if ($tiket->tanggal_pengerjaan)
+        Tanggal Pengerjaan :
+        <br>
+        {{ date('d M Y', strtotime($tiket->tanggal_pengerjaan)) }}
+        <br>
+        @endif
+        Tanggal Selesai :
+        <br>
+        {{ date('d M Y', strtotime($tiket->tanggal_akhir)) }}
+      </td>
+      <td class="td">
+        @if ($tiket->teknisi_id)
+        Teknisi :
+        <br>
+        {{ $tiket->teknisi->nama }}
+        <br>
+        Lama Pengerjaan :
+        <br>
+        @php
+        $tanggal_pengerjaan = strtotime($tiket->tanggal_pengerjaan);
+        $tanggal_akhir = strtotime($tiket->tanggal_akhir);
+        $selisih = ceil(abs($tanggal_akhir - $tanggal_pengerjaan) / 86400);
+        @endphp
+        @if ($selisih == 0)
+        Dikerjakan dan selesai hari itu juga.
+        @else
+        {{ $selisih }} Hari
+        @endif
+        @endif
+        @if ($tiket->jawaban)
+        CS :
+        <br>
+        {{ $tiket->jawaban }}
+        @endif
+      </td>
     </tr>
     @endforeach
   </table>

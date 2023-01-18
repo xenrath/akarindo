@@ -58,12 +58,13 @@
               <td>{{ $tiket->pengaduan }}</td>
               <td>{{ date('d M Y', strtotime($tiket->tanggal_awal)) }}</td>
               <td class="text-center">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-lihat">
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                  data-target="#modal-lihat-{{ $tiket->id }}">
                   Lihat
                 </button>
               </td>
             </tr>
-            <div class="modal fade" id="modal-lihat">
+            <div class="modal fade" id="modal-lihat-{{ $tiket->id }}">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -74,10 +75,12 @@
                   </div>
                   <div class="modal-body">
                     <div class="row">
+                      @if ($tiket->gambar)
                       <div class="col">
                         <img src="{{ asset('storage/uploads/' . $tiket->gambar) }}" alt="{{ $tiket->kode }}"
-                          class="w-100 rounded shadow">
+                          class="w-100 rounded border">
                       </div>
+                      @endif
                       <div class="col">
                         <p class="text-wrap">
                           <strong>Client</strong>
@@ -94,8 +97,48 @@
                           <br>
                           {{ $tiket->pengaduan }}
                         </p>
+                        <p class="text-wrap">
+                          <strong>Waktu</strong>
+                          <br>
+                          {{ date('d M Y', strtotime($tiket->tanggal_awal)) }} - {{ date('d M Y',
+                          strtotime($tiket->tanggal_akhir)) }}
+                        </p>
                       </div>
                     </div>
+                    <hr>
+                    @if ($tiket->jawaban)
+                    <p class="text-wrap">
+                      <strong>Jawaban</strong>
+                      <br>
+                      {{ $tiket->jawaban }}
+                    </p>
+                    @endif
+                    @if ($tiket->teknisi_id)
+                    <p class="text-wrap">
+                      <strong>Teknisi</strong>
+                      <br>
+                      {{ $tiket->teknisi->nama }}
+                    </p>
+                    <p class="text-wrap">
+                      <strong>Tanggal Pengerjaan</strong>
+                      <br>
+                      {{ date('d M Y', strtotime($tiket->tanggal_pengerjaan)) }}
+                    </p>
+                    <p class="text-wrap">
+                      <strong>Lama Pengerjaan</strong>
+                      <br>
+                      @php
+                      $tanggal_pengerjaan = strtotime($tiket->tanggal_pengerjaan);
+                      $tanggal_akhir = strtotime($tiket->tanggal_akhir);
+                      $selisih = ceil(abs($tanggal_akhir - $tanggal_pengerjaan) / 86400);
+                      @endphp
+                      @if ($selisih == 0)
+                      Dikerjakan dan selesai hari itu juga.
+                      @else
+                      {{ $selisih }} Hari
+                      @endif
+                    </p>
+                    @endif
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>

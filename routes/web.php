@@ -84,7 +84,7 @@ Route::prefix('client')->middleware('client')->group(function () {
   Route::get('tiket/menunggu', [\App\Http\Controllers\Client\TiketController::class, 'menunggu']);
   Route::get('tiket/proses', [\App\Http\Controllers\Client\TiketController::class, 'proses']);
   Route::get('tiket/selesai', [\App\Http\Controllers\Client\TiketController::class, 'selesai']);
-  Route::get('tiket/konfirmasi/{id}', [\App\Http\Controllers\Client\TiketController::class, 'konfirmasi']);
+  Route::get('tiket/konfirmasi_selesai/{id}', [\App\Http\Controllers\Client\TiketController::class, 'konfirmasi_selesai']);
   Route::resource('tiket', \App\Http\Controllers\Client\TiketController::class);
   Route::get('faq', [\App\Http\Controllers\Client\FaqController::class, 'index']);
 });

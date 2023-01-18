@@ -42,58 +42,59 @@
       <form action="{{ url('admin/user') }}" method="post" enctype="multipart/form-data" autocomplete="off">
         @csrf
         <div class="card-body">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="nama">Nama User</label>
-                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan nama user" value="{{ old('nama') }}">
-              </div>
+          <div class="form-group">
+            <label for="nama">Nama User</label>
+            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan nama user"
+              value="{{ old('nama') }}">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Masukan email"
+              value="{{ old('email') }}">
+          </div>
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select class="custom-select form-control" id="role" name="role">
+              <option value="">- Pilih Role -</option>
+              <option value="admin" {{ old('role')=='admin' ? 'selected' : '' }}>Admin</option>
+              <option value="cs" {{ old('role')=='cs' ? 'selected' : '' }}>CS</option>
+              <option value="teknisi" {{ old('role')=='teknisi' ? 'selected' : '' }}>Teknisi</option>
+              <option value="client" {{ old('role')=='client' ? 'selected' : '' }}>Client</option>
+            </select>
+          </div>
+          <div id="layout_layanan" style="display: none">
+            <div class="form-group">
+              <label for="layanan_id">Kategori</label>
+              <select class="custom-select form-control" id="layanan_id" name="layanan_id">
+                <option value="">- Pilih Kategori -</option>
+                @foreach ($layanans as $layanan)
+                <option value="{{ $layanan->id }}" {{ old('layanan_id')==$layanan->id ? 'selected' : '' }}>{{
+                  $layanan->layanan }}</option>
+                @endforeach
+              </select>
             </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="Masukan email" value="{{ old('email') }}">
+          </div>
+          <div class="form-group">
+            <label for="telp">No. Telepon</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">+62</span>
               </div>
+              <input type="text" id="telp" name="telp" class="form-control" placeholder="Masukan nomor telepon"
+                value="{{ old('telp') }}">
             </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="role">Role</label>
-                <select class="custom-select form-control" id="role" name="role">
-                  <option value="">- Pilih Role -</option>
-                  <option value="admin" {{ old('role')=='admin' ? 'selected' : '' }}>Admin</option>
-                  <option value="cs" {{ old('role')=='cs' ? 'selected' : '' }}>CS</option>
-                  <option value="teknisi" {{ old('role')=='teknisi' ? 'selected' : '' }}>Teknisi</option>
-                  <option value="client" {{ old('role')=='client' ? 'selected' : '' }}>Client</option>
-                </select>
-              </div>
+          </div>
+          <div class="form-group">
+            <label for="foto">Foto</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="foto" name="foto" accept="image/*">
+              <label class="custom-file-label" for="foto">Pilih Foto</label>
             </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="telp">No. Telepon</label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">+62</span>
-                  </div>
-                  <input type="text" id="telp" name="telp" class="form-control" placeholder="Masukan nomor telepon" value="{{ old('telp') }}">
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="foto">Foto</label>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="foto" name="foto" accept="image/*">
-                  <label class="custom-file-label" for="foto">Pilih Foto</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="alamat">Alamat</label>
-                <textarea class="form-control" id="alamat" name="alamat" rows="3"
-                  placeholder="Masukan alamat">{{ old('alamat') }}</textarea>
-              </div>
-            </div>
+          </div>
+          <div class="form-group">
+            <label for="alamat">Alamat</label>
+            <textarea class="form-control" id="alamat" name="alamat" rows="3"
+              placeholder="Masukan alamat">{{ old('alamat') }}</textarea>
           </div>
         </div>
         <div class="card-footer text-right">
@@ -104,4 +105,25 @@
     </div>
   </div>
 </section>
+<script>
+  var role = document.getElementById('role');
+  var layout_layanan = document.getElementById('layout_layanan');
+  var layanan_id = document.getElementById('layanan_id');
+
+  if (role.value == 'teknisi') {
+    layout_layanan.style.display = "inline";
+  } else {
+    layout_layanan.style.display = "none";
+    layanan_id.value = "";
+  }
+
+  role.addEventListener('change', function () {
+    if (role.value == 'teknisi') {
+      layout_layanan.style.display = "inline";
+    } else {
+      layout_layanan.style.display = "none";
+      layanan_id.value = "";
+    }
+  });
+</script>
 @endsection

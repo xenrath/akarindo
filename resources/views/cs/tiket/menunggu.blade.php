@@ -124,7 +124,7 @@
                       data-target="#modal-jawab">Jawab
                       Pengaduan</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
-                      data-target="#modal-alihkan">Alihkan
+                      data-target="#modal-alihkan-{{ $tiket->id }}">Alihkan
                       ke Teknisi</button>
                   </div>
                 </div>
@@ -157,7 +157,7 @@
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="modal-alihkan">
+            <div class="modal fade" id="modal-alihkan-{{ $tiket->id }}">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -178,12 +178,6 @@
                         <select class="form-control select2bs4" id="teknisi_id" name="teknisi_id">
                           <option value="">- Pilih Teknisi -</option>
                           @foreach ($teknisis as $teknisi)
-                          @php
-                          $tikets = \App\Models\Tiket::where([
-                          ['teknisi_id', $teknisi->id],
-                          ['status', 'proses']
-                          ])->get();
-                          @endphp
                           <option value="{{ $teknisi->id }}" {{ old('teknisi_id')==$teknisi->id ? 'selected' : '' }}>{{
                             $teknisi->nama }} ({{ $teknisi->tiket_teknisis_count }})</option>
                           @endforeach
@@ -232,8 +226,25 @@
                           <br>
                           {{ $tiket->pengaduan }}
                         </p>
+                        <p class="text-wrap">
+                          <strong>Tanggal Dibuat</strong>
+                          <br>
+                          {{ date('d M Y', strtotime($tiket->tanggal_awal)) }}
+                        </p>
                       </div>
                     </div>
+                    @if ($tiket->teknisi_id)
+                    <hr>
+                    <p class="text-wrap">
+                      Tiket <strong>{{ $tiket->produk->nama }}</strong> sudah dialihkan ke Teknisi. Harap menunggu
+                      konfirmasi pengerjaan dari Teknisi.
+                    </p>
+                    <p class="text-wrap">
+                      <strong>Teknisi</strong>
+                      <br>
+                      {{ $tiket->teknisi->nama }}
+                    </p>
+                    @endif
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>

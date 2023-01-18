@@ -114,6 +114,11 @@
                           <br>
                           {{ $tiket->pengaduan }}
                         </p>
+                        <p class="text-wrap">
+                          <strong>Tanggal Dibuat</strong>
+                          <br>
+                          {{ date('d M Y', strtotime($tiket->tanggal_awal)) }}
+                        </p>
                       </div>
                     </div>
                     <hr>

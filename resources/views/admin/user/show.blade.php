@@ -63,7 +63,7 @@
               </tr>
               @if ($user->layanan_id)
               <tr>
-                <th>Bagian</th>
+                <th>Kategori</th>
                 <td>:</td>
                 <td>{{ $user->layanan->layanan }}</td>
               </tr>

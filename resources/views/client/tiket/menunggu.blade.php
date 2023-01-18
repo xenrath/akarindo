@@ -80,7 +80,7 @@
                       @if ($tiket->gambar)
                       <div class="col">
                         <img src="{{ asset('storage/uploads/' . $tiket->gambar) }}" alt="{{ $tiket->kode }}"
-                          class="w-100 rounded shadow">
+                          class="w-100 rounded border">
                       </div>
                       @endif
                       <div class="col">
