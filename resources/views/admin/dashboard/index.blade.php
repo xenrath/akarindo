@@ -25,7 +25,7 @@
   <div class="container-fluid">
     <!-- Small boxes (Stat box) -->
     <div class="row">
-      <div class="col-lg-4 col-6">
+      <div class="col-md-4">
         <!-- small box -->
         <div class="small-box bg-warning">
           <div class="inner">
@@ -38,9 +38,6 @@
           <a href="{{ url('admin/tiket/menunggu') }}" class="small-box-footer">Lihat <i
               class="fas fa-arrow-circle-right"></i></a>
         </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-4 col-6">
         <!-- small box -->
         <div class="small-box bg-primary">
           <div class="inner">
@@ -53,9 +50,6 @@
           <a href="{{ url('admin/tiket/proses') }}" class="small-box-footer">Lihat <i
               class="fas fa-arrow-circle-right"></i></a>
         </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-4 col-6">
         <!-- small box -->
         <div class="small-box bg-success">
           <div class="inner">
@@ -69,14 +63,48 @@
               class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
-      <!-- ./col -->
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            Grafik Pengaduan
+          </div>
+          <div class="card-body">
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- /.row -->
   </div>
   <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
+  const ctx = document.getElementById('myChart');
   
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: {{ Js::from($labels) }},
+      datasets: [{
+        label: 'Banyak Pengaduan',
+        barPercentage: 0,
+        barThickness: 50,
+        data: {{ Js::from($data) }},
+        borderWidth: 1
+      }]
+    },
+    options: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          precision: 0
+        }
+      },
+    }
+  });
 </script>
 @endsection

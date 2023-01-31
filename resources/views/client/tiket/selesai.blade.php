@@ -124,7 +124,7 @@
                       <strong>Maksimal Pengerjaan</strong>
                       <br>
                       {{ date('d M Y', strtotime($tiket->tanggal_awal . ' + ' .
-                      $tiket->produk->layanan->level->perbaikan . ' days')) }}
+                      $tiket->produk->sublayanan->layanan->level->perbaikan . ' days')) }}
                     </p>
                     @endif
                   </div>
