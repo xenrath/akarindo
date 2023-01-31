@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Produk')
+@section('title', 'Ubah Produk')
 
 @section('content')
 <!-- Content Header (Page header) -->
@@ -13,7 +13,7 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{{ url('admin/produk') }}">Produk</a></li>
-          <li class="breadcrumb-item active">Tambah</li>
+          <li class="breadcrumb-item active">Ubah</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -36,7 +36,7 @@
     @endif
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Tambah Produk</h3>
+        <h3 class="card-title">Ubah Produk</h3>
       </div>
       <!-- /.card-header -->
       <form action="{{ url('admin/produk/' . $produk->id) }}" method="POST" enctype="multipart/form-data"

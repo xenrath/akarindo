@@ -43,7 +43,7 @@
           <tr>
             <th>Layanan</th>
             <td>:</td>
-            <td>{{ $produk->layanan->layanan }}</td>
+            <td>{{ $produk->sublayanan->layanan->layanan }}</td>
           </tr>
           <tr>
             <th>URL</th>
