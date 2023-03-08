@@ -54,10 +54,9 @@ class TiketController extends Controller
 
     public function index()
     {
-        $diproses = Tiket::where('status', 'proses')->get();
-        $selesai = Tiket::where('status', 'selesai')->get();
+        $tikets = Tiket::get();
 
-        return view('admin.tiket.index', compact('menunggu', 'diproses', 'selesai'));
+        return view('admin.tiket.index', compact('tikets'));
     }
 
     public function create()

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tiket Menunggu')
+@section('title', 'Pengaduan Menunggu')
 
 @section('content')
 <!-- Content Header (Page header) -->
@@ -8,11 +8,11 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Tiket</h1>
+        <h1 class="m-0">Pengaduan</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item active">Tiket Menunggu</li>
+          <li class="breadcrumb-item active">Pengaduan Menunggu</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -34,7 +34,7 @@
     @endif
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Data Tiket Menunggu</h3>
+        <h3 class="card-title">Data Pengaduan Menunggu</h3>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
@@ -67,13 +67,13 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title">Konfirmasi Tiket</h4>
+                    <h4 class="modal-title">Konfirmasi Pengaduan</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                    <p>Yakin proses tiket <strong>{{ $tiket->produk->nama }}</strong>?</p>
+                    <p>Yakin proses pengaduan <strong>{{ $tiket->produk->nama }}</strong>?</p>
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

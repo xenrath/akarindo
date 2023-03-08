@@ -1,175 +1,89 @@
 @extends('layouts.app')
 
-@section('title', 'Tiket')
+@section('title', 'Pengaduan')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-  <h4 class="fw-bold py-3 mb-4">
-    <span class="text-muted fw-light">Data Master /</span>
-    Tiket
-  </h4>
-  @if (session('status'))
-  <div class="alert alert-primary alert-dismissible" tiket="alert">
-    {{ session('status') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  @endif
-  <div class="nav-align-top mb-4">
-    <ul class="nav nav-pills nav-fill mb-3" role="tablist">
-      <li class="nav-item">
-        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#menunggu"
-          aria-controls="navs-justified-home" aria-selected="true">Menunggu
-          {{-- <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger">3</span> --}}
-        </button>
-      </li>
-      <li class="nav-item">
-        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#diproses"
-          aria-controls="navs-justified-profile" aria-selected="false">Diproses
-        </button>
-      </li>
-      <li class="nav-item">
-        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#selesai"
-          aria-controls="navs-justified-messages" aria-selected="false">Selesai
-        </button>
-      </li>
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane fade show active" id="menunggu" role="tabpanel">
-        <div class="table-responsive text-nowrap">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th class="text-center">No</th>
-                <th>Kode</th>
-                <th>Produk</th>
-                <th>Deskripsi</th>
-                <th>Tanggal Dibuat</th>
-                <th class="text-center">Opsi</th>
-              </tr>
-            </thead>
-            <tbody class="table-border-bottom-0">
-              @foreach ($menunggu as $m)
-              <tr>
-                <td class="text-center">{{ $loop->iteration }}</td>
-                <td>{{ $m->kode }}</td>
-                <td>{{ $m->produk->nama }}</td>
-                <td>{{ $m->pengaduan }}</td>
-                <td>{{ date('d M Y', strtotime($m->tanggal_awal)) }}</td>
-                <td class="text-center">
-                  <a href="{{ url('admin/tiket/' . $m->id) }}" class="btn rounded-pill btn-secondary btn-sm text-white"
-                    data-bs-toggle="modal" data-bs-target="#modalMenunggu{{ $m->id }}">
-                    Proses Tiket
-                  </a>
-                </td>
-                <div class="modal fade" id="modalMenunggu{{ $m->id }}" aria-labelledby="modalToggleLabel" tabindex="-1"
-                  style="display: none" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="modalToggleLabel">Update Status</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <span class="fw-bold">{{ $m->kode }}</span>
-                        <br>
-                        {{ $m->client->nama }} | {{ $m->produk->nama }}
-                      </div>
-                      <div class="modal-footer">
-                        <a href="{{ url('admin/status-diproses/' . $m->id) }}" class="btn btn-secondary">Proses
-                          Tiket</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Pengaduan</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item active">Pengaduan</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    @if (session('success'))
+    <div class="alert alert-success alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h5>
+        <i class="icon fas fa-check"></i> Success!
+      </h5>
+      {{ session('success') }}
+    </div>
+    @endif
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Data Pengaduan</h3>
       </div>
-      <div class="tab-pane fade" id="diproses" role="tabpanel">
-        <div class="table-responsive text-nowrap">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th class="text-center">No</th>
-                <th>Kode</th>
-                <th>Produk</th>
-                <th>Deskripsi</th>
-                <th>Tanggal Dibuat</th>
-                <th class="text-center">Opsi</th>
-              </tr>
-            </thead>
-            <tbody class="table-border-bottom-0">
-              @foreach ($diproses as $d)
-              <tr>
-                <td class="text-center">{{ $loop->iteration }}</td>
-                <td>{{ $d->kode }}</td>
-                <td>{{ $d->produk->nama }}</td>
-                <td>{{ $d->pengaduan }}</td>
-                <td>{{ $d->tanggal_awal }}</td>
-                <td class="text-center">
-                  <a href="{{ url('admin/tiket/' . $d->id) }}" class="btn rounded-pill btn-primary btn-sm text-white"
-                    data-bs-toggle="modal" data-bs-target="#modalDiproses{{ $d->id }}">
-                    Selesaikan Tiket
-                  </a>
-                </td>
-                <div class="modal fade" id="modalDiproses{{ $d->id }}" aria-labelledby="modalToggleLabel" tabindex="-1"
-                  style="display: none" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="modalToggleLabel">Update Status</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <span class="fw-bold">{{ $d->kode }}</span>
-                        <br>
-                        {{ $d->client->nama }} | {{ $d->produk_id }}
-                      </div>
-                      <div class="modal-footer">
-                        <a href="{{ url('admin/status-selesai/' . $d->id) }}" class="btn btn-primary">Selesaikan
-                          Tiket</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th class="text-center">No</th>
+              <th>Produk</th>
+              <th>Tanggal</th>
+              <th>Teknisi</th>
+              <th>Status</th>
+              <th class="text-center">Opsi</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($tikets as $tiket)
+            <tr>
+              <td class="text-center">{{ $loop->iteration }}</td>
+              <td>{{ $tiket->produk->nama }}</td>
+              <td>{{ date('d M Y', strtotime($tiket->tanggal_awal)) }}</td>
+              <td>
+                @if ($tiket->teknisi_id != null)
+                {{ $tiket->teknisi->nama }}
+                @else
+                -
+                @endif
+              </td>
+              <td>
+                @if ($tiket->pengaduan == 'menunggu')
+                <span class="badge bg-warning">Menunggu</span>
+                @elseif ($tiket->pengaduan == 'proses')
+                <span class="badge bg-primary">Proses</span>
+                @else
+                <span class="badge bg-success">Selesai</span>
+                @endif
+              </td>
+              <td class="text-center">
+                <a href="{{ url('admin/tiket/' . $tiket->id) }}" class="btn btn-info btn-sm">
+                  <i class="fas fa-eye"></i>
+                </a>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
-      <div class="tab-pane fade" id="selesai" role="tabpanel">
-        <div class="table-responsive text-nowrap">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th class="text-center">No</th>
-                <th>Kode</th>
-                <th>Produk</th>
-                <th>Deskripsi</th>
-                <th>Tanggal Dibuat</th>
-                <th>Tanggal Selesai</th>
-              </tr>
-            </thead>
-            <tbody class="table-border-bottom-0">
-              @foreach ($selesai as $s)
-              <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $s->kode }}</td>
-                <td>{{ $s->produk->nama }}</td>
-                <td>{{ $s->pengaduan }}</td>
-                <td>{{ $s->tanggal_awal }}</td>
-                <td>{{ $s->tanggal_akhir }}</td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <!-- /.card-body -->
     </div>
   </div>
-  <!--/ Basic Bootstrap Table -->
-</div>
+</section>
+<!-- /.card -->
 @endsection

@@ -13,7 +13,7 @@ $menunggus = \App\Models\Tiket::where('status', 'menunggu')->get();
 $proseses = \App\Models\Tiket::where('status', 'proses')->get();
 $selesais = \App\Models\Tiket::where('status', 'selesai')->get();
 @endphp
-<li class="nav-header">Tiket</li>
+<li class="nav-header">Pengaduan</li>
 <li class="nav-item">
   <a href="{{ url('cs/tiket/menunggu') }}" class="nav-link {{ request()->is('cs/tiket/menunggu') ? 'active' : '' }}">
     <i class="nav-icon fas fa-ticket-alt"></i>

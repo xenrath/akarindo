@@ -1,66 +1,103 @@
-@extends('back.layout.main')
+@extends('layouts.app')
 
-@section('title', 'Detail Pengaduan')
+@section('title', 'Lihat Pengaduan')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">
-      <a href="{{ url('complaint') }}">Pengaduan</a> /</span> Detail Pengaduan</h4>
-  <!-- Basic Layout -->
-  <div class="row">
-    <div class="col-xl">
-      <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="mb-0">Detail Data</h5>
-          @if ($complaint->status == "Menunggu")
-          <span class="badge bg-label-warning me-1 float-end">Menunggu</span>
-          @elseif($complaint->status == "Diproses")
-          <span class="badge bg-label-primary me-1 float-end">Diproses</span>
-          @else
-          <span class="badge bg-label-success me-1 float-end">Selesai</span>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Pengaduan</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="{{ url('admin/tiket') }}">Pengaduan</a></li>
+          <li class="breadcrumb-item active">Lihat</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Lihat Pengaduan</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <table class="table">
+              <tr>
+                <th>Client</th>
+                <td>:</td>
+                <td>{{ $tiket->client->nama }}</td>
+              </tr>
+              <tr>
+                <th>Produk</th>
+                <td>:</td>
+                <td>{{ $tiket->produk->nama }}</td>
+              </tr>
+              <tr>
+                <th>Pengaduan</th>
+                <td>:</td>
+                <td>{{ $tiket->pengaduan }}</td>
+              </tr>
+              <tr>
+                <th>Waktu</th>
+                <td>:</td>
+                <td>{{ date('d M Y', strtotime($tiket->tanggal_awal)) }} - {{ date('d M Y',
+                  strtotime($tiket->tanggal_akhir)) }}</td>
+              </tr>
+              @if ($tiket->jawaban)
+              <tr>
+                <th>Jawaban</th>
+                <td>:</td>
+                <td>{{ $tiket->jawaban }}</td>
+              </tr>
+              @endif
+              @if ($tiket->teknisi_id)
+              <tr>
+                <th>Teknisi</th>
+                <td>:</td>
+                <td>{{ $tiket->teknisi->nama }}</td>
+              </tr>
+              <tr>
+                <th>Tanggal Pengerjaan</th>
+                <td>:</td>
+                <td>{{ date('d M Y', strtotime($tiket->tanggal_pengerjaan)) }}</td>
+              </tr>
+              <tr>
+                <th>Lama Pengerjaan</th>
+                <td>:</td>
+                <td>
+                  @php
+                  $tanggal_pengerjaan = strtotime($tiket->tanggal_pengerjaan);
+                  $tanggal_akhir = strtotime($tiket->tanggal_akhir);
+                  $selisih = ceil(abs($tanggal_akhir - $tanggal_pengerjaan) / 86400);
+                  @endphp
+                  @if ($selisih == 0)
+                  Dikerjakan dan selesai hari itu juga.
+                  @else
+                  {{ $selisih }} Hari
+                  @endif
+                </td>
+              </tr>
+              @endif
+            </table>
+          </div>
+          @if ($tiket->gambar)
+          <div class="col">
+            <img src="{{ asset('storage/uploads/' . $tiket->gambar) }}" alt="{{ $tiket->nama }}" class="w-100 rounded">
+          </div>
           @endif
-        </div>
-        <hr class="my-1" />
-        <div class="card-body">
-          <div class="row mb-2">
-            <label class="col-sm-2 col-form-label">Nama Client</label>
-            <div class="col-sm-10">
-              <p>{{ $complaint->user_id }}</p>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <label class="col-sm-2 col-form-label">Produk</label>
-            <div class="col-sm-10">
-              <p>{{ $complaint->product_id }}</p>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <label class="col-sm-2 col-form-label">Keterangan</label>
-            <div class="col-sm-10">
-              <p>{{ $complaint->description }}</p>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <label class="col-sm-2 col-form-label">Tanggal Dibuat</label>
-            <div class="col-sm-10">
-              <p>{{ $complaint->start_date }}</p>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <label class="col-sm-2 col-form-label">Tanggal Dibuat</label>
-            <div class="col-sm-10">
-              <p>
-                @if ($complaint->end_date != null)
-                {{ $complaint->end_date }}
-                @else
-                -
-                @endif
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 @endsection

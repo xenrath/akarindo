@@ -46,7 +46,7 @@ class TiketController extends Controller
     {
         Tiket::where('id', $id)->update([
             'status' => 'proses',
-            'tanggal_pengerjaan' => Carbon::now()->format('d-m-Y')
+            'tanggal_pengerjaan' => Carbon::now()->format('Y-m-d')
         ]);
 
         return back()->with('success', 'Berhasil mengkonfirmasi Tiket');
@@ -55,7 +55,7 @@ class TiketController extends Controller
     public function konfirmasi_selesai($id)
     {
         Tiket::where('id', $id)->update([
-            'tanggal_akhir' => Carbon::now()->format('d-m-Y'),
+            'tanggal_akhir' => Carbon::now()->format('Y-m-d'),
             'status' => 'selesai'
         ]);
 
@@ -65,7 +65,7 @@ class TiketController extends Controller
     public function generateCode()
     {
         $now = Carbon::now();
-        $tikets = Tiket::where('tanggal_awal', $now->format('d-m-Y'))->get();
+        $tikets = Tiket::where('tanggal_awal', $now->format('Y-m-d'))->get();
         if (count($tikets) > 0) {
             $count = count($tikets) + 1;
             $num = sprintf("%04s", $count);

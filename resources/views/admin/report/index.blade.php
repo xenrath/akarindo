@@ -35,14 +35,31 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Data Laporan</h3>
-        <div class="float-right">
-          <a href="{{ url('admin/report/print') }}" class="btn btn-outline-primary btn-sm">
-            <i class="fas fa-print"></i> Cetak
-          </a>
-        </div>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
+        <form method="GET" id="form-action">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <input class="form-control" id="tanggal_awal" name="tanggal_awal" type="date"
+                value="{{ Request::get('tanggal_awal') }}" max="{{ date('Y-m-d') }}" />
+              <label for="tanggal_awal">(Tanggal Awal)</label>
+            </div>
+            <div class="col-md-4 mb-3">
+              <input class="form-control" id="tanggal_akhir" name="tanggal_akhir" type="date"
+                value="{{ Request::get('tanggal_akhir') }}" max="{{ date('Y-m-d') }}" />
+              <label for="tanggal_awal">(Tanggal Akhir)</label>
+            </div>
+            <div class="col-md-4">
+              <button type="button" class="btn btn-outline-primary mr-2" onclick="cari()">
+                <i class="fas fa-search"></i> Cari
+              </button>
+              <button type="button" class="btn btn-primary" onclick="print()" target="_blank">
+                <i class="fas fa-print"></i> Cetak
+                </a>
+            </div>
+          </div>
+        </form>
         <table id="example1" class="table table-bordered table-striped">
           <thead>
             <tr>
@@ -153,4 +170,29 @@
   </div>
 </section>
 <!-- /.card -->
+<script>
+  var tanggalAwal = document.getElementById('tanggal_awal');
+  var tanggalAkhir = document.getElementById('tanggal_akhir');
+  if (tanggalAwal.value == "") {
+    tanggalAkhir.readOnly = true;
+  }
+  tanggalAwal.addEventListener('change', function() {
+    if (this.value == "") {
+      tanggalAkhir.readOnly = true;
+    } else {
+      tanggalAkhir.readOnly = false;
+    };
+    tanggalAkhir.value = "";
+    tanggalAkhir.setAttribute('min', this.value);
+  });
+  var form = document.getElementById('form-action')
+  function cari() {
+    form.action = "{{ url('admin/report') }}";
+    form.submit();
+  }
+  function print() {
+    form.action = "{{ url('admin/report/print') }}";
+    form.submit();
+  }
+</script>
 @endsection

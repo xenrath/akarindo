@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login E-Tiketing</title>
+  <title>Login Helpdesk</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -18,7 +18,7 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a href=""><b>EHR</b> Tiketing</a>
+      <a href=""><b>EHR</b> Helpdesk</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">

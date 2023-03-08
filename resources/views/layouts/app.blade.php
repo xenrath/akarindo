@@ -43,7 +43,7 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="{{ asset('storage/uploads/logo.png') }}" alt="EHR-Tiketing" height="80"
+      <img class="animation__shake" src="{{ asset('storage/uploads/logo.png') }}" alt="EHR-Helpdesk" height="80"
         width="80">
     </div>
 
@@ -56,7 +56,7 @@
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <h4 class="nav-link">
-            <span class="font-weight-bold">Selamat Datang di EHR Tiketing</span>
+            <span class="font-weight-bold">Selamat Datang di EHR Helpdesk</span>
           </h4>
         </li>
       </ul>
@@ -67,8 +67,8 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="" class="brand-link">
-        <img src="{{ asset('storage/uploads/logo.png') }}" alt="EHR-Tiketing" class="brand-image">
-        <span class="brand-text font-wight-bold">EHR-Tiketing</span>
+        <img src="{{ asset('storage/uploads/logo.png') }}" alt="EHR-Helpdesk" class="brand-image">
+        <span class="brand-text font-wight-bold">EHR-Helpdesk</span>
       </a>
 
       <!-- Sidebar -->
@@ -132,7 +132,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>Yakin keluar sistem <strong>EHR-Tiketing</strong>?</p>
+            <p>Yakin keluar sistem <strong>EHR-Helpdesk</strong>?</p>
           </div>
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

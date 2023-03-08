@@ -46,7 +46,7 @@ class TiketController extends Controller
     {
         Tiket::where('id', $id)->update([
             'status' => 'selesai',
-            'tanggal_akhir' => Carbon::now()
+            'tanggal_akhir' => Carbon::now()->format('Y-m-d')
         ]);
 
         return back()->with('success', 'Berhasil menyelesaikan Tiket.');
@@ -75,7 +75,7 @@ class TiketController extends Controller
             return back()->withInput()->with('error', $error);
         }
 
-        $now = Carbon::now()->format('d-m-Y');
+        $now = Carbon::now()->format('Y-m-d');
 
         if ($request->gambar) {
             $nama = str_replace(' ', '', $request->gambar->getClientOriginalName());
@@ -108,7 +108,7 @@ class TiketController extends Controller
     public function generateCode()
     {
         $now = Carbon::now();
-        $tikets = Tiket::where('tanggal_awal', $now->format('d-m-Y'))->get();
+        $tikets = Tiket::where('tanggal_awal', $now->format('Y-m-d'))->get();
         if (count($tikets) > 0) {
             $count = count($tikets) + 1;
             $num = sprintf("%04s", $count);
