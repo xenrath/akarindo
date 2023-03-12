@@ -31,7 +31,7 @@ $selesais = \App\Models\Tiket::where([
 ['status', 'selesai']
 ])->get();
 @endphp
-<li class="nav-header">Tiket</li>
+<li class="nav-header">Pengaduan</li>
 <li class="nav-item">
   <a href="{{ url('client/tiket/menunggu') }}"
     class="nav-link {{ request()->is('client/tiket/menunggu') ? 'active' : '' }}">

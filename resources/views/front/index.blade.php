@@ -245,8 +245,8 @@
           <div class="col-lg-4 col-md-6">
             <h5 class="text-light mb-4">Alamat</h5>
             <p>
-              <i class="fa fa-map-marker-alt me-3"></i>Jl. Jenderal Sudirman No. 354, Gisikdrono, Kec. Semarang Barat,
-              Kota Semarang, Jawa Tengah 50149
+              <i class="fa fa-map-marker-alt me-3"></i>
+              Jl. Bukit Limau VIII FE 3 Bhromelia Permata Puri, Bringin, Ngaliyan, Kota Semarang, Jawa Tengah 50189
             </p>
             <p><i class="fa fa-phone-alt me-3"></i>(024) 76435498</p>
             <p><i class="fa fa-envelope me-3"></i>ehrsistem@gmail.com</p>
