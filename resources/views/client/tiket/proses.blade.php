@@ -44,7 +44,7 @@
               <th class="text-center">No</th>
               <th>Kode</th>
               <th>Produk</th>
-              <th>Deskripsi</th>
+              <th>Pengaduan</th>
               <th class="text-center">Opsi</th>
             </tr>
           </thead>

@@ -63,9 +63,9 @@
                 @endif
               </td>
               <td>
-                @if ($tiket->pengaduan == 'menunggu')
+                @if ($tiket->status == 'menunggu')
                 <span class="badge bg-warning">Menunggu</span>
-                @elseif ($tiket->pengaduan == 'proses')
+                @elseif ($tiket->status == 'proses')
                 <span class="badge bg-primary">Proses</span>
                 @else
                 <span class="badge bg-success">Selesai</span>

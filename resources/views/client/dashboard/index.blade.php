@@ -30,7 +30,7 @@
         <div class="small-box bg-warning">
           <div class="inner">
             <h3>{{ count($menunggus) }}&nbsp;data</h3>
-            <p>Tiket Menunggu</p>
+            <p>Pengaduan Menunggu</p>
           </div>
           <div class="icon">
             <i class="fas fa-ticket-alt"></i>
@@ -45,7 +45,7 @@
         <div class="small-box bg-primary">
           <div class="inner">
             <h3>{{ count($proseses) }}&nbsp;data</h3>
-            <p>Tiket Proses</p>
+            <p>Pengaduan Proses</p>
           </div>
           <div class="icon">
             <i class="fas fa-ticket-alt"></i>
@@ -60,7 +60,7 @@
         <div class="small-box bg-success">
           <div class="inner">
             <h3>{{ count($selesais) }}&nbsp;data</h3>
-            <p>Tiket Selesai</p>
+            <p>Pengaduan Selesai</p>
           </div>
           <div class="icon">
             <i class="fas fa-ticket-alt"></i>
