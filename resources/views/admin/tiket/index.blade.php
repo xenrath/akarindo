@@ -38,6 +38,19 @@
       </div>
       <!-- /.card-header -->
       <div class="card-body">
+        <form action="{{ url('admin/tiket') }}" method="GET" id="form-action">
+          <div class="form-group">
+            <label for="status">Pilih Status</label>
+            <br>
+            <select class="custom-select form-control" id="status" name="status" style="width: 200px"
+              onchange="event.preventDefault(); document.getElementById('form-action').submit();">
+              <option value="">- Semua Status -</option>
+              <option value="menunggu" {{ Request::get('status')=='menunggu' ? 'selected' : '' }}>Menunggu</option>
+              <option value="proses" {{ Request::get('status')=='proses' ? 'selected' : '' }}>Proses</option>
+              <option value="selesai" {{ Request::get('status')=='selesai' ? 'selected' : '' }}>Selesai</option>
+            </select>
+          </div>
+        </form>
         <table id="example1" class="table table-bordered table-striped">
           <thead>
             <tr>

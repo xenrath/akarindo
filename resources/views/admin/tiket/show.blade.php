@@ -47,12 +47,14 @@
                 <td>:</td>
                 <td>{{ $tiket->pengaduan }}</td>
               </tr>
+              @if ($tiket->status == 'selesai')
               <tr>
                 <th>Waktu</th>
                 <td>:</td>
                 <td>{{ date('d M Y', strtotime($tiket->tanggal_awal)) }} - {{ date('d M Y',
                   strtotime($tiket->tanggal_akhir)) }}</td>
               </tr>
+              @endif
               @if ($tiket->jawaban)
               <tr>
                 <th>Jawaban</th>
@@ -71,6 +73,7 @@
                 <td>:</td>
                 <td>{{ date('d M Y', strtotime($tiket->tanggal_pengerjaan)) }}</td>
               </tr>
+              @if ($tiket->status == 'selesai')
               <tr>
                 <th>Lama Pengerjaan</th>
                 <td>:</td>
@@ -87,6 +90,7 @@
                   @endif
                 </td>
               </tr>
+              @endif
               @endif
             </table>
           </div>

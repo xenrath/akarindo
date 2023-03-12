@@ -52,9 +52,15 @@ class TiketController extends Controller
         return back()->with('success', 'Berhasil menyelesaikan Tiket');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $tikets = Tiket::get();
+        $status = $request->status;
+
+        if ($status != "") {
+            $tikets = Tiket::where('status', $status)->get();
+        } else {
+            $tikets = Tiket::get();
+        }
 
         return view('admin.tiket.index', compact('tikets'));
     }
