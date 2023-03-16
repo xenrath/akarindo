@@ -236,10 +236,18 @@
               Follow social media kami untuk melihat update terbaru dari produk kami.
             </p>
             <div class="d-flex pt-2">
-              <a class="btn btn-square me-1" href=""><i class="fab fa-twitter"></i></a>
-              <a class="btn btn-square me-1" href=""><i class="fab fa-facebook-f"></i></a>
-              <a class="btn btn-square me-1" href=""><i class="fab fa-youtube"></i></a>
-              <a class="btn btn-square me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+              <a class="btn btn-square me-1" href="">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a class="btn btn-square me-1" href="">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a class="btn btn-square me-1" href="">
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a class="btn btn-square me-0" href="">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">

@@ -145,12 +145,12 @@
                       @php
                       $tanggal_pengerjaan = strtotime($tiket->tanggal_pengerjaan);
                       $tanggal_akhir = strtotime($tiket->tanggal_akhir);
-                      $selisih = ceil(abs($tanggal_akhir - $tanggal_pengerjaan));
+                      $selisih = ceil(abs($tanggal_akhir - $tanggal_pengerjaan) / 86400);
                       @endphp
                       @if ($selisih == 0)
                       Dikerjakan dan selesai hari itu juga.
                       @else
-                      {{ $selisih }}
+                      {{ $selisih }} Hari
                       @endif
                     </p>
                     @endif
