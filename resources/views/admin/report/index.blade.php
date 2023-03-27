@@ -41,6 +41,15 @@
         <form method="GET" id="form-action">
           <div class="row">
             <div class="col-md-4 mb-3">
+              <select class="custom-select form-control" id="status" name="status">
+                <option value="">- Semua Status -</option>
+                <option value="menunggu" {{ Request::get('status')=='menunggu' ? 'selected' : '' }}>Menunggu</option>
+                <option value="proses" {{ Request::get('status')=='proses' ? 'selected' : '' }}>Proses</option>
+                <option value="selesai" {{ Request::get('status')=='selesai' ? 'selected' : '' }}>Selesai</option>
+              </select>
+              <label for="status">(Pilih Status)</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input class="form-control" id="tanggal_awal" name="tanggal_awal" type="date"
                 value="{{ Request::get('tanggal_awal') }}" max="{{ date('Y-m-d') }}" />
               <label for="tanggal_awal">(Tanggal Awal)</label>
@@ -50,14 +59,14 @@
                 value="{{ Request::get('tanggal_akhir') }}" max="{{ date('Y-m-d') }}" />
               <label for="tanggal_awal">(Tanggal Akhir)</label>
             </div>
-            <div class="col-md-4">
-              <button type="button" class="btn btn-outline-primary mr-2" onclick="cari()">
-                <i class="fas fa-search"></i> Cari
-              </button>
-              <button type="button" class="btn btn-primary" onclick="print()" target="_blank">
-                <i class="fas fa-print"></i> Cetak
-                </a>
-            </div>
+          </div>
+          <div class="text-right mb-3">
+            <button type="button" class="btn btn-outline-primary mr-2" onclick="cari()">
+              <i class="fas fa-search"></i> Cari
+            </button>
+            <button type="button" class="btn btn-primary" onclick="print()" target="_blank">
+              <i class="fas fa-print"></i> Cetak
+            </button>
           </div>
         </form>
         <table id="example1" class="table table-bordered table-striped">
@@ -66,7 +75,9 @@
               <th class="text-center">No</th>
               <th>Nama Client</th>
               <th>Produk</th>
+              <th>Teknisi</th>
               <th>Tanggal</th>
+              <th>Status</th>
               <th class="text-center">Opsi</th>
             </tr>
           </thead>
@@ -76,7 +87,23 @@
               <td class="text-center">{{ $loop->iteration }}</td>
               <td>{{ $tiket->client->nama }}</td>
               <td>{{ $tiket->produk->nama }}</td>
-              <td>{{ date('d M Y', strtotime($tiket->tanggal_akhir)) }}</td>
+              <td>
+                @if ($tiket->teknisi_id != null)
+                {{ $tiket->teknisi->nama }}
+                @else
+                -
+                @endif
+              </td>
+              <td>{{ date('d M Y', strtotime($tiket->tanggal_awal)) }}</td>
+              <td>
+                @if ($tiket->status == 'menunggu')
+                <span class="badge bg-warning">Menunggu</span>
+                @elseif ($tiket->status == 'proses')
+                <span class="badge bg-primary">Proses</span>
+                @else
+                <span class="badge bg-success">Selesai</span>
+                @endif
+              </td>
               <td class="text-center">
                 <button type="button" class="btn btn-info" data-toggle="modal"
                   data-target="#modal-lihat-{{ $tiket->id }}">
