@@ -8,7 +8,7 @@
     </p>
   </a>
 </li>
-<li class="nav-header">Pengaduan</li>
+{{-- <li class="nav-header">Pengaduan</li> --}}
 {{-- <li class="nav-item {{ request()->is('admin/tiket*') ? 'menu-open' : '' }}">
   <a href="#" class="nav-link {{ request()->is('admin/tiket*') ? 'active' : '' }}">
     <i class="nav-icon fas fa-ticket-alt"></i>
@@ -41,14 +41,14 @@
     </li>
   </ul>
 </li> --}}
-<li class="nav-item">
+{{-- <li class="nav-item">
   <a href="{{ url('admin/tiket') }}" class="nav-link {{ request()->is('admin/tiket*') ? 'active' : '' }}">
     <i class="nav-icon fas fa-ticket-alt"></i>
     <p>
       Data Pengaduan
     </p>
   </a>
-</li>
+</li> --}}
 <li class="nav-header">Layanan</li>
 <li class="nav-item {{ request()->is('admin/layanan*') || request()->is('admin/sublayanan*') ? 'menu-open' : '' }}">
   <a href="#"
