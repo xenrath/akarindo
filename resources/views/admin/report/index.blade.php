@@ -144,12 +144,14 @@
                           <br>
                           {{ $tiket->pengaduan }}
                         </p>
+                        @if ($tiket->status == 'selesai')
                         <p class="text-wrap">
                           <strong>Waktu</strong>
                           <br>
                           {{ date('d M Y', strtotime($tiket->tanggal_awal)) }} - {{ date('d M Y',
                           strtotime($tiket->tanggal_akhir)) }}
                         </p>
+                        @endif
                       </div>
                     </div>
                     <hr>

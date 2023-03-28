@@ -38,7 +38,8 @@
       <td style="letter-spacing: 1px">
         <span style="font-weight: bold; font-size: 20px;">EHR HELPDESK</span>
         <br>
-        <span>Alamat : Jl. Bukit Limau VIII FE 3 Bhromelia Permata Puri, Bringin, Ngaliyan, Kota Semarang, Jawa Tengah 50189</span>
+        <span>Alamat : Jl. Bukit Limau VIII FE 3 Bhromelia Permata Puri, Bringin, Ngaliyan, Kota Semarang, Jawa Tengah
+          50189</span>
         <br>
         <span>Telp. (024)76435498, Email. ehrsistem@gmail.com</span>
       </td>
@@ -111,5 +112,25 @@
     </tr>
     @endforeach
   </table>
+  <br>
+  <br>
+  <table style="width: 100%;" cellspacing="0" cellpadding="8">
+    <tr>
+      <td></td>
+      <td></td>
+      <td style="width: 240px">
+        <p>Semarang, {{ Carbon\Carbon::now()->translatedFormat('d M Y') }}</p>
+        <p>CV. Anugrah Karya Indonesia</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        Radita Citra Oktaviyani
+      </td>
+    </tr>
+  </table>
+  <div style="text-align: center; position: fixed; bottom: -20px; left: 0px; right: 0px">
+    SUPPORT BY SYSTEM EHR.CO.ID
+  </div>
 </body>
 </html>
