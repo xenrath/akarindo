@@ -169,7 +169,13 @@
                       {{ $tiket->teknisi->nama }}
                     </p>
                     <p class="text-wrap">
-                      <strong>Masa Pengerjaan</strong>
+                      <strong>Tanggal Pengerjaan</strong>
+                      <br>
+                      {{ date('d M Y', strtotime($tiket->tanggal_pengerjaan)) }}
+                    </p>
+                    @if ($tiket->status == 'selesai')
+                    <p class="text-wrap">
+                      <strong>Lama Pengerjaan</strong>
                       <br>
                       @php
                       $tanggal_pengerjaan = strtotime($tiket->tanggal_pengerjaan);
@@ -182,6 +188,7 @@
                       {{ $selisih }} Hari
                       @endif
                     </p>
+                    @endif
                     @endif
                   </div>
                   <div class="modal-footer justify-content-between">
