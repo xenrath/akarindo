@@ -110,7 +110,7 @@
                           {{ $tiket->produk->nama }}
                         </p>
                         <p class="text-wrap">
-                          <strong>Pengaduan</strong>
+                          <strong>Deskripsi</strong>
                           <br>
                           {{ $tiket->pengaduan }}
                         </p>

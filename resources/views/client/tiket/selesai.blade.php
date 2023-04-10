@@ -44,7 +44,7 @@
               <th class="text-center">No</th>
               <th>Kode</th>
               <th>Produk</th>
-              <th>Pengaduan</th>
+              <th>Deskripsi</th>
               <th class="text-center">Opsi</th>
             </tr>
           </thead>
@@ -91,7 +91,7 @@
                           {{ $tiket->produk->nama }}
                         </p>
                         <p class="text-wrap">
-                          <strong>Pengaduan</strong>
+                          <strong>Deskripsi</strong>
                           <br>
                           {{ $tiket->pengaduan }}
                         </p>

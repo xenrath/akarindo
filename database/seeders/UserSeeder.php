@@ -24,7 +24,8 @@ class UserSeeder extends Seeder
                 'alamat' => null,
                 'foto' => null,
                 'password' =>  bcrypt('admin'),
-                'layanan_id' => null
+                'layanan_id' => null,
+                'status' => true
             ],
             [
                 'kode' => $this->kodeUser(),
@@ -35,7 +36,8 @@ class UserSeeder extends Seeder
                 'alamat' => 'Semarang',
                 'foto' => 'user/raditra.jpg',
                 'password' =>  bcrypt('cs'),
-                'layanan_id' => null
+                'layanan_id' => null,
+                'status' => true
             ],
             [
                 'kode' => $this->kodeUser(),
@@ -46,7 +48,8 @@ class UserSeeder extends Seeder
                 'alamat' => 'Semarang',
                 'foto' => 'user/arief.jpg',
                 'password' =>  bcrypt('web1'),
-                'layanan_id' => '1'
+                'layanan_id' => '1',
+                'status' => true
             ],
             [
                 'kode' => $this->kodeUser(),
@@ -57,7 +60,8 @@ class UserSeeder extends Seeder
                 'alamat' => 'Semarang',
                 'foto' => 'user/dani.jpg',
                 'password' =>  bcrypt('web2'),
-                'layanan_id' => '1'
+                'layanan_id' => '1',
+                'status' => true
             ],
             [
                 'kode' => $this->kodeUser(),
@@ -68,7 +72,8 @@ class UserSeeder extends Seeder
                 'alamat' => 'Semarang',
                 'foto' => 'user/silvia.jpg',
                 'password' =>  bcrypt('web3'),
-                'layanan_id' => '1'
+                'layanan_id' => '1',
+                'status' => true
             ],
             [
                 'kode' => $this->kodeUser(),
@@ -79,7 +84,8 @@ class UserSeeder extends Seeder
                 'alamat' => 'Semarang',
                 'foto' => 'user/bimo.jpg',
                 'password' =>  bcrypt('mobile'),
-                'layanan_id' => '2'
+                'layanan_id' => '2',
+                'status' => true
             ],
             [
                 'kode' => $this->kodeUser(),
@@ -90,7 +96,8 @@ class UserSeeder extends Seeder
                 'alamat' => 'Semarang',
                 'foto' => 'user/widya.jpg',
                 'password' =>  bcrypt('marketing1'),
-                'layanan_id' => '3'
+                'layanan_id' => '3',
+                'status' => true
             ],
             [
                 'kode' => $this->kodeUser(),
@@ -101,7 +108,8 @@ class UserSeeder extends Seeder
                 'alamat' => 'Semarang',
                 'foto' => 'user/mufti.jpg',
                 'password' =>  bcrypt('marketing2'),
-                'layanan_id' => '3'
+                'layanan_id' => '3',
+                'status' => true
             ],
             [
                 'kode' => $this->kodeUser(),
@@ -112,7 +120,8 @@ class UserSeeder extends Seeder
                 'alamat' => 'Semarang',
                 'foto' => 'user/jumagung.jpg',
                 'password' =>  bcrypt('grafis'),
-                'layanan_id' => '4'
+                'layanan_id' => '4',
+                'status' => true
             ],
             [
                 'kode' => $this->kodeUser(),
@@ -123,7 +132,8 @@ class UserSeeder extends Seeder
                 'alamat' => 'Tegal',
                 'foto' => 'user/johan.png',
                 'password' =>  bcrypt('client1'),
-                'layanan_id' => null
+                'layanan_id' => null,
+                'status' => true
             ],
             [
                 'kode' => $this->kodeUser(),
@@ -134,7 +144,8 @@ class UserSeeder extends Seeder
                 'alamat' => 'Tegal',
                 'foto' => 'user/andre.png',
                 'password' =>  bcrypt('client2'),
-                'layanan_id' => null
+                'layanan_id' => null,
+                'status' => true
             ],
         ];
 

@@ -29,6 +29,8 @@
 
   <!-- Template Stylesheet -->
   <link href="{{ asset('insure/css/style.css') }}" rel="stylesheet" />
+
+  {{-- <script src="js/app.js"></script> --}}
 </head>
 
 <body>
@@ -77,25 +79,34 @@
         CV Anugrah Karya Indonesia
       </h4>
     </a>
-    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav mx-auto bg-light rounded pe-4 py-3 py-lg-0">
         <a href="#home" class="nav-item nav-link active">Home</a>
         <a href="#about" class="nav-item nav-link">About Us</a>
         <a href="#service" class="nav-item nav-link">Our Services</a>
         <a href="#contact" class="nav-item nav-link">Contact Us</a>
+        <div class="d-block d-lg-none">
+          @if (auth()->check())
+          <a href="{{ url('login') }}" class="nav-item nav-link btn btn-outline-primary btn-sm">Halo, {{
+            auth()->user()->nama
+            }}</a>
+          @else
+          <a href="{{ url('login') }}" class="nav-item nav-link btn btn-primary btn-sm text-white ">Login</a>
+          @endif
+        </div>
       </div>
     </div>
-
-    @if (auth()->check())
-    <a href="{{ url('login') }}" class="btn btn-outline-primary px-3 d-none d-lg-block">Halo, {{ auth()->user()->nama
-      }}</a>
-    @else
-    <a href="{{ url('login') }}" class="btn btn-primary px-3 d-none d-lg-block">Login</a>
-    @endif
-
+    <div class="d-none d-lg-block">
+      @if (auth()->check())
+      <a href="{{ url('login') }}" class="btn btn-outline-primary px-3">Halo, {{ auth()->user()->nama
+        }}</a>
+      @else
+      <a href="{{ url('login') }}" class="btn btn-primary px-3">Login</a>
+      @endif
+    </div>
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </nav>
   <!-- Navbar End -->
 

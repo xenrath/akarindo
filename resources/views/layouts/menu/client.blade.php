@@ -7,6 +7,16 @@
     </p>
   </a>
 </li>
+<li class="nav-header">Obrolan</li>
+<li class="nav-item">
+  <a href="{{ url('client/obrolan/create') }}"
+    class="nav-link {{ request()->is('client/obrolan/create') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-comments"></i>
+    <p>
+      Obrolan
+    </p>
+  </a>
+</li>
 <li class="nav-header">Pengaduan</li>
 <li class="nav-item">
   <a href="{{ url('client/tiket/create') }}"

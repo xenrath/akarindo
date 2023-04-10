@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\CS;
 
+use App\Events\Realtime;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Tiket;
@@ -50,6 +51,8 @@ class TiketController extends Controller
             'jawaban' => $request->jawaban,
             'status' => 'proses'
         ]);
+
+        Realtime::dispatch('message');
 
         return back()->with('success', 'Berhasil mengirimkan Jawaban');
     }

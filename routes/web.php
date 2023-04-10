@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\Realtime;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -21,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'index']);
 
+Route::get('push', function () {
+  Realtime::dispatch('Hello World');
+});
+
 // Front
 
 Route::get('dashboard', [HomeController::class, 'index']);
@@ -40,6 +45,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
   Route::get('user/cs', [\App\Http\Controllers\Admin\UserController::class, 'cs']);
   Route::get('user/teknisi', [\App\Http\Controllers\Admin\UserController::class, 'teknisi']);
   Route::get('user/client', [\App\Http\Controllers\Admin\UserController::class, 'client']);
+  Route::get('user/nonaktif/{id}', [\App\Http\Controllers\Admin\UserController::class, 'nonaktif']);
   Route::resource('user', \App\Http\Controllers\Admin\UserController::class);
   Route::resource('level', \App\Http\Controllers\Admin\LevelController::class);
   Route::resource('layanan', \App\Http\Controllers\Admin\LayananController::class);
@@ -52,6 +58,8 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
 Route::prefix('cs')->middleware('cs')->group(function () {
   Route::get('/', [\App\Http\Controllers\CS\DashboardController::class, 'index']);
+
+  Route::resource('obrolan', \App\Http\Controllers\CS\ObrolanController::class);
 
   Route::get('tiket/menunggu', [\App\Http\Controllers\CS\TiketController::class, 'menunggu']);
   Route::get('tiket/proses', [\App\Http\Controllers\CS\TiketController::class, 'proses']);
@@ -81,11 +89,15 @@ Route::prefix('teknisi')->middleware('teknisi')->group(function () {
 
 Route::prefix('client')->middleware('client')->group(function () {
   Route::get('/', [\App\Http\Controllers\Client\DashboardController::class, 'index']);
+
+  Route::resource('obrolan', \App\Http\Controllers\Client\ObrolanController::class);
+
   Route::get('tiket/menunggu', [\App\Http\Controllers\Client\TiketController::class, 'menunggu']);
   Route::get('tiket/proses', [\App\Http\Controllers\Client\TiketController::class, 'proses']);
   Route::get('tiket/selesai', [\App\Http\Controllers\Client\TiketController::class, 'selesai']);
   Route::get('tiket/konfirmasi_selesai/{id}', [\App\Http\Controllers\Client\TiketController::class, 'konfirmasi_selesai']);
   Route::resource('tiket', \App\Http\Controllers\Client\TiketController::class);
+  
   Route::get('faq', [\App\Http\Controllers\Client\FaqController::class, 'index']);
 });
 

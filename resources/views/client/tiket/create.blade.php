@@ -61,9 +61,9 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="pengaduan">Pengaduan</label>
+            <label for="pengaduan">Deskripsi</label>
             <textarea class="form-control" id="pengaduan" name="pengaduan" rows="3"
-              placeholder="Masukan pengaduan">{{ old('pengaduan') }}</textarea>
+              placeholder="Masukan deskripsi">{{ old('pengaduan') }}</textarea>
           </div>
           <div class="form-group">
             <label for="gambar">Gambar</label>

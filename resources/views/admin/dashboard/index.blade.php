@@ -35,8 +35,6 @@
           <div class="icon">
             <i class="fas fa-ticket-alt"></i>
           </div>
-          <a href="{{ url('admin/tiket/menunggu') }}" class="small-box-footer">Lihat <i
-              class="fas fa-arrow-circle-right"></i></a>
         </div>
         <!-- small box -->
         <div class="small-box bg-primary">
@@ -47,8 +45,6 @@
           <div class="icon">
             <i class="fas fa-ticket-alt"></i>
           </div>
-          <a href="{{ url('admin/tiket/proses') }}" class="small-box-footer">Lihat <i
-              class="fas fa-arrow-circle-right"></i></a>
         </div>
         <!-- small box -->
         <div class="small-box bg-success">
@@ -59,8 +55,6 @@
           <div class="icon">
             <i class="fas fa-ticket-alt"></i>
           </div>
-          <a href="{{ url('admin/tiket/selesai') }}" class="small-box-footer">Lihat <i
-              class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <div class="col-md-8">
@@ -69,7 +63,29 @@
             Grafik Pengaduan
           </div>
           <div class="card-body">
+            <form action="{{ url('admin') }}" method="get" id="form-submit">
+              <input type="hidden" class="form-control" name="filter" id="filter">
+            </form>
+            <div class="text-right mb-3">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default">{{ Request::get('filter') == "" ? "1" :
+                  Request::get('filter') }} Hari</button>
+                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                </button>
+                <div class="dropdown-menu" role="menu">
+                  <button class="dropdown-item" onclick="get_filter('1')">1 Hari</button>
+                  <button class="dropdown-item" onclick="get_filter('7')">7 Hari</button>
+                  <button class="dropdown-item" onclick="get_filter('30')">30 Hari</button>
+                </div>
+              </div>
+            </div>
+            @if (array_sum($data) > 0)
             <canvas id="myChart"></canvas>
+            @else
+            <div class="border rounded p-5">
+              <p class="text-center">- Tidak ada data -</p>
+            </div>
+            @endif
           </div>
         </div>
       </div>
@@ -83,6 +99,14 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+  var filter = document.getElementById('filter');
+  var form_submit = document.getElementById('form-submit');
+  
+  function get_filter(waktu) {
+    filter.value = waktu;
+    form_submit.submit();
+  }
+
   const ctx = document.getElementById('myChart');
   
   new Chart(ctx, {

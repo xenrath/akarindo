@@ -241,6 +241,15 @@ class UserController extends Controller
         return redirect('admin/user')->with('success', 'Berhasil menghapus User');
     }
 
+    public function nonaktif($id)
+    {
+        User::where('id', $id)->update([
+            'status' => false   
+        ]);
+
+        return back()->with('success', 'Berhasil menonaktifkan Client');
+    }
+
     public function kodeUser()
     {
         $karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';

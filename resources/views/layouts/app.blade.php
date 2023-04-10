@@ -37,15 +37,17 @@
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 
+  <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+  <script src="{{ asset('js/pusher.js') }}"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    {{-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="{{ asset('storage/uploads/logo.png') }}" alt="EHR-Helpdesk" height="80"
         width="80">
-    </div>
+    </div> --}}
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">

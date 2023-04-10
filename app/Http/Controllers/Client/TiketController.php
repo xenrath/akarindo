@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\Realtime;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Tiket;
@@ -92,6 +93,8 @@ class TiketController extends Controller
             'status' => 'menunggu',
             'tanggal_awal' => $now
         ]));
+
+        Realtime::dispatch('message');
 
         return back()->with('success', 'Berhasil membuat Tiket.');
     }

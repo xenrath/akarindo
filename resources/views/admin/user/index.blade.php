@@ -64,13 +64,22 @@
                 <a href="{{ url('admin/user/' . $user->id) }}" class="btn btn-info">
                   <i class="fas fa-eye"></i>
                 </a>
+                @if ($user->status)
                 <a href="{{ url('admin/user/' . $user->id . '/edit') }}" class="btn btn-warning">
                   <i class="fas fa-pencil-alt"></i>
                 </a>
+                @if ($user->role == 'client')
+                <button type="button" class="btn btn-danger" data-toggle="modal"
+                  data-target="#modal-check-{{ $user->id }}">
+                  <i class="fas fa-times"></i>
+                </button>
+                @else
                 <button type="submit" class="btn btn-danger" data-toggle="modal"
                   data-target="#modal-hapus-{{ $user->id }}">
                   <i class="fas fa-trash"></i>
                 </button>
+                @endif
+                @endif
               </td>
             </tr>
             <div class="modal fade" id="modal-hapus-{{ $user->id }}">
@@ -92,6 +101,27 @@
                       @method('delete')
                       <button type="submit" class="btn btn-danger">Hapus</button>
                     </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="modal-check-{{ $user->id }}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Non Aktifkan Client</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Yakin non aktifkan client <strong>{{ $user->nama }}</strong>?</p>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                    <a href="{{ url('admin/user/nonaktif/' . $user->id) }}" class="btn btn-danger">
+                      Non Aktif
+                    </a>
                   </div>
                 </div>
               </div>
