@@ -74,6 +74,8 @@ class TiketController extends Controller
             'teknisi_id' => $request->teknisi_id,
         ]);
 
+        Realtime::dispatch('message');
+
         return back()->with('success', 'Berhasil mengalihkan ke Teknisi');
     }
 
@@ -83,6 +85,8 @@ class TiketController extends Controller
             'tanggal_akhir' => Carbon::now()->format('d-m-Y'),
             'status' => 'selesai',
         ]);
+
+        Realtime::dispatch('message');
 
         return back()->with('success', 'Berhasil menyelesaikan Tiket');
     }

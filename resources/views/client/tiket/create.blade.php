@@ -42,6 +42,7 @@
       @endforeach
     </div>
     @endif
+    @if (auth()->user()->status)
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Buat Pengaduan</h3>
@@ -79,6 +80,16 @@
         </div>
       </form>
     </div>
+    @else
+    <div class="card">
+      <div class="card-body text-center p-5">
+        <h4>
+          <strong class="text-danger">Akun anda sudah tidak aktif!</strong>
+        </h4>
+        <h4>Silahkan hubungi customer service untuk mengaktifkannya.</h4>
+      </div>
+    </div>
+    @endif
   </div>
 </section>
 @endsection
