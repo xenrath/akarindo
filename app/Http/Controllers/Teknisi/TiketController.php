@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Teknisi;
 
+use App\Events\Realtime;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Tiket;
@@ -49,6 +50,8 @@ class TiketController extends Controller
             'tanggal_pengerjaan' => Carbon::now()->format('Y-m-d')
         ]);
 
+        Realtime::dispatch('message');
+
         return back()->with('success', 'Berhasil mengkonfirmasi Tiket');
     }
 
@@ -58,6 +61,8 @@ class TiketController extends Controller
             'tanggal_akhir' => Carbon::now()->format('Y-m-d'),
             'status' => 'selesai'
         ]);
+
+        Realtime::dispatch('message');
 
         return back()->with('success', 'Berhasil menyelesaikan Tiket');
     }

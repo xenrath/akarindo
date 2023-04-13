@@ -225,6 +225,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'role' => $request->role,
                 'layanan_id' => $request->layanan_id,
+                'status' => $request->status,
                 'telp' => $request->telp,
                 'foto' => $namafoto,
                 'alamat' => $request->alamat,

@@ -70,9 +70,19 @@
               <select class="custom-select form-control" id="layanan_id" name="layanan_id">
                 <option value="">- Pilih Kategori -</option>
                 @foreach ($layanans as $layanan)
-                <option value="{{ $layanan->id }}" {{ old('layanan_id', $user->layanan_id)==$layanan->id ? 'selected' : '' }}>{{
+                <option value="{{ $layanan->id }}" {{ old('layanan_id', $user->layanan_id)==$layanan->id ? 'selected' :
+                  '' }}>{{
                   $layanan->layanan }}</option>
                 @endforeach
+              </select>
+            </div>
+          </div>
+          <div id="layout_status" style="display: none">
+            <div class="form-group">
+              <label for="status">Status</label>
+              <select class="custom-select form-control" id="status" name="status">
+                <option value="1" {{ old('status', $user->status)=='1' ? 'selected' : '' }}>Aktif</option>
+                <option value="0" {{ old('status', $user->status)=='0' ? 'selected' : '' }}>Non Aktif</option>
               </select>
             </div>
           </div>
@@ -111,20 +121,33 @@
   var role = document.getElementById('role');
   var layout_layanan = document.getElementById('layout_layanan');
   var layanan_id = document.getElementById('layanan_id');
+  var layout_status = document.getElementById('layout_status');
 
   if (role.value == 'teknisi') {
     layout_layanan.style.display = "inline";
+    layout_status.style.display = "none";
+  } else if (role.value == 'client') {
+    layout_status.style.display = "inline";
+    layout_layanan.style.display = "none";
+    layanan_id.value = "";
   } else {
     layout_layanan.style.display = "none";
     layanan_id.value = "";
+    layout_status.style.display = "none";
   }
 
   role.addEventListener('change', function () {
     if (role.value == 'teknisi') {
       layout_layanan.style.display = "inline";
+      layout_status.style.display = "none";
+    } else if (role.value == 'client') {
+      layout_status.style.display = "inline";
+      layout_layanan.style.display = "none";
+      layanan_id.value = "";
     } else {
       layout_layanan.style.display = "none";
       layanan_id.value = "";
+      layout_status.style.display = "none";
     }
   });
 </script>
