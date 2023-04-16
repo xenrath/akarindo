@@ -27,4 +27,9 @@ class DashboardController extends Controller
 
         return view('client.dashboard.index', compact('menunggus', 'proseses', 'selesais'));
     }
+
+    public function nonaktif()
+    {
+        return view('client.dashboard.nonaktif');
+    }
 }

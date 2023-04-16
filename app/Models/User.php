@@ -88,7 +88,7 @@ class User extends Authenticatable
 
     public function isClient()
     {
-        if ($this->role == 'client') {
+        if ($this->role == 'client' && $this->status) {
             return true;
         }
         return false;

@@ -101,5 +101,7 @@ Route::prefix('client')->middleware('client')->group(function () {
   Route::get('faq', [\App\Http\Controllers\Client\FaqController::class, 'index']);
 });
 
+Route::get('client/nonaktif', [\App\Http\Controllers\Client\DashboardController::class, 'nonaktif']);
+
 Route::get('profile', [ProfileController::class, 'index']);
 Route::post('profile/update', [ProfileController::class, 'update']);
