@@ -18,11 +18,11 @@ class UserSeeder extends Seeder
             [
                 'kode' => $this->kodeUser(),
                 'role' => 'admin',
-                'nama' => 'Argantara Reynand',
+                'nama' => 'Wahyu Kristianto',
                 'email' => 'admin@gmail.com',
                 'telp' => null,
                 'alamat' => null,
-                'foto' => null,
+                'foto' => 'user/Admin.png',
                 'password' =>  bcrypt('admin'),
                 'layanan_id' => null,
                 'status' => true
@@ -30,11 +30,12 @@ class UserSeeder extends Seeder
             [
                 'kode' => $this->kodeUser(),
                 'role' => 'cs',
-                'nama' => 'Raditra Citra Oktaviyani',
+                'nama' => 'Radita Citra Oktaviyani',
                 'email' => 'cs@gmail.com',
                 'telp' => '81234567890',
                 'alamat' => 'Semarang',
-                'foto' => 'user/raditra.jpg',
+                'foto' => 'user/Radita.png
+',
                 'password' =>  bcrypt('cs'),
                 'layanan_id' => null,
                 'status' => true
@@ -46,7 +47,7 @@ class UserSeeder extends Seeder
                 'email' => 'web1@gmail.com',
                 'telp' => '82345678901',
                 'alamat' => 'Semarang',
-                'foto' => 'user/arief.jpg',
+                'foto' => 'user/Arief.png',
                 'password' =>  bcrypt('web1'),
                 'layanan_id' => '1',
                 'status' => true
@@ -58,7 +59,7 @@ class UserSeeder extends Seeder
                 'email' => 'web2@gmail.com',
                 'telp' => '83456789012',
                 'alamat' => 'Semarang',
-                'foto' => 'user/dani.jpg',
+                'foto' => 'user/Dani.png',
                 'password' =>  bcrypt('web2'),
                 'layanan_id' => '1',
                 'status' => true
@@ -70,7 +71,7 @@ class UserSeeder extends Seeder
                 'email' => 'web3@gmail.com',
                 'telp' => '84567890123',
                 'alamat' => 'Semarang',
-                'foto' => 'user/silvia.jpg',
+                'foto' => 'user/Silvia.png',
                 'password' =>  bcrypt('web3'),
                 'layanan_id' => '1',
                 'status' => true
@@ -82,7 +83,7 @@ class UserSeeder extends Seeder
                 'email' => 'mobile@gmail.com',
                 'telp' => '85678901234',
                 'alamat' => 'Semarang',
-                'foto' => 'user/bimo.jpg',
+                'foto' => 'user/Bimo.png',
                 'password' =>  bcrypt('mobile'),
                 'layanan_id' => '2',
                 'status' => true
@@ -94,7 +95,7 @@ class UserSeeder extends Seeder
                 'email' => 'marketing1@gmail.com',
                 'telp' => '86789012345',
                 'alamat' => 'Semarang',
-                'foto' => 'user/widya.jpg',
+                'foto' => 'user/Widya.png',
                 'password' =>  bcrypt('marketing1'),
                 'layanan_id' => '3',
                 'status' => true
@@ -106,7 +107,7 @@ class UserSeeder extends Seeder
                 'email' => 'marketing2@gmail.com',
                 'telp' => '87890123456',
                 'alamat' => 'Semarang',
-                'foto' => 'user/mufti.jpg',
+                'foto' => 'user/Mufti.png',
                 'password' =>  bcrypt('marketing2'),
                 'layanan_id' => '3',
                 'status' => true
@@ -118,7 +119,7 @@ class UserSeeder extends Seeder
                 'email' => 'grafis@gmail.com',
                 'telp' => '88901234567',
                 'alamat' => 'Semarang',
-                'foto' => 'user/jumagung.jpg',
+                'foto' => 'user/Jumagung.png',
                 'password' =>  bcrypt('grafis'),
                 'layanan_id' => '4',
                 'status' => true

@@ -50,7 +50,7 @@
               <th>Nama Produk</th>
               <th>Client</th>
               <th>Layanan</th>
-              <th class="text-center">Opsi</th>
+              <th class="text-center" width="120">Opsi</th>
             </tr>
           </thead>
           <tbody>

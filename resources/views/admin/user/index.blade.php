@@ -50,7 +50,7 @@
               <th>Nama</th>
               <th>Email</th>
               <th>Role</th>
-              <th class="text-center">Opsi</th>
+              <th class="text-center" width="120">Opsi</th>
             </tr>
           </thead>
           <tbody>
