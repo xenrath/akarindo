@@ -8,7 +8,7 @@
     </p>
   </a>
 </li>
-{{-- <li class="nav-header">Obrolan</li>
+<li class="nav-header">Obrolan</li>
 <li class="nav-item">
   <a href="{{ url('cs/obrolan') }}" class="nav-link {{ request()->is('cs/obrolan') ? 'active' : '' }}">
     <i class="nav-icon fas fa-comments"></i>
@@ -16,7 +16,7 @@
       Obrolan
     </p>
   </a>
-</li> --}}
+</li>
 @php
 $menunggus = \App\Models\Tiket::where('status', 'menunggu')->get();
 $proseses = \App\Models\Tiket::where('status', 'proses')->get();
