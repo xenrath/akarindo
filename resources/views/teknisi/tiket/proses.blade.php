@@ -65,7 +65,7 @@
               <td>{{ $tiket->produk->nama }}</td>
               <td>{{ $tiket->pengaduan }}</td>
               <td class="text-center">
-                <a href="{{ url('teknisi/tiket/komentar/' . $tiket->id) }}" class="btn btn-info btn-sm">
+                {{-- <a href="{{ url('teknisi/tiket/komentar/' . $tiket->id) }}" class="btn btn-info btn-sm">
                   Obrolan
                   @php
                   $komentars = \App\Models\Komentar::where([
@@ -77,7 +77,7 @@
                   @if (count($komentars) > 0)
                   <span class="right badge badge-light">{{ count($komentars) }}</span>
                   @endif
-                </a>
+                </a> --}}
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                   data-target="#modal-konfirmasi-{{ $tiket->id }}">
                   Selesaikan
