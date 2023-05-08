@@ -49,8 +49,8 @@
               <span class="direct-chat-name float-left">{{ $detail_obrolan->pengirim->nama }} ({{
                 ucfirst($detail_obrolan->pengirim->role) }})</span>
             </div>
-            <img class="direct-chat-img" src="{{ asset('adminlte/dist/img/user1-128x128.jpg') }}"
-              alt="Message User Image">
+            <img class="direct-chat-img" src="{{ asset('storage/uploads/' . $detail_obrolan->pengirim->foto) }}"
+              alt="{{ $detail_obrolan->pengirim->nama }}">
             <div class="direct-chat-text">
               {{ $detail_obrolan->pesan }}
             </div>

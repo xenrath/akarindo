@@ -57,7 +57,7 @@
               <td class="text-wrap w-50">{{ $tiket->pengaduan }}</td>
               <td class="text-center" style="width: 120px">
                 @if ($tiket->teknisi_id)
-                <a href="{{ url('client/tiket/komentar/' . $tiket->id) }}" class="btn btn-info btn-sm">
+                {{-- <a href="{{ url('client/tiket/komentar/' . $tiket->id) }}" class="btn btn-info btn-sm">
                   Obrolan
                   @php
                   $komentars = \App\Models\Komentar::where([
@@ -69,7 +69,11 @@
                   @if (count($komentars) > 0)
                   <span class="right badge badge-light">{{ count($komentars) }}</span>
                   @endif
-                </a>
+                </a> --}}
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                  data-target="#modal-lihat-{{ $tiket->id }}">
+                  Lihat
+                </button>
                 @endif
                 @if ($tiket->jawaban)
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"

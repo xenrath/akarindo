@@ -78,10 +78,10 @@
                   <span class="right badge badge-light">{{ count($komentars) }}</span>
                   @endif
                 </a>
-                {{-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                   data-target="#modal-konfirmasi-{{ $tiket->id }}">
                   Selesaikan
-                </button> --}}
+                </button>
               </td>
             </tr>
             <div class="modal fade" id="modal-konfirmasi-{{ $tiket->id }}">
