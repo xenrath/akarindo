@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Teknisi;
 
 use App\Events\Realtime;
 use App\Http\Controllers\Controller;
+use App\Models\Komentar;
+use App\Models\Obrolan;
 use App\Models\Produk;
 use App\Models\Tiket;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class TiketController extends Controller
@@ -31,6 +34,53 @@ class TiketController extends Controller
         ])->get();
 
         return view('teknisi.tiket.proses', compact('tikets'));
+    }
+
+    public function komentar($id)
+    {
+        $tiket = Tiket::where('id', $id)->first();
+        $komentars = Komentar::where('tiket_id', $tiket->id)->orderByDesc('id')->get();
+
+        Komentar::where([
+            ['tiket_id', $id],
+            ['pengirim_id', '!=', auth()->user()->id]
+        ])->update([
+            'status' => false
+        ]);
+
+        return view('teknisi.tiket.komentar', compact('tiket', 'komentars'));
+    }
+
+    public function buat_komentar(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'komentar' => 'required',
+            'gambar' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+        ], [
+            'komentar.required' => 'Komentar harus diisi!',
+            'gambar.image' => 'Gambar harus berformat jpeg, jpg, png!',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->all();
+            return back()->withInput()->with('error', $error);
+        }
+
+        if ($request->gambar) {
+            Storage::disk('local')->delete('public/uploads/' . $request->gambar);
+            $gambar = str_replace(' ', '', $request->gambar->getClientOriginalName());
+            $namagambar = "komentar/" . date('YmdHis') . "." . $gambar;
+            $request->gambar->storeAs('public/uploads', $namagambar);
+        } else {
+            $namagambar = null;
+        }
+
+        Komentar::create(array_merge($request->all(), [
+            'pengirim_id' => auth()->user()->id,
+            'gambar' => $namagambar
+        ]));
+
+        return back();
     }
     
     public function selesai()

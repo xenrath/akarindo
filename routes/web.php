@@ -79,11 +79,14 @@ Route::prefix('teknisi')->middleware('teknisi')->group(function () {
   Route::get('tiket/menunggu', [\App\Http\Controllers\Teknisi\TiketController::class, 'menunggu']);
   Route::get('tiket/proses', [\App\Http\Controllers\Teknisi\TiketController::class, 'proses']);
   Route::get('tiket/selesai', [\App\Http\Controllers\Teknisi\TiketController::class, 'selesai']);
-
+  
   Route::get('tiket/konfirmasi_kerjakan/{id}', [\App\Http\Controllers\Teknisi\TiketController::class, 'konfirmasi_kerjakan']);
   Route::get('tiket/konfirmasi_selesai/{id}', [\App\Http\Controllers\Teknisi\TiketController::class, 'konfirmasi_selesai']);
 
   Route::resource('tiket', \App\Http\Controllers\Teknisi\TiketController::class);
+  
+  Route::get('tiket/komentar/{id}', [\App\Http\Controllers\Teknisi\TiketController::class, 'komentar']);
+  Route::post('tiket/buat_komentar', [\App\Http\Controllers\Teknisi\TiketController::class, 'buat_komentar']);
 });
 
 
@@ -98,6 +101,9 @@ Route::prefix('client')->middleware('client')->group(function () {
   Route::get('tiket/konfirmasi_selesai/{id}', [\App\Http\Controllers\Client\TiketController::class, 'konfirmasi_selesai']);
   Route::resource('tiket', \App\Http\Controllers\Client\TiketController::class);
   
+  Route::get('tiket/komentar/{id}', [\App\Http\Controllers\Client\TiketController::class, 'komentar']);
+  Route::post('tiket/buat_komentar', [\App\Http\Controllers\Client\TiketController::class, 'buat_komentar']);
+
   Route::get('faq', [\App\Http\Controllers\Client\FaqController::class, 'index']);
 });
 

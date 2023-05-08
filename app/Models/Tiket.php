@@ -37,4 +37,9 @@ class Tiket extends Model
     {
         return $this->belongsTo(Produk::class);
     }
+
+    public function komentars()
+    {
+        return $this->hasMany(Komentar::class);
+    }
 }

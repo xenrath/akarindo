@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
                 'email' => 'admin@gmail.com',
                 'telp' => null,
                 'alamat' => null,
-                'foto' => 'user/Admin.png',
+                'foto' => 'user/admin.png',
                 'password' =>  bcrypt('admin'),
                 'layanan_id' => null,
                 'status' => true
@@ -34,8 +34,7 @@ class UserSeeder extends Seeder
                 'email' => 'cs@gmail.com',
                 'telp' => '81234567890',
                 'alamat' => 'Semarang',
-                'foto' => 'user/Radita.png
-',
+                'foto' => 'user/radita.png',
                 'password' =>  bcrypt('cs'),
                 'layanan_id' => null,
                 'status' => true
@@ -47,7 +46,7 @@ class UserSeeder extends Seeder
                 'email' => 'web1@gmail.com',
                 'telp' => '82345678901',
                 'alamat' => 'Semarang',
-                'foto' => 'user/Arief.png',
+                'foto' => 'user/arief.png',
                 'password' =>  bcrypt('web1'),
                 'layanan_id' => '1',
                 'status' => true
@@ -59,7 +58,7 @@ class UserSeeder extends Seeder
                 'email' => 'web2@gmail.com',
                 'telp' => '83456789012',
                 'alamat' => 'Semarang',
-                'foto' => 'user/Dani.png',
+                'foto' => 'user/dani.png',
                 'password' =>  bcrypt('web2'),
                 'layanan_id' => '1',
                 'status' => true
@@ -71,7 +70,7 @@ class UserSeeder extends Seeder
                 'email' => 'web3@gmail.com',
                 'telp' => '84567890123',
                 'alamat' => 'Semarang',
-                'foto' => 'user/Silvia.png',
+                'foto' => 'user/silvia.png',
                 'password' =>  bcrypt('web3'),
                 'layanan_id' => '1',
                 'status' => true
@@ -83,7 +82,7 @@ class UserSeeder extends Seeder
                 'email' => 'mobile@gmail.com',
                 'telp' => '85678901234',
                 'alamat' => 'Semarang',
-                'foto' => 'user/Bimo.png',
+                'foto' => 'user/bimo.png',
                 'password' =>  bcrypt('mobile'),
                 'layanan_id' => '2',
                 'status' => true
@@ -95,7 +94,7 @@ class UserSeeder extends Seeder
                 'email' => 'marketing1@gmail.com',
                 'telp' => '86789012345',
                 'alamat' => 'Semarang',
-                'foto' => 'user/Widya.png',
+                'foto' => 'user/widya.png',
                 'password' =>  bcrypt('marketing1'),
                 'layanan_id' => '3',
                 'status' => true
@@ -107,7 +106,7 @@ class UserSeeder extends Seeder
                 'email' => 'marketing2@gmail.com',
                 'telp' => '87890123456',
                 'alamat' => 'Semarang',
-                'foto' => 'user/Mufti.png',
+                'foto' => 'user/mufti.png',
                 'password' =>  bcrypt('marketing2'),
                 'layanan_id' => '3',
                 'status' => true
@@ -119,7 +118,7 @@ class UserSeeder extends Seeder
                 'email' => 'grafis@gmail.com',
                 'telp' => '88901234567',
                 'alamat' => 'Semarang',
-                'foto' => 'user/Jumagung.png',
+                'foto' => 'user/admin.png',
                 'password' =>  bcrypt('grafis'),
                 'layanan_id' => '4',
                 'status' => true
@@ -180,7 +179,7 @@ class UserSeeder extends Seeder
                 'email' => 'help.suryakencana@gmail.com',
                 'telp' => '80123456785',
                 'alamat' => 'Jl. Suryakencana No.99, RT.03/RW.06, Babakan Ps., Kecamatan Bogor Tengah, Kota Bogor, Jawa Barat 16123',
-                'foto' => 'user/suryak.png',
+                'foto' => 'user/surya.png',
                 'password' =>  bcrypt('client5'),
                 'layanan_id' => null,
                 'status' => true
@@ -216,7 +215,7 @@ class UserSeeder extends Seeder
                 'email' => 'help.sinarmitrasjr@gmail.com',
                 'telp' => '80123456788',
                 'alamat' => 'Jl. Abdulrahman Saleh No.199, Kembangarum, Kec. Semarang Barat, Kota Semarang, Jawa Tengah 50183',
-                'foto' => 'user/banksms.png',
+                'foto' => 'user/sms.png',
                 'password' =>  bcrypt('client8'),
                 'layanan_id' => null,
                 'status' => true
@@ -228,7 +227,7 @@ class UserSeeder extends Seeder
                 'email' => 'help.bprphm@gmail.com',
                 'telp' => '80123456789',
                 'alamat' => 'Karang Anyar, Beringin, Sidodadi Ramunia, Kec. Beringin, Kabupaten Deli Serdang, Sumatera Utara 20551',
-                'foto' => 'user/bankphm.png',
+                'foto' => 'user/phm.png',
                 'password' =>  bcrypt('client9'),
                 'layanan_id' => null,
                 'status' => true
@@ -252,7 +251,7 @@ class UserSeeder extends Seeder
                 'email' => 'help.kurniamakmur@gmail.com',
                 'telp' => '80123456772',
                 'alamat' => 'Jl. Jenderal Sudirman No.354, Karangayu, Kec. Semarang Barat, Kota Semarang, Jawa Tengah 50149',
-                'foto' => 'user/makmur.png',
+                'foto' => 'user/kurnia.png',
                 'password' =>  bcrypt('client11'),
                 'layanan_id' => null,
                 'status' => true
@@ -265,7 +264,7 @@ class UserSeeder extends Seeder
                 'email' => 'help.danamuliasjr@gmail.com',
                 'telp' => '80123456773',
                 'alamat' => 'Jl. Pos No. 15 Tanjungpinang Kepulauan Riau, 29111. Telp. (0771) 450 1455',
-                'foto' => 'user/bankdms.png',
+                'foto' => 'user/dms.png',
                 'password' =>  bcrypt('client12'),
                 'layanan_id' => null,
                 'status' => true
@@ -277,7 +276,7 @@ class UserSeeder extends Seeder
                 'email' => 'help.kridadhana@gmail.com',
                 'telp' => '80123456775',
                 'alamat' => ' Jl. Semeru Sel. No.07, Dampit, Kec. Dampit, Kabupaten Malang, Jawa Timur 65181',
-                'foto' => 'user/citranusa.png',
+                'foto' => 'user/krida.png',
                 'password' =>  bcrypt('client13'),
                 'layanan_id' => null,
                 'status' => true
@@ -301,7 +300,7 @@ class UserSeeder extends Seeder
                 'email' => 'help.digitalanoa@gmail.com',
                 'telp' => '80123456777',
                 'alamat' => 'Jl. Bukit Limau VIII FE 3 Bhromelia Permata Puri, Bringin, Ngaliyan, Kota Semarang, Jawa Tengah 50189 ',
-                'foto' => 'user/anoaa.png',
+                'foto' => 'user/anoa.png',
                 'password' =>  bcrypt('client15'),
                 'layanan_id' => null,
                 'status' => true
@@ -313,7 +312,7 @@ class UserSeeder extends Seeder
                 'email' => 'help.arthaabadi@gmail.com',
                 'telp' => '80123456778',
                 'alamat' => 'Jl. Pucang Gading Raya No.65, Pucanggading, Batursari, Kec. Mranggen, Kabupaten Demak, Jawa Tengah 59567',
-                'foto' => 'user/abadii.png',
+                'foto' => 'user/abadi.png',
                 'password' =>  bcrypt('client16'),
                 'layanan_id' => null,
                 'status' => true
@@ -325,7 +324,7 @@ class UserSeeder extends Seeder
                 'email' => 'help.banksamawa@gmail.com',
                 'telp' => '80123456779',
                 'alamat' => 'Kantor PusatJalan Pendidikan No. 19 Alas, Sumbawa, NTB 84353',
-                'foto' => 'user/kencanaa.png',
+                'foto' => 'user/bsk.png',
                 'password' =>  bcrypt('client17'),
                 'layanan_id' => null,
                 'status' => true
@@ -337,7 +336,7 @@ class UserSeeder extends Seeder
                 'email' => 'help.bankirind@gmail.com',
                 'telp' => '80123456761',
                 'alamat' => 'Jl. Jendral Sudirman 354, Semarang Barat Kota Semarang',
-                'foto' => 'user/bankirr.png',
+                'foto' => 'user/bankir.png',
                 'password' =>  bcrypt('client18'),
                 'layanan_id' => null,
                 'status' => true

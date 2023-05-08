@@ -54,7 +54,7 @@
               <th>Kode</th>
               <th>Produk</th>
               <th>Deskripsi</th>
-              <th class="text-center">Opsi</th>
+              <th class="text-center" style="width: 120px">Opsi</th>
             </tr>
           </thead>
           <tbody>
@@ -65,10 +65,23 @@
               <td>{{ $tiket->produk->nama }}</td>
               <td>{{ $tiket->pengaduan }}</td>
               <td class="text-center">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                <a href="{{ url('teknisi/tiket/komentar/' . $tiket->id) }}" class="btn btn-info btn-sm">
+                  Obrolan
+                  @php
+                  $komentars = \App\Models\Komentar::where([
+                  ['tiket_id', $tiket->id],
+                  ['pengirim_id', '!=', auth()->user()->id],
+                  ['status', true]
+                  ])->get();
+                  @endphp
+                  @if (count($komentars) > 0)
+                  <span class="right badge badge-light">{{ count($komentars) }}</span>
+                  @endif
+                </a>
+                {{-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                   data-target="#modal-konfirmasi-{{ $tiket->id }}">
                   Selesaikan
-                </button>
+                </button> --}}
               </td>
             </tr>
             <div class="modal fade" id="modal-konfirmasi-{{ $tiket->id }}">

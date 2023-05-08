@@ -55,11 +55,22 @@
               <td>{{ $tiket->kode }}</td>
               <td>{{ $tiket->produk->nama }}</td>
               <td class="text-wrap w-50">{{ $tiket->pengaduan }}</td>
-              <td class="text-center" style="width: 140px">
-                <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                  data-target="#modal-lihat-{{ $tiket->id }}">
-                  Lihat
-                </button>
+              <td class="text-center" style="width: 120px">
+                @if ($tiket->teknisi_id)
+                <a href="{{ url('client/tiket/komentar/' . $tiket->id) }}" class="btn btn-info btn-sm">
+                  Obrolan
+                  @php
+                  $komentars = \App\Models\Komentar::where([
+                  ['tiket_id', $tiket->id],
+                  ['pengirim_id', '!=', auth()->user()->id],
+                  ['status', true]
+                  ])->get();
+                  @endphp
+                  @if (count($komentars) > 0)
+                  <span class="right badge badge-light">{{ count($komentars) }}</span>
+                  @endif
+                </a>
+                @endif
                 @if ($tiket->jawaban)
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                   data-target="#modal-konfirmasi-{{ $tiket->id }}">

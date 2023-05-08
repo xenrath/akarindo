@@ -121,10 +121,18 @@
                       {{ $tiket->teknisi->nama }}
                     </p>
                     <p class="text-wrap">
-                      <strong>Maksimal Pengerjaan</strong>
+                      <strong>Lama Pengerjaan</strong>
                       <br>
-                      {{ date('d M Y', strtotime($tiket->tanggal_awal . ' + ' .
-                      $tiket->produk->sublayanan->layanan->level->perbaikan . ' days')) }}
+                      @php
+                      $tanggal_pengerjaan = strtotime($tiket->tanggal_pengerjaan);
+                      $tanggal_akhir = strtotime($tiket->tanggal_akhir);
+                      $selisih = ceil(abs($tanggal_akhir - $tanggal_pengerjaan) / 86400);
+                      @endphp
+                      @if ($selisih == 0)
+                      Dikerjakan dan selesai hari itu juga.
+                      @else
+                      {{ $selisih }} Hari
+                      @endif
                     </p>
                     @endif
                   </div>
