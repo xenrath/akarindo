@@ -16,12 +16,12 @@ $menunggus = \App\Models\Tiket::where([
 ])->get();
 $proseses = \App\Models\Tiket::where([
 ['teknisi_id', auth()->user()->id],
-['status', 'proses']
+['status', 'proses'],
 ['is_read_teknisi', false]
 ])->get();
 $selesais = \App\Models\Tiket::where([
 ['teknisi_id', auth()->user()->id],
-['status', 'selesai']
+['status', 'selesai'],
 ['is_read_teknisi', false]
 ])->get();
 @endphp
