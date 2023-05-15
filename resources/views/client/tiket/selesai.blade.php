@@ -113,9 +113,6 @@
                     @endif
                     @if ($tiket->teknisi_id)
                     <p class="text-wrap">
-                      <strong>{{ $tiket->produk->nama }}</strong> sedang dalam masa perbaikan
-                    </p>
-                    <p class="text-wrap">
                       <strong>Teknisi</strong>
                       <br>
                       {{ $tiket->teknisi->nama }}

@@ -111,6 +111,21 @@ class TiketController extends Controller
 
         return back();
     }
+
+    public function konfirmasi_selesai($id)
+    {
+        Tiket::where('id', $id)->update([
+            'tanggal_akhir' => Carbon::now()->format('Y-m-d'),
+            'status' => 'selesai',
+            'is_read_cs' => false,
+            'is_read_teknisi' => false,
+            'is_read_client' => false
+        ]);
+
+        Realtime::dispatch('message');
+
+        return redirect('tiket/tiket/proses')->with('success', 'Berhasil menyelesaikan Tiket');
+    }
     
     public function selesai()
     {
@@ -127,18 +142,6 @@ class TiketController extends Controller
         ])->get();
 
         return view('teknisi.tiket.selesai', compact('tikets'));
-    }
-
-    public function konfirmasi_selesai($id)
-    {
-        Tiket::where('id', $id)->update([
-            'tanggal_akhir' => Carbon::now()->format('Y-m-d'),
-            'status' => 'selesai'
-        ]);
-
-        Realtime::dispatch('message');
-
-        return back()->with('success', 'Berhasil menyelesaikan Tiket');
     }
 
     public function generateCode()
