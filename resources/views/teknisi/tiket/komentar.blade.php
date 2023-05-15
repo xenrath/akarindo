@@ -27,10 +27,12 @@
       <div class="card-header">
         <h3 class="card-title">Detail Pengaduan</h3>
         <div class="card-tools">
+          @if ($tiket->status == 'proses')
           <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
             data-target="#modal-konfirmasi">
             Selesaikan
           </button>
+          @endif
           <button type="button" class="btn btn-tool" data-card-widget="collapse">
             <i class="fas fa-plus"></i>
           </button>
@@ -152,7 +154,7 @@
   </div>
 </div>
 <div class="modal fade" id="modal-konfirmasi">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Konfirmasi Pengaduan</h4>
