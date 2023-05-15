@@ -11,15 +11,18 @@
 @php
 $menunggus = \App\Models\Tiket::where([
 ['teknisi_id', auth()->user()->id],
-['status', 'menunggu']
+['status', 'menunggu'],
+['is_read_teknisi', false]
 ])->get();
 $proseses = \App\Models\Tiket::where([
 ['teknisi_id', auth()->user()->id],
 ['status', 'proses']
+['is_read_teknisi', false]
 ])->get();
 $selesais = \App\Models\Tiket::where([
 ['teknisi_id', auth()->user()->id],
 ['status', 'selesai']
+['is_read_teknisi', false]
 ])->get();
 @endphp
 <li class="nav-header">Pengaduan</li>
