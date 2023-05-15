@@ -142,24 +142,5 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="modal-konfirmasi">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Konfirmasi Pengaduan</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Yakin selesaikan pengaduan?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-        <a href="{{ url('client/tiket/konfirmasi_selesai/' . $tiket->id) }}" class="btn btn-primary">Selesaikan</a>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- /.card -->
 @endsection

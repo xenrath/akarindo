@@ -92,6 +92,8 @@ class TiketController extends Controller
             'gambar' => $namagambar
         ]));
 
+        Realtime::dispatch('message');
+
         return back();
     }
 

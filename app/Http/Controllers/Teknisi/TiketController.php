@@ -109,6 +109,8 @@ class TiketController extends Controller
             'gambar' => $namagambar
         ]));
 
+        Realtime::dispatch('message');
+
         return back();
     }
 
@@ -124,7 +126,7 @@ class TiketController extends Controller
 
         Realtime::dispatch('message');
 
-        return redirect('tiket/tiket/proses')->with('success', 'Berhasil menyelesaikan Tiket');
+        return redirect('teknisi/tiket/proses')->with('success', 'Berhasil menyelesaikan Tiket');
     }
     
     public function selesai()
