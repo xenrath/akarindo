@@ -64,33 +64,37 @@
           </div>
           <div class="card-body">
             <form action="{{ url('admin') }}" method="get" id="form-submit">
-              <input type="hidden" class="form-control" name="filter" id="filter">
-            </form>
-            <div class="text-right mb-3">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default">{{ Request::get('filter') == "" ? "1" :
-                  Request::get('filter') }} Hari</button>
-                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                </button>
-                <div class="dropdown-menu" role="menu">
-                  <button class="dropdown-item" onclick="get_filter('1')">1 Hari</button>
-                  <button class="dropdown-item" onclick="get_filter('7')">7 Hari</button>
-                  <button class="dropdown-item" onclick="get_filter('30')">30 Hari</button>
+              <div class="row">
+                <div class="col-md-5 mb-3">
+                  <input class="form-control" id="tanggal_awal" name="tanggal_awal" type="date"
+                    value="{{ Request::get('tanggal_awal') }}" max="{{ date('Y-m-d') }}" />
+                  <label for="tanggal_awal">(Tanggal Awal)</label>
+                </div>
+                <div class="col-md-5 mb-3">
+                  <input class="form-control" id="tanggal_akhir" name="tanggal_akhir" type="date"
+                    value="{{ Request::get('tanggal_akhir') }}" max="{{ date('Y-m-d') }}" />
+                  <label for="tanggal_awal">(Tanggal Akhir)</label>
+                </div>
+                <div class="text-right">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Cari
+                  </button>
                 </div>
               </div>
-            </div>
-            @if (array_sum($data) > 0)
-            <canvas id="myChart"></canvas>
-            @else
-            <div class="border rounded p-5">
-              <p class="text-center">- Tidak ada data -</p>
-            </div>
-            @endif
+            </form>
           </div>
+          @if (array_sum($data) > 0)
+          <canvas id="myChart"></canvas>
+          @else
+          <div class="border rounded p-5">
+            <p class="text-center">- Tidak ada data -</p>
+          </div>
+          @endif
         </div>
       </div>
     </div>
-    <!-- /.row -->
+  </div>
+  <!-- /.row -->
   </div>
   <!-- /.container-fluid -->
 </section>
@@ -99,6 +103,21 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+  var tanggalAwal = document.getElementById('tanggal_awal');
+  var tanggalAkhir = document.getElementById('tanggal_akhir');
+  if (tanggalAwal.value == "") {
+    tanggalAkhir.readOnly = true;
+  }
+  tanggalAwal.addEventListener('change', function() {
+    if (this.value == "") {
+      tanggalAkhir.readOnly = true;
+    } else {
+      tanggalAkhir.readOnly = false;
+    };
+    tanggalAkhir.value = "";
+    tanggalAkhir.setAttribute('min', this.value);
+  });
+  
   var filter = document.getElementById('filter');
   var form_submit = document.getElementById('form-submit');
   

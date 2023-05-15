@@ -30,15 +30,18 @@
 @php
 $menunggus = \App\Models\Tiket::where([
 ['client_id', auth()->user()->id],
-['status', 'menunggu']
+['status', 'menunggu'],
+['is_read_client', false]
 ])->get();
 $proseses = \App\Models\Tiket::where([
 ['client_id', auth()->user()->id],
-['status', 'proses']
+['status', 'proses'],
+['is_read_client', false]
 ])->get();
 $selesais = \App\Models\Tiket::where([
 ['client_id', auth()->user()->id],
-['status', 'selesai']
+['status', 'selesai'],
+['is_read_client', false]
 ])->get();
 @endphp
 <li class="nav-header">Pengaduan</li>

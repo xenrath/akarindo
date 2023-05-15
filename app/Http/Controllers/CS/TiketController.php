@@ -15,13 +15,21 @@ class TiketController extends Controller
 {
     public function menunggu()
     {
-        $tikets = Tiket::where('status', 'Menunggu')->with('client')->get();
+        Tiket::where('status', 'menunggu')->update([
+            'is_read_cs' => true
+        ]);
+
+        $tikets = Tiket::where('status', 'menunggu')->with('client')->get();
 
         return view('cs.tiket.menunggu', compact('tikets'));
     }
 
     public function proses()
     {
+        Tiket::where('status', 'proses')->update([
+            'is_read_cs' => true
+        ]);
+
         $tikets = Tiket::where('status', 'proses')->get();
 
         return view('cs.tiket.proses', compact('tikets'));
@@ -29,6 +37,10 @@ class TiketController extends Controller
 
     public function selesai()
     {
+        Tiket::where('status', 'selesai')->update([
+            'is_read_cs' => true
+        ]);
+
         $tikets = Tiket::where('status', 'selesai')->get();
 
         return view('cs.tiket.selesai', compact('tikets'));
@@ -49,7 +61,9 @@ class TiketController extends Controller
 
         Tiket::where('id', $id)->update([
             'jawaban' => $request->jawaban,
-            'status' => 'proses'
+            'status' => 'proses',
+            'is_read_cs' => false,
+            'is_read_client' => false
         ]);
 
         Realtime::dispatch('message');
@@ -84,6 +98,8 @@ class TiketController extends Controller
         Tiket::where('id', $id)->update([
             'tanggal_akhir' => Carbon::now()->format('d-m-Y'),
             'status' => 'selesai',
+            'is_read_cs' => false,
+            'is_read_client' => false
         ]);
 
         Realtime::dispatch('message');

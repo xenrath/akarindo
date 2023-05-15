@@ -20,24 +20,36 @@ class DashboardController extends Controller
         $labels = array();
         $data = array();
 
-        $filter = $request->filter;
-        $min = Carbon::now()->subDays($filter)->format('Y-m-d');
-        $max = Carbon::now()->format('Y-m-d');
+        $tanggal_awal = $request->tanggal_awal;
+        $tanggal_akhir = $request->tanggal_akhir;
 
         foreach ($layanans as $layanan) {
-            if ($filter != "") {
-                $tikets = Tiket::where('status', 'selesai')->whereDate('tanggal_akhir', '>=', $min)->whereDate('tanggal_akhir', '<=', $max)->whereHas('produk', function ($query) use ($layanan) {
-                    $query->whereHas('sublayanan', function ($query) use ($layanan) {
-                        $query->where('layanan_id', $layanan->id);
-                    });
-                })->get();
+            if ($tanggal_awal != "" && $tanggal_akhir != "") {
+                $tikets = Tiket::where('status', 'selesai')
+                    ->whereDate('tanggal_awal', '>=', $tanggal_awal)
+                    ->whereDate('tanggal_akhir', '<=', $tanggal_akhir)
+                    ->whereHas('produk', function ($query) use ($layanan) {
+                        $query->whereHas('sublayanan', function ($query) use ($layanan) {
+                            $query->where('layanan_id', $layanan->id);
+                        });
+                    })->get();
+            } else if ($tanggal_awal != "" && $tanggal_akhir == "") {
+                $tikets = Tiket::where('status', 'selesai')
+                    ->whereDate('tanggal_awal', '>=', $tanggal_awal)
+                    ->whereHas('produk', function ($query) use ($layanan) {
+                        $query->whereHas('sublayanan', function ($query) use ($layanan) {
+                            $query->where('layanan_id', $layanan->id);
+                        });
+                    })->get();
             } else {
-                $tikets = Tiket::where('status', 'selesai')->whereDate('tanggal_akhir', '>=', $max)->whereDate('tanggal_akhir', '<=', $max)->whereHas('produk', function ($query) use ($layanan) {
-                    $query->whereHas('sublayanan', function ($query) use ($layanan) {
-                        $query->where('layanan_id', $layanan->id);
-                    });
-                })->get();
+                $tikets = Tiket::where('status', 'selesai')
+                    ->whereHas('produk', function ($query) use ($layanan) {
+                        $query->whereHas('sublayanan', function ($query) use ($layanan) {
+                            $query->where('layanan_id', $layanan->id);
+                        });
+                    })->get();
             }
+            
             $labels[] = $layanan->layanan;
             $data[] = count($tikets);
         }

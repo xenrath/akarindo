@@ -19,7 +19,7 @@ class CreateKomentarsTable extends Migration
             $table->unsignedInteger('pengirim_id');
             $table->text('komentar');
             $table->string('gambar')->nullable();
-            $table->boolean('status')->default(true);
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
         });
     }

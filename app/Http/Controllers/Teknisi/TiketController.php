@@ -18,6 +18,13 @@ class TiketController extends Controller
 {
     public function menunggu()
     {
+        Tiket::where([
+            ['teknisi_id', auth()->user()->id],
+            ['status', 'menunggu']
+        ])->update([
+            'is_read_teknisi' => true
+        ]);
+
         $tikets = Tiket::where([
             ['teknisi_id', auth()->user()->id],
             ['status', 'menunggu']
@@ -26,8 +33,30 @@ class TiketController extends Controller
         return view('teknisi.tiket.menunggu', compact('tikets'));
     }
 
+    public function konfirmasi_kerjakan($id)
+    {
+        Tiket::where('id', $id)->update([
+            'tanggal_pengerjaan' => Carbon::now()->format('Y-m-d'),
+            'status' => 'proses',
+            'is_read_cs' => false,
+            'is_read_teknisi' => false,
+            'is_read_client' => false
+        ]);
+
+        Realtime::dispatch('message');
+
+        return back()->with('success', 'Berhasil mengkonfirmasi Tiket');
+    }
+
     public function proses()
     {
+        Tiket::where([
+            ['teknisi_id', auth()->user()->id],
+            ['status', 'proses']
+        ])->update([
+            'is_read_teknisi' => true
+        ]);
+
         $tikets = Tiket::where([
             ['teknisi_id', auth()->user()->id],
             ['status', 'proses']
@@ -45,7 +74,7 @@ class TiketController extends Controller
             ['tiket_id', $id],
             ['pengirim_id', '!=', auth()->user()->id]
         ])->update([
-            'status' => false
+            'is_read' => true
         ]);
 
         return view('teknisi.tiket.komentar', compact('tiket', 'komentars'));
@@ -85,24 +114,19 @@ class TiketController extends Controller
     
     public function selesai()
     {
+        Tiket::where([
+            ['teknisi_id', auth()->user()->id],
+            ['status', 'selesai']
+        ])->update([
+            'is_read_teknisi' => true
+        ]);
+
         $tikets = Tiket::where([
             ['teknisi_id', auth()->user()->id],
             ['status', 'selesai']
         ])->get();
 
         return view('teknisi.tiket.selesai', compact('tikets'));
-    }
-
-    public function konfirmasi_kerjakan($id)
-    {
-        Tiket::where('id', $id)->update([
-            'status' => 'proses',
-            'tanggal_pengerjaan' => Carbon::now()->format('Y-m-d')
-        ]);
-
-        Realtime::dispatch('message');
-
-        return back()->with('success', 'Berhasil mengkonfirmasi Tiket');
     }
 
     public function konfirmasi_selesai($id)

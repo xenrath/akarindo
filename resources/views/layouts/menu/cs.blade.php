@@ -18,9 +18,18 @@
   </a>
 </li>
 @php
-$menunggus = \App\Models\Tiket::where('status', 'menunggu')->get();
-$proseses = \App\Models\Tiket::where('status', 'proses')->get();
-$selesais = \App\Models\Tiket::where('status', 'selesai')->get();
+$menunggus = \App\Models\Tiket::where([
+['status', 'menunggu'],
+['is_read_cs', false]
+])->get();
+$proseses = \App\Models\Tiket::where([
+['status', 'proses'],
+['is_read_cs', false]
+])->get();
+$selesais = \App\Models\Tiket::where([
+['status', 'selesai'],
+['is_read_cs', false]
+])->get();
 @endphp
 <li class="nav-header">Pengaduan</li>
 <li class="nav-item">
