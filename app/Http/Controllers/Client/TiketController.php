@@ -51,6 +51,11 @@ class TiketController extends Controller
     public function komentar($id)
     {
         $tiket = Tiket::where('id', $id)->first();
+        
+        if ($tiket->status != 'proses') {
+            return redirect('client/tiket/proses');
+        }
+        
         $komentars = Komentar::where('tiket_id', $tiket->id)->orderByDesc('id')->get();
 
         Komentar::where([
