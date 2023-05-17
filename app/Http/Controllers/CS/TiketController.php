@@ -10,6 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use stdClass;
 
 class TiketController extends Controller
 {
@@ -107,18 +108,30 @@ class TiketController extends Controller
         return back()->with('success', 'Berhasil menyelesaikan Tiket');
     }
 
-    public function generateCode()
+    public function teknisi($id)
     {
-        $now = Carbon::now();
-        $tikets = Tiket::where('tanggal_awal', $now->format('Y-m-d'))->get();
-        if (count($tikets) > 0) {
-            $count = count($tikets) + 1;
-            $num = sprintf("%04s", $count);
-        } else {
-            $num = "0001";
+        $tiket = Tiket::where('id', $id)->first();
+        $teknisis = User::where('layanan_id', $tiket->produk->sublayanan->layanan_id)->withCount('tiket_teknisis')->orderBy('tiket_teknisis_count')->get();
+
+        $data = array();
+
+        foreach ($teknisis as $teknisi) {
+            $tikets = Tiket::where('teknisi_id', $teknisi->id)->get();
+
+            $jumlah = 0;
+            foreach ($tikets as $tiket) {
+                $jumlah += $tiket->produk->sublayanan->layanan->level->lama;
+            }
+
+            $class = new stdClass();
+
+            $class->id = $teknisi->id;
+            $class->nama = $teknisi->nama;
+            $class->jumlah = $jumlah;
+
+            array_push($data, $class);
         }
 
-        $result = $now->format('ymd') . $num;
-        return $result;
+        return json_encode($data);
     }
 }

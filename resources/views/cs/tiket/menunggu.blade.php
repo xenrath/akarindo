@@ -72,7 +72,7 @@
                 </button>
                 @else
                 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
-                  data-target="#modal-konfirmasi-{{ $tiket->id }}">
+                  data-target="#modal-konfirmasi-{{ $tiket->id }}" onclick="getTeknisi({{ $tiket->id }})">
                   Proses
                 </button>
                 @endif
@@ -169,19 +169,9 @@
                   <form action="{{ url('cs/tiket/konfirmasi_alihkan/' . $tiket->id) }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                      @php
-                      $teknisis = \App\Models\User::where('layanan_id',
-                      $tiket->produk->sublayanan->layanan_id)->withCount('tiket_teknisis')->orderBy('tiket_teknisis_count')->get();
-                      @endphp
                       <div class="form-group">
                         <label for="teknisi_id">Teknisi</label>
-                        <select class="form-control select2bs4" id="teknisi_id" name="teknisi_id">
-                          <option value="">- Pilih Teknisi -</option>
-                          @foreach ($teknisis as $teknisi)
-                          <option value="{{ $teknisi->id }}" {{ old('teknisi_id')==$teknisi->id ? 'selected' : '' }}>{{
-                            $teknisi->nama }} ({{ $teknisi->tiket_teknisis_count }})</option>
-                          @endforeach
-                        </select>
+                        <select class="form-control select2bs4" id="teknisi_id-{{ $tiket->id }}" name="teknisi_id"></select>
                       </div>
                     </div>
                     <div class="modal-footer">
@@ -261,4 +251,24 @@
   </div>
 </section>
 <!-- /.card -->
+<script>
+  function getTeknisi(id) {
+    console.log(id);
+    $.ajax({
+      url: "{{ url('cs/tiket/teknisi') }}" + "/" + id,
+      type: "GET",
+      dataType: "json",
+      success: function(data) {
+        console.log(data);
+        if (data != null) {
+          $('#teknisi_id-' + id).empty();
+          $('#teknisi_id-' + id).append('<option value="">- Pilih Teknisi -</option>');
+          $.each(data, function(key, value) {
+            $('#teknisi_id-' + id).append('<option value="' + value.id + '">' + value.nama + ' (' + value.jumlah + ') </option>');
+          });
+        }
+      },
+    });
+  }
+</script>
 @endsection

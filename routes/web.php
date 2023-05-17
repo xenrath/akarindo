@@ -69,6 +69,7 @@ Route::prefix('cs')->middleware('cs')->group(function () {
   Route::post('tiket/konfirmasi_alihkan/{id}', [\App\Http\Controllers\CS\TiketController::class, 'konfirmasi_alihkan']);
   Route::get('tiket/konfirmasi_selesai/{id}', [\App\Http\Controllers\CS\TiketController::class, 'konfirmasi_selesai']);
 
+  Route::get('tiket/teknisi/{id}', [\App\Http\Controllers\CS\TiketController::class, 'teknisi']);
 
   Route::resource('tiket', \App\Http\Controllers\CS\TiketController::class);
 });
