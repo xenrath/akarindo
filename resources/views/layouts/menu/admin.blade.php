@@ -84,15 +84,14 @@
     </p>
   </a>
 </li>
-<li class="nav-item">
+{{-- <li class="nav-item">
   <a href="{{ url('admin/level') }}" class="nav-link {{ request()->is('admin/level*') ? 'active' : '' }}">
     <i class="nav-icon fas fa-sort-amount-down"></i>
     <p>
       Data Level
-      {{-- <span class="right badge badge-danger">New</span> --}}
     </p>
   </a>
-</li>
+</li> --}}
 <li class="nav-item">
   <a href="{{ url('admin/produk') }}" class="nav-link {{ request()->is('admin/produk*') ? 'active' : '' }}">
     <i class="nav-icon fas fa-grip-horizontal"></i>
