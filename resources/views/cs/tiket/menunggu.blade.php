@@ -121,7 +121,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
-                      data-target="#modal-jawab">Jawab
+                      data-target="#modal-jawab-{{ $tiket->id }}">Jawab
                       Pengaduan</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
                       data-target="#modal-alihkan-{{ $tiket->id }}">Alihkan
@@ -130,7 +130,7 @@
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="modal-jawab">
+            <div class="modal fade" id="modal-jawab-{{ $tiket->id }}">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">

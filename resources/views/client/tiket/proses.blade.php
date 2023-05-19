@@ -45,7 +45,7 @@
               <th>Kode</th>
               <th>Produk</th>
               <th>Deskripsi</th>
-              <th class="text-center">Opsi</th>
+              <th class="text-center" style="width: 120px">Opsi</th>
             </tr>
           </thead>
           <tbody>
@@ -70,12 +70,12 @@
                   <span class="right badge badge-light">{{ count($komentars) }}</span>
                   @endif
                 </a>
+                @endif
+                @if ($tiket->jawaban)
                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                   data-target="#modal-lihat-{{ $tiket->id }}">
                   Lihat
                 </button>
-                @endif
-                @if ($tiket->jawaban)
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                   data-target="#modal-konfirmasi-{{ $tiket->id }}">
                   Selesaikan
