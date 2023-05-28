@@ -54,7 +54,7 @@
                 <th>Kode</th>
                 <th>Produk</th>
                 <th>Deskripsi</th>
-                <th class="text-center" style="width: 120px">Opsi</th>
+                <th class="text-center" style="width: 160px">Opsi</th>
               </tr>
             </thead>
             <tbody>
