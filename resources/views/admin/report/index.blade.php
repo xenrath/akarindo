@@ -176,7 +176,7 @@
                             <p class="text-wrap">
                               <strong>Tanggal Selesai</strong>
                               <br>
-                              {{ $tiket->tanggal_selesai }}
+                              {{ $tiket->tanggal_akhir }}
                             </p>
                             <p class="text-wrap">
                               <strong>Bukti</strong>
