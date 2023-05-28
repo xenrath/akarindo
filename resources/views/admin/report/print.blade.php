@@ -68,18 +68,18 @@
       <td class="td" style="width: 140px; vertical-align: top">
         Dibuat :
         <br>
-        {{ date('d M Y', strtotime($tiket->tanggal_awal)) }}
+        {{ $tiket->tanggal_awal }}
         <br>
         @if ($tiket->tanggal_pengerjaan)
         Pengerjaan :
         <br>
-        {{ date('d M Y', strtotime($tiket->tanggal_pengerjaan)) }}
+        {{ $tiket->tanggal_pengerjaan }}
         <br>
         @endif
         @if ($tiket->tanggal_akhir)
         Selesai :
         <br>
-        {{ date('d M Y', strtotime($tiket->tanggal_akhir)) }}
+        {{ $tiket->tanggal_akhir }}
         @endif
       </td>
       <td class="td" style="vertical-align: top">
@@ -87,20 +87,6 @@
         Teknisi :
         <br>
         {{ $tiket->teknisi->nama }}
-        <br>
-        <br>
-        Lama Pengerjaan :
-        <br>
-        @php
-        $tanggal_pengerjaan = strtotime($tiket->tanggal_pengerjaan);
-        $tanggal_akhir = strtotime($tiket->tanggal_akhir);
-        $selisih = ceil(abs($tanggal_akhir - $tanggal_pengerjaan) / 86400);
-        @endphp
-        @if ($selisih == 0)
-        Dikerjakan dan selesai hari itu juga.
-        @else
-        {{ $selisih }} Hari
-        @endif
         @endif
         @if ($tiket->jawaban)
         CS :
