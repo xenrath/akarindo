@@ -40,7 +40,7 @@ $selesais = \App\Models\Tiket::where([
 </li>
 <li class="nav-item">
   <a href="{{ url('teknisi/tiket/proses') }}"
-    class="nav-link {{ request()->is('teknisi/tiket/proses') ? 'active' : '' }}">
+    class="nav-link {{ request()->is('teknisi/tiket/proses') || request()->is('teknisi/tiket/obrolan*')  ? 'active' : '' }}">
     <i class="nav-icon fas fa-ticket-alt"></i>
     <p>
       Proses

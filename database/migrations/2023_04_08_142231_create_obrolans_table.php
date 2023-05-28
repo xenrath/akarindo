@@ -15,8 +15,9 @@ class CreateObrolansTable extends Migration
     {
         Schema::create('obrolans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('cs_id');
-            $table->unsignedInteger('client_id');
+            $table->unsignedInteger('tiket_id')->nullable();
+            $table->unsignedInteger('cs_id')->nullable();
+            $table->unsignedInteger('client_id')->nullable();
             $table->timestamps();
         });
     }

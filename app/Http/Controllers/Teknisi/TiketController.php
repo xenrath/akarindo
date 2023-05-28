@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teknisi;
 
 use App\Events\Realtime;
 use App\Http\Controllers\Controller;
+use App\Models\DetailObrolan;
 use App\Models\Komentar;
 use App\Models\Obrolan;
 use App\Models\Produk;
@@ -65,29 +66,32 @@ class TiketController extends Controller
         return view('teknisi.tiket.proses', compact('tikets'));
     }
 
-    public function komentar($id)
+    public function obrolan($id)
     {
         $tiket = Tiket::where('id', $id)->first();
-        $komentars = Komentar::where('tiket_id', $tiket->id)->orderByDesc('id')->get();
 
-        Komentar::where([
-            ['tiket_id', $id],
+        if ($tiket->status != 'proses') {
+            return redirect('teknisi/tiket/proses');
+        }
+
+        $obrolan = Obrolan::where('tiket_id', $id)->first();
+
+        DetailObrolan::where([
+            ['obrolan_id', $id],
             ['pengirim_id', '!=', auth()->user()->id]
         ])->update([
             'is_read' => true
         ]);
 
-        return view('teknisi.tiket.komentar', compact('tiket', 'komentars'));
+        return view('teknisi.tiket.obrolan', compact('tiket', 'obrolan'));
     }
 
-    public function buat_komentar(Request $request)
+    public function buat_obrolan(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'komentar' => 'required',
-            'gambar' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+            'pesan' => 'required',
         ], [
-            'komentar.required' => 'Komentar harus diisi!',
-            'gambar.image' => 'Gambar harus berformat jpeg, jpg, png!',
+            'pesan.required' => 'Pesan tidak boleh kosong!',
         ]);
 
         if ($validator->fails()) {
@@ -95,28 +99,57 @@ class TiketController extends Controller
             return back()->withInput()->with('error', $error);
         }
 
-        if ($request->gambar) {
-            Storage::disk('local')->delete('public/uploads/' . $request->gambar);
-            $gambar = str_replace(' ', '', $request->gambar->getClientOriginalName());
-            $namagambar = "komentar/" . date('YmdHis') . "." . $gambar;
-            $request->gambar->storeAs('public/uploads', $namagambar);
+        $tiket_id = $request->tiket_id;
+        $pesan = $request->pesan;
+
+        if ($this->cek_obrolan($tiket_id)) {
+            $obrolan = $this->cek_obrolan($tiket_id);
         } else {
-            $namagambar = null;
+            $obrolan = Obrolan::create([
+                'tiket_id' => $tiket_id,
+            ]);
         }
 
-        Komentar::create(array_merge($request->all(), [
+        DetailObrolan::create([
+            'obrolan_id' => $obrolan->id,
             'pengirim_id' => auth()->user()->id,
-            'gambar' => $namagambar
-        ]));
+            'pesan' => $pesan
+        ]);
 
         Realtime::dispatch('message');
 
         return back();
     }
 
-    public function konfirmasi_selesai($id)
+    public function cek_obrolan($tiket_id)
     {
-        Tiket::where('id', $id)->update([
+        $obrolan = Obrolan::where('tiket_id', $tiket_id)->first();
+
+        return $obrolan;
+    }
+
+    public function konfirmasi_selesai(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'bukti' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+        ], [
+            'bukti.required' => 'Bukti harus diisi!',
+            'bukti.image' => 'Foto harus berformat jpeg, jpg, png!',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->all();
+            return back()->withInput()->with('error', $error);
+        }
+
+        $tiket_id = $request->tiket_id;
+
+        $bukti = str_replace(' ', '', $request->bukti->getClientOriginalName());
+        $namabukti = "tiket/" . date('YmdHis') . "." . $bukti;
+        $request->bukti->storeAs('public/uploads', $namabukti);
+
+        Tiket::where('id', $tiket_id)->update([
+            'bukti' => $namabukti,
             'tanggal_akhir' => Carbon::now()->format('Y-m-d'),
             'status' => 'selesai',
             'is_read_cs' => false,
@@ -128,7 +161,7 @@ class TiketController extends Controller
 
         return redirect('teknisi/tiket/proses')->with('success', 'Berhasil menyelesaikan Tiket');
     }
-    
+
     public function selesai()
     {
         Tiket::where([

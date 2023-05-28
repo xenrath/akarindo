@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,7 @@ class Tiket extends Model
         'jawaban',
         'tanggal_awal',
         'tanggal_pengerjaan',
+        'bukti',
         'tanggal_akhir'
     ];
     
@@ -41,5 +43,20 @@ class Tiket extends Model
     public function komentars()
     {
         return $this->hasMany(Komentar::class);
+    }
+
+    public function getTanggalAwalAttribute()
+    {
+        return Carbon::parse($this->attributes['tanggal_awal'])->translatedFormat('d F Y');
+    }
+
+    public function getTanggalPengerjaanAttribute()
+    {
+        return Carbon::parse($this->attributes['tanggal_pengerjaan'])->translatedFormat('d F Y');
+    }
+
+    public function getTanggalAkhirAttribute()
+    {
+        return Carbon::parse($this->attributes['tanggal_akhir'])->translatedFormat('d F Y');
     }
 }

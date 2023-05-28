@@ -25,6 +25,7 @@ class CreateTiketsTable extends Migration
             $table->string('jawaban')->nullable();
             $table->string('tanggal_awal');
             $table->string('tanggal_pengerjaan')->nullable();
+            $table->string('bukti')->nullable();
             $table->string('tanggal_akhir')->nullable();
             $table->boolean('is_read_cs')->default(false);
             $table->boolean('is_read_teknisi')->default(false);

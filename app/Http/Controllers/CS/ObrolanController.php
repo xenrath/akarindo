@@ -12,7 +12,7 @@ class ObrolanController extends Controller
 {
     public function index()
     {
-        $obrolans = Obrolan::get();
+        $obrolans = Obrolan::where('cs_id', auth()->user()->id)->get();
 
         return view('cs.obrolan.index', compact('obrolans'));
     }
@@ -33,6 +33,13 @@ class ObrolanController extends Controller
     public function show($id)
     {
         $obrolan = Obrolan::where('id', $id)->first();
+
+        DetailObrolan::where([
+            ['obrolan_id', $obrolan->id],
+            ['pengirim_id', '!=', auth()->user()->id]
+        ])->update([
+            'is_read' => true
+        ]);
 
         return view('cs.obrolan.show', compact('obrolan'));
     }

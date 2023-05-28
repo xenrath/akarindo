@@ -18,6 +18,7 @@ class CreateDetailObrolansTable extends Migration
             $table->unsignedInteger('obrolan_id');
             $table->unsignedInteger('pengirim_id');
             $table->string('pesan');
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
         });
     }

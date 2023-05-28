@@ -19,6 +19,13 @@ class ObrolanController extends Controller
             ['client_id', auth()->user()->id]
         ])->first();
 
+        DetailObrolan::where([
+            ['obrolan_id', $obrolan->id],
+            ['pengirim_id', '!=', auth()->user()->id]
+        ])->update([
+            'is_read' => true
+        ]);
+
         return view('client.obrolan.create', compact('obrolan'));
     }
 

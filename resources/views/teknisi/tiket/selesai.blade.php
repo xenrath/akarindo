@@ -107,30 +107,25 @@
                         <p class="text-wrap">
                           <strong>Tanggal Dibuat</strong>
                           <br>
-                          {{ date('d M Y', strtotime($tiket->tanggal_awal)) }}
+                          {{ $tiket->tanggal_awal }}
                         </p>
                       </div>
                     </div>
-                    <hr>
                     <p class="text-wrap">
                       <strong>Tanggal Pengerjaan</strong>
                       <br>
-                      {{ date('d M Y', strtotime($tiket->tanggal_pengerjaan)) }}
+                      {{ $tiket->tanggal_pengerjaan }}
                     </p>
                     <p class="text-wrap">
-                      <strong>Lama Pengerjaan</strong>
+                      <strong>Tanggal Selesai</strong>
                       <br>
-                      @php
-                      $tanggal_pengerjaan = strtotime($tiket->tanggal_pengerjaan);
-                      $tanggal_akhir = strtotime($tiket->tanggal_akhir);
-                      $selisih = ceil(abs($tanggal_akhir - $tanggal_pengerjaan) / 86400);
-                      @endphp
-                      @if ($selisih == 0)
-                      Dikerjakan dan selesai hari itu juga.
-                      @else
-                      {{ $selisih }} Hari
-                      @endif
+                      {{ $tiket->tanggal_akhir }}
                     </p>
+                    <p class="text-wrap">
+                      <strong>Bukti</strong>
+                      <br>
+                    </p>
+                    <img src="{{ asset('storage/uploads/' . $tiket->bukti) }}" class="rounded w-50">
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

@@ -10,6 +10,7 @@ class Obrolan extends Model
     use HasFactory;
 
     protected $fillable = [
+        'tiket_id',
         'cs_id',
         'client_id',
     ];

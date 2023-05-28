@@ -14,6 +14,17 @@
     <i class="nav-icon fas fa-comments"></i>
     <p>
       Obrolan
+      @php
+        $obrolan = \App\Models\Obrolan::where('client_id', auth()->user()->id)->first();
+      @endphp
+      @if ($obrolan)
+        @php
+          $detail_obrolans = \App\Models\DetailObrolan::where([['obrolan_id', $obrolan->id], ['pengirim_id', '!=', auth()->user()->id], ['is_read', false]])->get();
+        @endphp
+        @if (count($detail_obrolans) > 0)
+          <span class="right badge badge-info">{{ count($detail_obrolans) }}</span>
+        @endif
+      @endif
     </p>
   </a>
 </li>
@@ -28,21 +39,9 @@
   </a>
 </li>
 @php
-$menunggus = \App\Models\Tiket::where([
-['client_id', auth()->user()->id],
-['status', 'menunggu'],
-['is_read_client', false]
-])->get();
-$proseses = \App\Models\Tiket::where([
-['client_id', auth()->user()->id],
-['status', 'proses'],
-['is_read_client', false]
-])->get();
-$selesais = \App\Models\Tiket::where([
-['client_id', auth()->user()->id],
-['status', 'selesai'],
-['is_read_client', false]
-])->get();
+  $menunggus = \App\Models\Tiket::where([['client_id', auth()->user()->id], ['status', 'menunggu'], ['is_read_client', false]])->get();
+  $proseses = \App\Models\Tiket::where([['client_id', auth()->user()->id], ['status', 'proses'], ['is_read_client', false]])->get();
+  $selesais = \App\Models\Tiket::where([['client_id', auth()->user()->id], ['status', 'selesai'], ['is_read_client', false]])->get();
 @endphp
 <li class="nav-header">Pengaduan</li>
 <li class="nav-item">
@@ -52,19 +51,19 @@ $selesais = \App\Models\Tiket::where([
     <p>
       Menunggu
       @if (count($menunggus) > 0)
-      <span class="right badge badge-info">{{ count($menunggus) }}</span>
+        <span class="right badge badge-info">{{ count($menunggus) }}</span>
       @endif
     </p>
   </a>
 </li>
 <li class="nav-item">
   <a href="{{ url('client/tiket/proses') }}"
-    class="nav-link {{ request()->is('client/tiket/proses') ? 'active' : '' }}">
+    class="nav-link {{ request()->is('client/tiket/proses') || request()->is('client/tiket/obrolan*') ? 'active' : '' }}">
     <i class="nav-icon fas fa-ticket-alt"></i>
     <p>
       Proses
       @if (count($proseses) > 0)
-      <span class="right badge badge-info">{{ count($proseses) }}</span>
+        <span class="right badge badge-info">{{ count($proseses) }}</span>
       @endif
     </p>
   </a>
@@ -76,7 +75,7 @@ $selesais = \App\Models\Tiket::where([
     <p>
       Selesai
       @if (count($selesais) > 0)
-      <span class="right badge badge-info">{{ count($selesais) }}</span>
+        <span class="right badge badge-info">{{ count($selesais) }}</span>
       @endif
     </p>
   </a>
