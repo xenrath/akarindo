@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,6 +30,7 @@
     }
   </style>
 </head>
+
 <body>
   <table width="100%">
     <tr>
@@ -58,44 +60,44 @@
       <td class="td" style="text-align: center">Status</td>
     </tr>
     @foreach ($tikets as $tiket)
-    <tr>
-      <td class="td" style="text-align: center; vertical-align: top">{{ $loop->iteration }}.</td>
-      <td class="td" style="width: 180px; vertical-align: top">
-        {{ $tiket->client->nama }}
-        <br>
-        ({{ $tiket->produk->nama }})
-      </td>
-      <td class="td" style="width: 140px; vertical-align: top">
-        Dibuat :
-        <br>
-        {{ $tiket->tanggal_awal }}
-        <br>
-        @if ($tiket->tanggal_pengerjaan)
-        Pengerjaan :
-        <br>
-        {{ $tiket->tanggal_pengerjaan }}
-        <br>
-        @endif
-        @if ($tiket->tanggal_akhir)
-        Selesai :
-        <br>
-        {{ $tiket->tanggal_akhir }}
-        @endif
-      </td>
-      <td class="td" style="vertical-align: top">
-        @if ($tiket->teknisi_id)
-        Teknisi :
-        <br>
-        {{ $tiket->teknisi->nama }}
-        @endif
-        @if ($tiket->jawaban)
-        CS :
-        <br>
-        {{ $tiket->jawaban }}
-        @endif
-      </td>
-      <td class="td" style="width: 100px; text-align: center">{{ ucfirst($tiket->status) }}</td>
-    </tr>
+      <tr>
+        <td class="td" style="text-align: center; vertical-align: top">{{ $loop->iteration }}.</td>
+        <td class="td" style="width: 180px; vertical-align: top">
+          {{ $tiket->client->nama }}
+          <br>
+          ({{ $tiket->produk->nama }})
+        </td>
+        <td class="td" style="width: 140px; vertical-align: top">
+          Dibuat :
+          <br>
+          {{ $tiket->tanggal_awal }}
+          <br>
+          @if ($tiket->tanggal_pengerjaan)
+            Pengerjaan :
+            <br>
+            {{ $tiket->tanggal_pengerjaan }}
+            <br>
+          @endif
+          @if ($tiket->tanggal_akhir)
+            Selesai :
+            <br>
+            {{ $tiket->tanggal_akhir }}
+          @endif
+        </td>
+        <td class="td" style="vertical-align: top">
+          @if ($tiket->teknisi_id)
+            Teknisi :
+            <br>
+            {{ $tiket->teknisi->nama }}
+          @endif
+          @if ($tiket->jawaban)
+            CS :
+            <br>
+            {{ $tiket->jawaban }}
+          @endif
+        </td>
+        <td class="td" style="width: 100px; text-align: center">{{ ucfirst($tiket->status) }}</td>
+      </tr>
     @endforeach
   </table>
   <br>
@@ -119,4 +121,5 @@
     SUPPORT BY SYSTEM EHR.CO.ID
   </div>
 </body>
+
 </html>
