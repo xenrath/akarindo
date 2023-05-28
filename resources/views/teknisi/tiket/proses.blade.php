@@ -79,11 +79,39 @@
                         @endif
                       @endif
                     </a>
-                    {{-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                       data-target="#modal-konfirmasi-{{ $tiket->id }}">
                       Selesaikan
-                    </button> --}}
+                    </button>
                   </td>
+                  <div class="modal fade" id="modal-konfirmasi-{{ $tiket->id }}">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Selesaikan Pengaduan</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <form action="{{ url('teknisi/tiket/konfirmasi_selesai') }}" method="post"
+                          enctype="multipart/form-data">
+                          @csrf
+                          <div class="modal-body">
+                            <input type="hidden" class="form-control" name="tiket_id" id="tiket_id"
+                              value="{{ $tiket->id }}">
+                            <div class="form-group">
+                              <label class="form-label" for="bukti">Bukti</label>
+                              <input type="file" class="form-control" name="bukti" id="bukti" accept="image/*">
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Selesaikan</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </tr>
                 <div class="modal fade" id="modal-konfirmasi-{{ $tiket->id }}">
                   <div class="modal-dialog modal-lg">

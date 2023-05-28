@@ -40,11 +40,6 @@
         <div class="card-header">
           <h3 class="card-title">Detail Pengaduan</h3>
           <div class="card-tools">
-            @if ($tiket->status == 'proses')
-              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-konfirmasi">
-                Selesaikan
-              </button>
-            @endif
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
               <i class="fas fa-plus"></i>
             </button>
@@ -149,32 +144,6 @@
       </div>
     </div>
   </section>
-  <div class="modal fade" id="modal-konfirmasi">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Selesaikan Pengaduan</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="{{ url('teknisi/tiket/konfirmasi_selesai') }}" method="post" enctype="multipart/form-data">
-          @csrf
-          <div class="modal-body">
-            <input type="hidden" class="form-control" name="tiket_id" id="tiket_id" value="{{ $tiket->id }}">
-            <div class="form-group">
-              <label class="form-label" for="bukti">Bukti</label>
-              <input type="file" class="form-control" name="bukti" id="bukti" accept="image/*">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary">Selesaikan</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
   <!-- /.card -->
   <script>
     var scroll_bottom = document.getElementById('scroll-bottom');
