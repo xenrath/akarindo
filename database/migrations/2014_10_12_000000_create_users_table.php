@@ -22,11 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('telp')->unique()->nullable();
             $table->string('foto')->nullable();
             $table->text('alamat')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedInteger('layanan_id')->nullable();
             $table->boolean('status')->default(true);
-            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -9,6 +9,8 @@ class Faq extends Model
 {
     use HasFactory;
 
+    // kolom yang dapat diisi pada tabel faqs
+
     protected $fillable = [
         'pertanyaan',
         'jawaban',

@@ -11,11 +11,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    // kolom yang dapat diisi pada tabel users
+
     protected $fillable = [
         'kode',
         'nama',
@@ -28,39 +25,28 @@ class User extends Authenticatable
         'layanan_id'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
+    // relasi satu ke banyak dengan model produk
+    
     public function produks()
     {
         return $this->hasMany(Produk::class);
     }
+
+    // relasi satu ke banyak dengan model tiket
 
     public function tiket_teknisis()
     {
         return $this->hasMany(Tiket::class, 'teknisi_id', 'id');
     }
 
+    // relasi satu ke satu dengan model layanan
+
     public function layanan()
     {
         return $this->belongsTo(Layanan::class);
     }
+
+    // cek role admin
 
     public function isAdmin()
     {
@@ -70,6 +56,8 @@ class User extends Authenticatable
         return false;
     }
 
+    // cek role cs
+
     public function isCS()
     {
         if ($this->role == 'cs') {
@@ -78,6 +66,8 @@ class User extends Authenticatable
         return false;
     }
 
+    // cek role teknisi
+
     public function isTeknisi()
     {
         if ($this->role == 'teknisi') {
@@ -85,6 +75,8 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    // cek role client
 
     public function isClient()
     {

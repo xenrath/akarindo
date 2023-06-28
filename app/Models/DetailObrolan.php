@@ -9,6 +9,8 @@ class DetailObrolan extends Model
 {
     use HasFactory;
 
+    // kolom yang dapat diisi pada tabel detail_obrolans
+
     protected $fillable = [
         'obrolan_id',
         'pengirim_id',
@@ -16,10 +18,14 @@ class DetailObrolan extends Model
         'is_read'
     ];
 
+    // relasi satu ke satu dengan model obrolan
+
     public function obrolan()
     {
         return $this->belongsTo(Obrolan::class);
     }
+
+    // relasi satu ke satu dengan model user
 
     public function pengirim()
     {

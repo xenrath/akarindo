@@ -9,10 +9,14 @@ class Level extends Model
 {
     use HasFactory;
     
+    // kolom yang dapat diisi pada tabel levels
+
     protected $fillable = [
         'nama',
         'lama',
     ];
+
+    // relasi satu ke banyak dengan model layanan
 
     public function layanans()
     {
