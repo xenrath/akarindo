@@ -23,6 +23,9 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
+
+      {{-- menampilkan alert berhasil --}}
+
       @if (session('success'))
         <div class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -32,6 +35,7 @@
           {{ session('success') }}
         </div>
       @endif
+
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Data Pengaduan Selesai</h3>
@@ -49,6 +53,9 @@
               </tr>
             </thead>
             <tbody>
+
+              {{-- membuat perulangan dari data tiket selesai --}}
+
               @foreach ($tikets as $tiket)
                 <tr>
                   <td class="text-center">{{ $loop->iteration }}</td>
@@ -62,6 +69,9 @@
                     </button>
                   </td>
                 </tr>
+
+                {{-- menampilkan modal lihat --}}
+
                 <div class="modal fade" id="modal-lihat-{{ $tiket->id }}">
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">

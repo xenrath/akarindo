@@ -8,14 +8,11 @@ use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
+    // menampilkan halaman index
+
     public function index()
     {
         $layanans = Layanan::get();
         return view('front.index', compact('layanans'));
-    }
-
-    public function login()
-    {
-        return view('front.login');
     }
 }

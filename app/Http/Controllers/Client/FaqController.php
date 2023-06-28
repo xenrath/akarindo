@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
+    // menampilkan halaman index faq
+
     public function index()
     {
         $faqs = Faq::get();

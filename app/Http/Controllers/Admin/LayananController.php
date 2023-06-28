@@ -11,17 +11,23 @@ use Illuminate\Support\Facades\Validator;
 
 class LayananController extends Controller
 {
+    // menampilkan halaman index
+
     public function index()
     {
         $layanans = Layanan::get();
         return view('admin.layanan.index', compact('layanans'));
     }
 
+    // menampilkan halaman tambah
+
     public function create()
     {
         $levels = Level::all();
         return view('admin.layanan.create', compact('levels'));
     }
+
+    // proses tambah data layanan
 
     public function store(Request $request)
     {
@@ -55,10 +61,14 @@ class LayananController extends Controller
         return redirect('admin/layanan')->with('success', 'Berhasil menambahkan Layanan');
     }
 
+    // menampilkan halaman detail
+
     public function show(Layanan $layanan)
     {
         return view('admin.layanan.show', compact('layanan'));
     }
+
+    // menampilkan halaman ubah
 
     public function edit(Layanan $layanan)
     {
@@ -66,6 +76,7 @@ class LayananController extends Controller
         return view('admin.layanan.edit', compact('layanan', 'levels'));
     }
 
+    // proses ubah data layanan
 
     public function update(Request $request, Layanan $layanan)
     {
@@ -106,6 +117,8 @@ class LayananController extends Controller
 
         return redirect('admin/layanan')->with('success', 'Berhasil mengubah Layanan');
     }
+
+    // proses hapus data layanan
 
     public function destroy($id)
     {

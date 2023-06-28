@@ -25,6 +25,9 @@
   <div class="container-fluid">
     <!-- Small boxes (Stat box) -->
     <div class="row">
+      
+      {{-- Menampilkan jumlah pengaduan menunggu --}}
+      
       <div class="col-lg-4 col-6">
         <!-- small box -->
         <div class="small-box bg-warning">
@@ -40,6 +43,9 @@
         </div>
       </div>
       <!-- ./col -->
+      
+      {{-- Menampilkan jumlah pengaduan proses --}}
+      
       <div class="col-lg-4 col-6">
         <!-- small box -->
         <div class="small-box bg-primary">
@@ -55,6 +61,9 @@
         </div>
       </div>
       <!-- ./col -->
+
+      {{-- Menampilkan jumlah pengaduan selesai --}}
+      
       <div class="col-lg-4 col-6">
         <!-- small box -->
         <div class="small-box bg-success">

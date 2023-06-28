@@ -9,19 +9,28 @@ use Illuminate\Support\Facades\Validator;
 
 class FaqController extends Controller
 {
+
+    // menampilkan halaman index
+
     public function index()
     {
         $faqs = Faq::get();
         return view('admin.faq.index', compact('faqs'));
     }
 
+    // menampilkan halaman create 
+
     public function create()
     {
         return view('admin.faq.create');
     }
 
+    // proses tambah data faq
+
     public function store(Request $request)
     {
+        // validasi request
+
         $validator = Validator::make($request->all(), [
             'pertanyaan' => 'required',
             'jawaban' => 'required',
@@ -40,15 +49,20 @@ class FaqController extends Controller
         return redirect('admin/faq')->with('success', 'Berhasil menambahkan FAQ');
     }
 
+    // menampilkan halaman edit
+
     public function edit($id)
     {
         $faq = Faq::where('id', $id)->first();
         return view('admin.faq.edit', compact('faq'));
     }
 
+    // proses edit data FAQ
 
     public function update(Request $request, $id)
     {
+        // validasi request
+
         $validator = Validator::make($request->all(), [
             'pertanyaan' => 'required',
             'jawaban' => 'required',
@@ -69,6 +83,8 @@ class FaqController extends Controller
 
         return redirect('admin/faq')->with('success', 'Berhasil mengubah FAQ');
     }
+
+    // proses hapus data FAQ
 
     public function destroy($id)
     {

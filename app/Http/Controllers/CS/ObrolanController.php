@@ -10,12 +10,16 @@ use Illuminate\Http\Request;
 
 class ObrolanController extends Controller
 {
+    // menampilkan halaman index obrolan 
+
     public function index()
     {
         $obrolans = Obrolan::where('cs_id', auth()->user()->id)->get();
 
         return view('cs.obrolan.index', compact('obrolans'));
     }
+
+    // proses tambah data obrolan
 
     public function store(Request $request)
     {
@@ -29,6 +33,8 @@ class ObrolanController extends Controller
 
         return back();
     }
+
+    // menampilkan halaman detail obrolan
 
     public function show($id)
     {

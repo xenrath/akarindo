@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 
 class SubLayananController extends Controller
 {
+    // menampilkan halaman index sublayanan
+
     public function index()
     {
         $sublayanans = SubLayanan::get();
@@ -17,11 +19,15 @@ class SubLayananController extends Controller
         return view('admin.sublayanan.index', compact('sublayanans'));
     }
 
+    // menampilkan halaman tambah sublayanan
+
     public function create()
     {
         $layanans = Layanan::get();
         return view('admin.sublayanan.create', compact('layanans'));
     }
+
+    // proses tambah data sublayanan
 
     public function store(Request $request)
     {
@@ -43,6 +49,8 @@ class SubLayananController extends Controller
         return redirect('admin/sublayanan')->with('success', 'Berhasil menambahkan Sub Layanan');
     }
 
+    // menampilkan halaman ubah sublayanan
+
     public function edit($id)
     {
         $sublayanan = SubLayanan::where('id', $id)->first();
@@ -50,6 +58,7 @@ class SubLayananController extends Controller
         return view('admin.sublayanan.edit', compact('sublayanan', 'layanans'));
     }
 
+    // proses ubah data sublayanan
 
     public function update(Request $request, $id)
     {
@@ -74,6 +83,8 @@ class SubLayananController extends Controller
 
         return redirect('admin/sublayanan')->with('success', 'Berhasil mengubah Sub Layanan');
     }
+
+    // proses hapus data sublayanan
 
     public function destroy($id)
     {

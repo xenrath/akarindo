@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    // menampilkan halaman index cs
+
     public function index()
     {
         $menunggus = Tiket::where('status', 'Menunggu')->get();

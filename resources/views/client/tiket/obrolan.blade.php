@@ -33,6 +33,9 @@
           </div>
         </div>
         <!-- /.card-header -->
+
+        {{-- menampilkan detail data tiket --}}
+
         <div class="card-body">
           <div class="row">
             @if ($tiket->gambar)
@@ -72,6 +75,9 @@
         </div>
         <!-- /.card-body -->
       </div>
+
+      {{-- menampilkan alert gagal --}}
+
       @if (session('error'))
         <div class="alert alert-danger alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -85,13 +91,20 @@
           </ul>
         </div>
       @endif
+
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Detail Obrolan</h3>
         </div>
         <div class="card-body">
           <div class="direct-chat-messages p-0" id="scroll-bottom" style="height: 35vh;">
+
+            {{-- menampilkan obrolan --}}
+
             @if ($obrolan)
+
+              {{-- membuat perulangan dari data detail obrolan --}}
+
               @foreach ($obrolan->detail_obrolans as $detail_obrolan)
                 @if ($detail_obrolan->pengirim_id == auth()->user()->id)
                   <div class="direct-chat-msg right">
@@ -144,37 +157,6 @@
       </div>
     </div>
   </section>
-  <div class="modal fade" id="modal-komentar">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Buat Komentar</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="{{ url('client/tiket/buat_komentar') }}" method="post" enctype="multipart/form-data">
-          @csrf
-          <div class="modal-body">
-            <input type="hidden" class="form-control" name="tiket_id" value="{{ $tiket->id }}">
-            <div class="form-group mb-3">
-              <label class="form-label" for="komentar">Komentar</label>
-              <textarea class="form-control" id="komentar" name="komentar" style="height: 160px;">{{ old('komentar') }}</textarea>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="gambar">Gambar <small>(opsional)</small></label>
-              <input type="file" class="form-control" name="gambar" id="gambar" accept="image/*">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary">Kirim</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!-- /.card -->
   <script>
     var scroll_bottom = document.getElementById('scroll-bottom');
     scroll_bottom.scrollTop = scroll_bottom.scrollHeight;

@@ -34,7 +34,9 @@ class HomeController extends Controller
         } elseif (auth()->user()->isClient()) {
             return redirect('client');
         } elseif (!auth()->user()->isClient()) {
-            return redirect('client/nonaktif')->with('error_title', 'Akun Anda sudah tidak aktif!')->with('error_description', 'Silahkan hubungi customer service untuk mengaktifkannya.');
+            return redirect('client/nonaktif')
+                ->with('error_title', 'Akun Anda sudah tidak aktif!')
+                ->with('error_description', 'Silahkan hubungi customer service untuk mengaktifkannya.');
         }
     }
 }

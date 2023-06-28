@@ -245,7 +245,7 @@ class UserController extends Controller
     public function nonaktif($id)
     {
         User::where('id', $id)->update([
-            'status' => false   
+            'status' => false
         ]);
 
         return back()->with('success', 'Berhasil menonaktifkan Client');

@@ -53,6 +53,7 @@
             </tr>
           </thead>
           <tbody>
+            {{-- Membuat perulangan dari data FAQ --}}
             @foreach ($faqs as $faq)
             <tr>
               <td class="text-center">{{ $loop->iteration }}</td>

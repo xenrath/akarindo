@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    // function untuk menampilkan halaman index
+
     public function index(Request $request)
     {
         $menunggus = Tiket::where('status', 'menunggu')->get();
@@ -22,6 +24,8 @@ class DashboardController extends Controller
 
         $tanggal_awal = $request->tanggal_awal;
         $tanggal_akhir = $request->tanggal_akhir;
+
+        // membuat perulangan data tiket berdasarkan layanan dan request
 
         foreach ($layanans as $layanan) {
             if ($tanggal_awal != "" && $tanggal_akhir != "") {
@@ -62,16 +66,5 @@ class DashboardController extends Controller
             'labels',
             'data'
         ));
-    }
-
-    public function grafik()
-    {
-
-        // $ruangs = Ruang::selectRaw('nama')->withCount('pinjams')->orderByDesc('pinjams_count')->limit(10)->get();
-
-        // $labels = $ruangs->pluck('nama');
-        // $data = $ruangs->pluck('pinjams_count');
-
-        // return view('kalab.grafik.ruang', compact('labels', 'data'));
     }
 }

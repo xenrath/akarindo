@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    // menampilkan halaman index laporan
+
     public function index(Request $request)
     {
         $status = $request->status;
@@ -41,6 +43,8 @@ class ReportController extends Controller
 
         return view('admin.report.index', compact('tikets'));
     }
+
+    // menampilkan halaman print laporan
 
     public function print(Request $request)
     {

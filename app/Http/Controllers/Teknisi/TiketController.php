@@ -5,18 +5,16 @@ namespace App\Http\Controllers\Teknisi;
 use App\Events\Realtime;
 use App\Http\Controllers\Controller;
 use App\Models\DetailObrolan;
-use App\Models\Komentar;
 use App\Models\Obrolan;
-use App\Models\Produk;
 use App\Models\Tiket;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class TiketController extends Controller
 {
+    // menampilkan halaman tiket menunggu
+
     public function menunggu()
     {
         Tiket::where([
@@ -34,6 +32,8 @@ class TiketController extends Controller
         return view('teknisi.tiket.menunggu', compact('tikets'));
     }
 
+    // proses konfirmasi kerjakan tiket
+
     public function konfirmasi_kerjakan($id)
     {
         Tiket::where('id', $id)->update([
@@ -48,6 +48,8 @@ class TiketController extends Controller
 
         return back()->with('success', 'Berhasil mengkonfirmasi Tiket');
     }
+
+    // menampilkan halaman tiket proses
 
     public function proses()
     {
@@ -65,6 +67,8 @@ class TiketController extends Controller
 
         return view('teknisi.tiket.proses', compact('tikets'));
     }
+
+    // menampilkan halaman obrolan tiket proses
 
     public function obrolan($id)
     {
@@ -85,6 +89,8 @@ class TiketController extends Controller
 
         return view('teknisi.tiket.obrolan', compact('tiket', 'obrolan'));
     }
+
+    // proses tambah data obrolan
 
     public function buat_obrolan(Request $request)
     {
@@ -121,12 +127,16 @@ class TiketController extends Controller
         return back();
     }
 
+    // proses cek obrolan
+
     public function cek_obrolan($tiket_id)
     {
         $obrolan = Obrolan::where('tiket_id', $tiket_id)->first();
 
         return $obrolan;
     }
+
+    // proses konfirmasi selesai tiket
 
     public function konfirmasi_selesai(Request $request)
     {
@@ -162,6 +172,8 @@ class TiketController extends Controller
         return redirect('teknisi/tiket/proses')->with('success', 'Berhasil menyelesaikan Tiket');
     }
 
+    // menampilkan halaman tiket selesai
+
     public function selesai()
     {
         Tiket::where([
@@ -177,20 +189,5 @@ class TiketController extends Controller
         ])->get();
 
         return view('teknisi.tiket.selesai', compact('tikets'));
-    }
-
-    public function generateCode()
-    {
-        $now = Carbon::now();
-        $tikets = Tiket::where('tanggal_awal', $now->format('Y-m-d'))->get();
-        if (count($tikets) > 0) {
-            $count = count($tikets) + 1;
-            $num = sprintf("%04s", $count);
-        } else {
-            $num = "0001";
-        }
-
-        $result = $now->format('ymd') . $num;
-        return $result;
     }
 }

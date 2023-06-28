@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Validator;
 
 class TiketController extends Controller
 {
+    // menampilkan halaman tiket menunggu 
+
     public function menunggu()
     {
         Tiket::where([
@@ -33,6 +35,8 @@ class TiketController extends Controller
         return view('client.tiket.menunggu', compact('tikets'));
     }
 
+    // menampilkan halaman tiket proses
+
     public function proses()
     {
         Tiket::where([
@@ -49,6 +53,8 @@ class TiketController extends Controller
 
         return view('client.tiket.proses', compact('tikets'));
     }
+
+    // menampilkan halaman obrolan tiket proses
 
     public function obrolan($id)
     {
@@ -69,6 +75,8 @@ class TiketController extends Controller
 
         return view('client.tiket.obrolan', compact('tiket', 'obrolan'));
     }
+
+    // proses tambah data obrolan
 
     public function buat_obrolan(Request $request)
     {
@@ -105,12 +113,16 @@ class TiketController extends Controller
         return back();
     }
 
+    // proses cek obrolan
+
     public function cek_obrolan($tiket_id)
     {
         $obrolan = Obrolan::where('tiket_id', $tiket_id)->first();
 
         return $obrolan;
     }
+
+    // proses konfirmasi selesai 
 
     public function konfirmasi_selesai($id)
     {
@@ -126,6 +138,8 @@ class TiketController extends Controller
 
         return back()->with('success', 'Berhasil menyelesaikan Tiket');
     }
+
+    // menampilkan halaman tiket selesai
 
     public function selesai()
     {
@@ -144,11 +158,15 @@ class TiketController extends Controller
         return view('client.tiket.selesai', compact('tikets'));
     }
 
+    // menampilkan halaman tambah tiket
+
     public function create()
     {
         $produks = Produk::where('client_id', auth()->user()->id)->get();
         return view('client.tiket.create', compact('produks'));
     }
+
+    // proses tambah data tiket
 
     public function store(Request $request)
     {
@@ -190,6 +208,8 @@ class TiketController extends Controller
         return back()->with('success', 'Berhasil membuat Tiket.');
     }
 
+    // proses hapus data tiket
+
     public function destroy($id)
     {
         $tiket = Tiket::where('id', $id)->first();
@@ -198,6 +218,8 @@ class TiketController extends Controller
 
         return back()->with('success', 'Berhasil menghapus Tiket');
     }
+
+    // generate kode tiket
 
     public function generateCode()
     {

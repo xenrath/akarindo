@@ -14,6 +14,8 @@ use stdClass;
 
 class TiketController extends Controller
 {
+    // menampilkan halaman tiket menunggu
+
     public function menunggu()
     {
         Tiket::where('status', 'menunggu')->update([
@@ -24,6 +26,8 @@ class TiketController extends Controller
 
         return view('cs.tiket.menunggu', compact('tikets'));
     }
+
+    // menampilkan halaman tiket proses 
 
     public function proses()
     {
@@ -36,6 +40,8 @@ class TiketController extends Controller
         return view('cs.tiket.proses', compact('tikets'));
     }
 
+    // menampilkan halaman tiket selesai
+
     public function selesai()
     {
         Tiket::where('status', 'selesai')->update([
@@ -46,6 +52,8 @@ class TiketController extends Controller
 
         return view('cs.tiket.selesai', compact('tikets'));
     }
+
+    // proses konfirmasi jawab tiket
 
     public function konfirmasi_jawab(Request $request, $id)
     {
@@ -72,6 +80,8 @@ class TiketController extends Controller
         return back()->with('success', 'Berhasil mengirimkan Jawaban');
     }
 
+    // proses konfirmasi alihkan tiket
+
     public function konfirmasi_alihkan(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -94,6 +104,8 @@ class TiketController extends Controller
         return back()->with('success', 'Berhasil mengalihkan ke Teknisi');
     }
 
+    // proses konfirmasi selesai tiket
+
     public function konfirmasi_selesai($id)
     {
         Tiket::where('id', $id)->update([
@@ -107,6 +119,8 @@ class TiketController extends Controller
 
         return back()->with('success', 'Berhasil menyelesaikan Tiket');
     }
+
+    // proses ambil data teknisi
 
     public function teknisi($id)
     {

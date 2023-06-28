@@ -13,12 +13,15 @@ use Illuminate\Support\Facades\Validator;
 
 class ProdukController extends Controller
 {
+    // menampilkan halaman index produk
+
     function index()
     {
         $produks = Produk::get();
-
         return view('admin.produk.index', compact('produks'));
     }
+
+    // menampilkan halaman tambah produk
 
     function create()
     {
@@ -27,6 +30,8 @@ class ProdukController extends Controller
 
         return view('admin.produk.create', compact('clients', 'sublayanans'));
     }
+
+    // proses tambah data produk
 
     function store(Request $request)
     {
@@ -62,10 +67,14 @@ class ProdukController extends Controller
         return redirect('admin/produk')->with('success', 'Berhasil menambahkan Produk');
     }
 
+    // menampilkan halaman detail produk
+
     public function show(Produk $produk)
     {
         return view('admin.produk.show', compact('produk'));
     }
+
+    // menampilkan halaman ubah produk
 
     public function edit(Produk $produk)
     {
@@ -75,6 +84,7 @@ class ProdukController extends Controller
         return view('admin.produk.edit', compact('produk', 'clients', 'sublayanans'));
     }
 
+    // proses ubah data produk
 
     public function update(Request $request, Produk $produk)
     {
@@ -113,6 +123,8 @@ class ProdukController extends Controller
 
         return redirect('admin/produk')->with('success', 'Berhasil mengubah Produk');
     }
+
+    // proses hapus data produk
 
     public function destroy($id)
     {

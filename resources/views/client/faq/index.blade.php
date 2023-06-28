@@ -25,6 +25,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12" id="accordion">
+        {{-- Membuat perulangan dari data FAQ --}}
         @foreach ($faqs as $faq)
         <div class="card card-primary card-outline">
           <a class="d-block w-100" data-toggle="collapse" href="#faq-{{ $faq->id }}">

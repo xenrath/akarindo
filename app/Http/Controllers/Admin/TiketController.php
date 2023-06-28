@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class TiketController extends Controller
 {
-    // Tiket Menunggu
+    // menampilkan halaman menunggu
 
     public function menunggu()
     {
@@ -19,17 +19,23 @@ class TiketController extends Controller
         return view('admin.tiket.menunggu', compact('tikets'));
     }
 
+    // menampilkan halaman proses
+
     public function proses()
     {
         $tikets = Tiket::where('status', 'proses')->get();
         return view('admin.tiket.proses', compact('tikets'));
     }
 
+    // menampilkan halaman selesai
+
     public function selesai()
     {
         $tikets = Tiket::where('status', 'selesai')->get();
         return view('admin.tiket.selesai', compact('tikets'));
     }
+
+    // proses konfirmasi proses tiket
 
     public function konfirmasi_proses($id)
     {
@@ -39,6 +45,8 @@ class TiketController extends Controller
 
         return back()->with('success', 'Berhasil memproses Tiket');
     }
+
+    // proses konfirmasi selesai tiket
 
     public function konfirmasi_selesai($id)
     {
@@ -51,6 +59,8 @@ class TiketController extends Controller
 
         return back()->with('success', 'Berhasil menyelesaikan Tiket');
     }
+
+    
 
     public function index(Request $request)
     {

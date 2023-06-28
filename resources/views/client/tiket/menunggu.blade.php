@@ -49,6 +49,9 @@
               </tr>
             </thead>
             <tbody>
+
+              {{-- membuat perulangan dari data tiket menunggu --}}
+
               @foreach ($tikets as $tiket)
                 <tr>
                   <td class="text-center">{{ $loop->iteration }}</td>

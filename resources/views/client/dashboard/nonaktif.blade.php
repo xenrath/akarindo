@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css?v=3.2.0') }}">
 </head>
 <body>
+
+  {{-- Menampilkan halaman ini jika client status nonaktif --}}
+
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">

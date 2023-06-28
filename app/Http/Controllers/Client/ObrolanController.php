@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 
 class ObrolanController extends Controller
 {
+    // menampilkan halaman tambah obrolan
+
     public function create()
     {
         $cs = User::where('role', 'cs')->first();
@@ -30,6 +32,8 @@ class ObrolanController extends Controller
 
         return view('client.obrolan.create', compact('obrolan'));
     }
+
+    // proses tambah data obrolan
 
     public function store(Request $request)
     {
@@ -54,6 +58,8 @@ class ObrolanController extends Controller
 
         return back();
     }
+
+    // proses cek obrolan 
 
     public function cek_obrolan()
     {

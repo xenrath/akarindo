@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    // menampilkan halaman index client
+
     public function index()
     {
         $menunggus = Tiket::where([
@@ -27,6 +29,8 @@ class DashboardController extends Controller
 
         return view('client.dashboard.index', compact('menunggus', 'proseses', 'selesais'));
     }
+
+    // menampilkan halaman nonaktif client
 
     public function nonaktif()
     {

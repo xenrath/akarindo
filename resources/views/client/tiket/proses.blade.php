@@ -49,6 +49,9 @@
               </tr>
             </thead>
             <tbody>
+
+              {{-- membuat perulangan dari data tiket proses --}}
+
               @foreach ($tikets as $tiket)
                 <tr>
                   <td class="text-center">{{ $loop->iteration }}</td>
@@ -85,6 +88,9 @@
                     @endif
                   </td>
                 </tr>
+
+                {{-- menampilkan modal lihat --}}
+
                 <div class="modal fade" id="modal-lihat-{{ $tiket->id }}">
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -162,6 +168,9 @@
                     </div>
                   </div>
                 </div>
+
+                {{-- menampilkan modal konfirmasi --}}
+
                 <div class="modal fade" id="modal-konfirmasi-{{ $tiket->id }}">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -182,6 +191,7 @@
                     </div>
                   </div>
                 </div>
+
               @endforeach
             </tbody>
           </table>
