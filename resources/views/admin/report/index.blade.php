@@ -23,6 +23,9 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
+
+      {{-- menampilkan alert berhasil --}}
+
       @if (session('success'))
         <div class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -32,6 +35,7 @@
           {{ session('success') }}
         </div>
       @endif
+      
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Data Laporan</h3>

@@ -11,17 +11,23 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    // menampilkan halaman index user
+
     public function index()
     {
         $users = User::get();
         return view('admin.user.index', compact('users'));
     }
 
+    // menampilkan halaman tambah user
+
     public function create()
     {
         $layanans = Layanan::get();
         return view('admin.user.create', compact('layanans'));
     }
+
+    // proses tambah data user
 
     public function store(Request $request)
     {
@@ -110,16 +116,22 @@ class UserController extends Controller
         return redirect('admin/user')->with('success', 'Berhasil menambahkan User');
     }
 
+    // menampilkan halaman detail user
+
     public function show(User $user)
     {
         return view('admin.user.show', compact('user'));
     }
+
+    // menampilkan halaman ubah user
 
     public function edit(User $user)
     {
         $layanans = Layanan::get();
         return view('admin.user.edit', compact('user', 'layanans'));
     }
+
+    // proses ubah data user
 
     public function update(Request $request, User $user)
     {
@@ -234,6 +246,8 @@ class UserController extends Controller
         return redirect('admin/user')->with('success', 'Berhasil mengubah User');
     }
 
+    // proses hapus data user
+
     public function destroy($id)
     {
         $user = User::find($id);
@@ -242,14 +256,7 @@ class UserController extends Controller
         return redirect('admin/user')->with('success', 'Berhasil menghapus User');
     }
 
-    public function nonaktif($id)
-    {
-        User::where('id', $id)->update([
-            'status' => false
-        ]);
-
-        return back()->with('success', 'Berhasil menonaktifkan Client');
-    }
+    // generate kode user
 
     public function kodeUser()
     {

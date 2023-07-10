@@ -23,6 +23,9 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
+
+    {{-- menampilkan alert berhasil --}}
+
     @if (session('success'))
     <div class="alert alert-success alert-dismissible">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -32,6 +35,9 @@
       {{ session('success') }}
     </div>
     @endif
+
+    {{-- menampilkan data level --}}
+
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Data Level</h3>
@@ -53,6 +59,9 @@
             </tr>
           </thead>
           <tbody>
+
+            {{-- melakukan perulangan data level --}}
+
             @foreach ($levels as $level)
             <tr>
               <td class="text-center">{{ $loop->iteration }}</td>
@@ -68,6 +77,9 @@
                 </button>
               </td>
             </tr>
+
+            {{-- menampilkan modal hapus --}}
+
             <div class="modal fade" id="modal-hapus-{{ $level->id }}">
               <div class="modal-dialog">
                 <div class="modal-content">

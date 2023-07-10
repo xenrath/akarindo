@@ -21,6 +21,8 @@
 </div>
 <!-- /.content-header -->
 
+{{-- menampilkan detail data layanan --}}
+
 <section class="content">
   <div class="container-fluid">
     <div class="card">

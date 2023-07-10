@@ -28,6 +28,9 @@
         <h3 class="card-title">Lihat Layanan</h3>
       </div>
       <!-- /.card-header -->
+
+      {{-- menampilkan detail data faq --}}
+
       <div class="card-body">
         <div class="row">
           <div class="col-lg-8">

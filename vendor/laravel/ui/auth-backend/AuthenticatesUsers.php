@@ -76,6 +76,7 @@ trait AuthenticatesUsers
             'password' => 'required|string',
         ], [
             $this->username() . '.required' => 'Email tidak boleh kosong!',
+            $this->username() . '.email' => 'Email yang dimasukan salah!',
             'password.required' => 'Password tidak boleh kosong!'
         ]);
     }

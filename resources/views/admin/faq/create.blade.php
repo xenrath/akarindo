@@ -23,6 +23,9 @@
 
 <section class="content">
   <div class="container-fluid">
+
+    {{-- menampilkan alert gagal --}}
+
     @if (session('error'))
     <div class="alert alert-danger alert-dismissible">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -34,6 +37,9 @@
       @endforeach
     </div>
     @endif
+
+    {{-- menampilkan form faq --}}
+
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Tambah FAQ</h3>
