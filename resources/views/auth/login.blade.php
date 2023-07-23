@@ -29,7 +29,7 @@
           <i class="icon fas fa-ban"></i> Error!
         </h5>
         @foreach ($errors->all() as $error)
-          - {{ $error }}
+          - {{ $error }} <br>
         @endforeach
       </div>
     @endif
