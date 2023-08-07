@@ -160,19 +160,46 @@
             @endif
           </div>
         </div>
-        <div class="card-footer">
-          <form action="{{ url('teknisi/tiket/buat_obrolan') }}" method="post" autocomplete="off">
-            @csrf
-            <input type="hidden" name="tiket_id" value="{{ $tiket->id }}" class="form-control">
-            <div class="input-group">
-              <input type="text" name="pesan" placeholder="ketikan pesan ..." class="form-control">
-              <span class="input-group-append">
-                <button type="submit" class="btn btn-primary">
-                  Kirim <i class="fas fa-paper-plane"></i>
-                </button>
-              </span>
+        <div class="card-footer text-right">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-pesan">
+            Buat Pesan
+          </button>
+          <div class="modal fade" id="modal-pesan">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Buat Pesan</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form action="{{ url('teknisi/tiket/buat_obrolan') }}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <div class="modal-body">
+                    <input type="hidden" name="tiket_id" value="{{ $tiket->id }}" class="form-control">
+                    <div class="form-group text-left">
+                      <label class="form-label" for="pesan">Pesan</label>
+                      <textarea class="form-control" name="pesan" id="pesan"></textarea>
+                    </div>
+                    <div class="form-group text-left">
+                      <label class="form-label" for="gambar">Gambar</label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="gambar" name="gambar"
+                          accept="image/*">
+                        <label class="custom-file-label" for="gambar">Pilih Foto</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">
+                      Kirim <i class="fas fa-paper-plane"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
