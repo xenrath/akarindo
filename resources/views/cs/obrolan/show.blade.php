@@ -111,6 +111,7 @@
                 <form action="{{ url('cs/obrolan') }}" method="post" enctype="multipart/form-data">
                   @csrf
                   <div class="modal-body">
+                    <input type="hidden" name="obrolan_id" class="form-control" value="{{ $obrolan->id }}">
                     <div class="form-group text-left">
                       <label class="form-label" for="pesan">Pesan</label>
                       <textarea class="form-control" name="pesan" id="pesan"></textarea>
