@@ -12,9 +12,9 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $menunggus = Tiket::where('status', 'Menunggu')->get();
-        $proseses = Tiket::where('status', 'Diproses')->get();
-        $selesais = Tiket::where('status', 'Selesai')->get();
+        $menunggus = Tiket::where('status', 'menunggu')->get();
+        $proseses = Tiket::where('status', 'proses')->get();
+        $selesais = Tiket::where('status', 'selesai')->get();
 
         return view('cs.dashboard.index', compact('menunggus', 'proseses', 'selesais'));
     }

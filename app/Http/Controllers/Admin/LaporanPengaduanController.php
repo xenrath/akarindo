@@ -7,7 +7,7 @@ use App\Models\Tiket;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
-class ReportController extends Controller
+class LaporanPengaduanController extends Controller
 {
     // menampilkan halaman index laporan
 
@@ -41,7 +41,7 @@ class ReportController extends Controller
 
         // return response($tikets);
 
-        return view('admin.report.index', compact('tikets'));
+        return view('admin.laporan-pengaduan.index', compact('tikets'));
     }
 
     // menampilkan halaman print laporan
@@ -74,7 +74,7 @@ class ReportController extends Controller
             $tikets = Tiket::orderBy('id', 'DESC')->get();
         }
 
-        $pdf = Pdf::loadview('admin.report.print', compact('tikets'));
+        $pdf = Pdf::loadview('admin.laporan-pengaduan.print', compact('tikets'));
         return $pdf->stream('Laporan Pengaduan');
     }
 }

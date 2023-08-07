@@ -223,12 +223,12 @@
     var form = document.getElementById('form-action')
 
     function cari() {
-      form.action = "{{ url('admin/report') }}";
+      form.action = "{{ url('admin/laporan-pengaduan') }}";
       form.submit();
     }
 
     function print() {
-      form.action = "{{ url('admin/report/print') }}";
+      form.action = "{{ url('admin/laporan-pengaduan/print') }}";
       form.submit();
     }
   </script>

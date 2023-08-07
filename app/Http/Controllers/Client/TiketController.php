@@ -80,15 +80,8 @@ class TiketController extends Controller
 
     public function buat_obrolan(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'pesan' => 'required',
-        ], [
-            'pesan.required' => 'Pesan tidak boleh kosong!',
-        ]);
-
-        if ($validator->fails()) {
-            $error = $validator->errors()->all();
-            return back()->withInput()->with('error', $error);
+        if (!($request->pesan || $request->gambar)) {
+            return back()->with('error', 'Pesan atau Gambar belum diisi!');
         }
         
         $tiket_id = $request->tiket_id;
@@ -102,10 +95,20 @@ class TiketController extends Controller
             ]);
         }
 
+        if ($request->gambar) {
+            $gambar = str_replace(' ', '', $request->gambar->getClientOriginalName());
+            $namagambar = "obrolan/" . date('YmdHis') . "." . $gambar;
+            $request->gambar->storeAs('public/uploads', $namagambar);
+        } else {
+            $namagambar = null;
+        }
+
         DetailObrolan::create([
             'obrolan_id' => $obrolan->id,
             'pengirim_id' => auth()->user()->id,
-            'pesan' => $pesan
+            'pesan' => $pesan,
+            'gambar' => $namagambar
+
         ]);
 
         Realtime::dispatch('message');

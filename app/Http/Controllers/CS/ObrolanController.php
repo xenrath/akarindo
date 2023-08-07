@@ -23,10 +23,23 @@ class ObrolanController extends Controller
 
     public function store(Request $request)
     {
+        if (!($request->pesan || $request->gambar)) {
+            return back()->with('error', 'Pesan atau Gambar belum diisi!');
+        }
+
+        if ($request->gambar) {
+            $gambar = str_replace(' ', '', $request->gambar->getClientOriginalName());
+            $namagambar = "obrolan/" . date('YmdHis') . "." . $gambar;
+            $request->gambar->storeAs('public/uploads', $namagambar);
+        } else {
+            $namagambar = null;
+        }
+        
         DetailObrolan::create([
             'obrolan_id' => $request->obrolan_id,
             'pengirim_id' => auth()->user()->id,
-            'pesan' => $request->pesan
+            'pesan' => $request->pesan,
+            'gambar' => $namagambar,
         ]);
 
         Realtime::dispatch('message');

@@ -8,47 +8,6 @@
     </p>
   </a>
 </li>
-{{-- <li class="nav-header">Pengaduan</li> --}}
-{{-- <li class="nav-item {{ request()->is('admin/tiket*') ? 'menu-open' : '' }}">
-  <a href="#" class="nav-link {{ request()->is('admin/tiket*') ? 'active' : '' }}">
-    <i class="nav-icon fas fa-ticket-alt"></i>
-    <p>
-      Data Pengaduan
-      <i class="right fas fa-angle-left"></i>
-    </p>
-  </a>
-  <ul class="nav nav-treeview">
-    <li class="nav-item">
-      <a href="{{ url('admin/tiket/menunggu') }}"
-        class="nav-link {{ request()->is('admin/tiket/menunggu*') ? 'active' : '' }}">
-        <i class="far fa-circle nav-icon"></i>
-        <p>Menunggu</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="{{ url('admin/tiket/proses') }}"
-        class="nav-link {{ request()->is('admin/tiket/proses*') ? 'active' : '' }}">
-        <i class="far fa-circle nav-icon"></i>
-        <p>Proses</p>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="{{ url('admin/tiket/selesai') }}"
-        class="nav-link {{ request()->is('admin/tiket/selesai*') ? 'active' : '' }}">
-        <i class="far fa-circle nav-icon"></i>
-        <p>Selesai</p>
-      </a>
-    </li>
-  </ul>
-</li> --}}
-{{-- <li class="nav-item">
-  <a href="{{ url('admin/tiket') }}" class="nav-link {{ request()->is('admin/tiket*') ? 'active' : '' }}">
-    <i class="nav-icon fas fa-ticket-alt"></i>
-    <p>
-      Data Pengaduan
-    </p>
-  </a>
-</li> --}}
 <li class="nav-header">Layanan</li>
 <li class="nav-item {{ request()->is('admin/layanan*') || request()->is('admin/sublayanan*') ? 'menu-open' : '' }}">
   <a href="#"
@@ -110,13 +69,31 @@
   </a>
 </li>
 <li class="nav-header">Laporan</li>
-<li class="nav-item">
-  <a href="{{ url('admin/report') }}" class="nav-link {{ request()->is('admin/report*') ? 'active' : '' }}">
+<li class="nav-item {{ request()->is('admin/laporan-pengaduan*') || request()->is('admin/laporan-selesai*') ? 'menu-open' : '' }}">
+  <a href="#"
+    class="nav-link {{ request()->is('admin/laporan-pengaduan*') || request()->is('admin/laporan-selesai*') ? 'active' : '' }}">
     <i class="nav-icon fas fa-clipboard-list"></i>
     <p>
-      Laporan Pengaduan
+      Data Laporan
+      <i class="right fas fa-angle-left"></i>
     </p>
   </a>
+  <ul class="nav nav-treeview">
+    <li class="nav-item">
+      <a href="{{ url('admin/laporan-selesai') }}"
+        class="nav-link {{ request()->is('admin/laporan-selesai*') ? 'active' : '' }}">
+        <i class="nav-icon far fa-circle"></i>
+        <p>Laporan Selesai</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ url('admin/laporan-pengaduan') }}"
+        class="nav-link {{ request()->is('admin/laporan-pengaduan*') ? 'active' : '' }}">
+        <i class="nav-icon far fa-circle"></i>
+        <p>Data Pengaduan</p>
+      </a>
+    </li>
+  </ul>
 </li>
 <li class="nav-header">Profile</li>
 <li class="nav-item">

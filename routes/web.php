@@ -48,8 +48,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
   Route::resource('sublayanan', \App\Http\Controllers\Admin\SubLayananController::class);
   Route::resource('produk', \App\Http\Controllers\Admin\ProdukController::class);
   Route::resource('faq', \App\Http\Controllers\Admin\FaqController::class);
-  Route::get('report', [\App\Http\Controllers\Admin\ReportController::class, 'index']);
-  Route::get('report/print', [\App\Http\Controllers\Admin\ReportController::class, 'print']);
+  Route::get('laporan-pengaduan', [\App\Http\Controllers\Admin\LaporanPengaduanController::class, 'index']);
+  Route::get('laporan-pengaduan/print', [\App\Http\Controllers\Admin\LaporanPengaduanController::class, 'print']);
+  Route::resource('laporan-selesai', \App\Http\Controllers\Admin\LaporanSelesaiController::class)->only('index', 'show');
 });
 
 Route::prefix('cs')->middleware('cs')->group(function () {
@@ -65,6 +66,9 @@ Route::prefix('cs')->middleware('cs')->group(function () {
   Route::get('tiket/konfirmasi_selesai/{id}', [\App\Http\Controllers\CS\TiketController::class, 'konfirmasi_selesai']);
   Route::get('tiket/teknisi/{id}', [\App\Http\Controllers\CS\TiketController::class, 'teknisi']);
   Route::resource('tiket', \App\Http\Controllers\CS\TiketController::class);
+
+  Route::resource('laporan-menunggu', \App\Http\Controllers\CS\LaporanMenungguController::class)->only('index', 'show');
+  Route::resource('laporan-selesai', \App\Http\Controllers\CS\LaporanSelesaiController::class)->only('index', 'show');
 });
 
 Route::prefix('teknisi')->middleware('teknisi')->group(function () {

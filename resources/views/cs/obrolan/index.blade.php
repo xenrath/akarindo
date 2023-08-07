@@ -23,6 +23,7 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
+      @if (count($obrolans) > 0)
       <div class="row">
         @foreach ($obrolans as $obrolan)
           <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
@@ -62,6 +63,13 @@
           </div>
         @endforeach
       </div>
+      @else
+      <div class="card">
+        <div class="card-body">
+          <p class="text-center p-0">- Belum ada obrolan yang dibuat -</p>
+        </div>
+      </div>
+      @endif
       <!-- /.container-fluid -->
     </div>
   </section>

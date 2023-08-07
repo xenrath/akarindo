@@ -38,7 +38,7 @@
           <h5>
             <i class="icon fas fa-ban"></i> Error!
           </h5>
-          {{ session('error') }}
+          - {{ session('error') }}
         </div>
       @endif
       <div class="card">

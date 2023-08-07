@@ -85,9 +85,7 @@
             <i class="icon fas fa-ban"></i> Error!
           </h5>
           <ul>
-            @foreach (session('error') as $error)
-              <li>{{ $error }}</li>
-            @endforeach
+            <li>{{ session('error') }}</li>
           </ul>
         </div>
       @endif
@@ -106,6 +104,10 @@
               {{-- membuat perulangan dari data detail obrolan --}}
 
               @foreach ($obrolan->detail_obrolans as $detail_obrolan)
+                @php
+                  $pesan = $detail_obrolan->pesan;
+                  $gambar = $detail_obrolan->gambar;
+                @endphp
                 @if ($detail_obrolan->pengirim_id == auth()->user()->id)
                   <div class="direct-chat-msg right">
                     <div class="direct-chat-infos clearfix">
@@ -116,7 +118,16 @@
                     <img class="direct-chat-img" src="{{ asset('storage/uploads/' . $detail_obrolan->pengirim->foto) }}"
                       alt="{{ $detail_obrolan->pengirim->nama }}">
                     <div class="direct-chat-text">
-                      {{ $detail_obrolan->pesan }}
+                      @if ($gambar)
+                        <img src="{{ asset('storage/uploads/' . $gambar) }}" alt="" style="width: 400px"
+                          class="rounded my-1">
+                      @endif
+                      @if ($gambar && $pesan)
+                        <br>
+                      @endif
+                      @if ($pesan)
+                        {{ $pesan }}
+                      @endif
                     </div>
                   </div>
                 @else
@@ -128,7 +139,16 @@
                     <img class="direct-chat-img" src="{{ asset('storage/uploads/' . $detail_obrolan->pengirim->foto) }}"
                       alt="{{ $detail_obrolan->pengirim->nama }}">
                     <div class="direct-chat-text">
-                      {{ $detail_obrolan->pesan }}
+                      @if ($gambar)
+                        <img src="{{ asset('storage/uploads/' . $gambar) }}" alt="" style="width: 400px"
+                          class="rounded my-1">
+                      @endif
+                      @if ($gambar && $pesan)
+                        <br>
+                      @endif
+                      @if ($pesan)
+                        {{ $pesan }}
+                      @endif
                     </div>
                   </div>
                 @endif

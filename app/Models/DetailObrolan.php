@@ -15,6 +15,7 @@ class DetailObrolan extends Model
         'obrolan_id',
         'pengirim_id',
         'pesan',
+        'gambar',
         'is_read'
     ];
 

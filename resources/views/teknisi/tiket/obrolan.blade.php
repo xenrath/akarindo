@@ -85,14 +85,29 @@
         </div>
         <!-- /.card-body -->
       </div>
-      <div class="card">
+      @if (session('error'))
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h5>
+            <i class="icon fas fa-ban"></i> Error!
+          </h5>
+          <ul>
+            <li>{{ session('error') }}</li>
+          </ul>
+        </div>
+      @endif
+      <div class="card card-primary card-outline direct-chat direct-chat-primary">
         <div class="card-header">
           <h3 class="card-title">Detail Obrolan</h3>
         </div>
         <div class="card-body">
-          <div class="direct-chat-messages p-0" id="scroll-bottom" style="height: 35vh;">
+          <div class="direct-chat-messages px-4 py-3" id="scroll-bottom" style="height: 35vh;">
             @if ($obrolan)
               @foreach ($obrolan->detail_obrolans as $detail_obrolan)
+                @php
+                  $pesan = $detail_obrolan->pesan;
+                  $gambar = $detail_obrolan->gambar;
+                @endphp
                 @if ($detail_obrolan->pengirim_id == auth()->user()->id)
                   <div class="direct-chat-msg right">
                     <div class="direct-chat-infos clearfix">
@@ -103,7 +118,16 @@
                     <img class="direct-chat-img" src="{{ asset('storage/uploads/' . $detail_obrolan->pengirim->foto) }}"
                       alt="{{ $detail_obrolan->pengirim->nama }}">
                     <div class="direct-chat-text">
-                      {{ $detail_obrolan->pesan }}
+                      @if ($gambar)
+                        <img src="{{ asset('storage/uploads/' . $gambar) }}" alt="" style="width: 400px"
+                          class="rounded my-1">
+                      @endif
+                      @if ($gambar && $pesan)
+                        <br>
+                      @endif
+                      @if ($pesan)
+                        {{ $pesan }}
+                      @endif
                     </div>
                   </div>
                 @else
@@ -115,7 +139,16 @@
                     <img class="direct-chat-img" src="{{ asset('storage/uploads/' . $detail_obrolan->pengirim->foto) }}"
                       alt="{{ $detail_obrolan->pengirim->nama }}">
                     <div class="direct-chat-text">
-                      {{ $detail_obrolan->pesan }}
+                      @if ($gambar)
+                        <img src="{{ asset('storage/uploads/' . $gambar) }}" alt="" style="width: 400px"
+                          class="rounded my-1">
+                      @endif
+                      @if ($gambar && $pesan)
+                        <br>
+                      @endif
+                      @if ($pesan)
+                        {{ $pesan }}
+                      @endif
                     </div>
                   </div>
                 @endif
