@@ -84,6 +84,12 @@
     </li>
   </ul>
 </li>
+<li class="nav-item">
+  <a href="{{ url('cs/laporan-pengaduan') }}" class="nav-link {{ request()->is('cs/laporan-pengaduan') ? 'active' : '' }}">
+    <i class="nav-icon fas fa-clipboard-list"></i>
+    <p>Laporan Pengaduan</p>
+  </a>
+</li>
 <li class="nav-header">Profile</li>
 <li class="nav-item">
   <a href="{{ url('profile') }}" class="nav-link {{ request()->is('profile') ? 'active' : '' }}">

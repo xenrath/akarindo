@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\CS;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tiket;
@@ -41,7 +41,7 @@ class LaporanPengaduanController extends Controller
 
         // return response($tikets);
 
-        return view('cs.laporan-pengaduan.index', compact('tikets'));
+        return view('admin.laporan-pengaduan.index', compact('tikets'));
     }
 
     // menampilkan halaman print laporan
@@ -74,7 +74,7 @@ class LaporanPengaduanController extends Controller
             $tikets = Tiket::orderBy('id', 'DESC')->get();
         }
 
-        $pdf = Pdf::loadview('cs.laporan-pengaduan.print', compact('tikets'));
+        $pdf = Pdf::loadview('admin.laporan-pengaduan.print', compact('tikets'));
         return $pdf->stream('Laporan Pengaduan');
     }
 }
