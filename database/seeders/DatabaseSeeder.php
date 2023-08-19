@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             LayananSeeder::class,
             ProdukSeeder::class,
             SubLayananSeeder::class,
-            FaqSeeder::class
+            FaqSeeder::class,
+            ChatbotSeeder::class,
+            SubChatbotSeeder::class
         ]);
     }
 }

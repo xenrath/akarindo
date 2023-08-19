@@ -9,8 +9,8 @@
 </li>
 <li class="nav-header">Obrolan</li>
 <li class="nav-item">
-  <a href="{{ url('client/obrolan/create') }}"
-    class="nav-link {{ request()->is('client/obrolan/create') ? 'active' : '' }}">
+  <a href="{{ url('client/obrolan') }}"
+    class="nav-link {{ request()->is('client/obrolan*') ? 'active' : '' }}">
     <i class="nav-icon fas fa-comments"></i>
     <p>
       Obrolan

@@ -91,7 +91,11 @@ Route::prefix('teknisi')->middleware('teknisi')->group(function () {
 Route::prefix('client')->middleware('client')->group(function () {
   Route::get('/', [\App\Http\Controllers\Client\DashboardController::class, 'index']);
 
+  Route::get('obrolan/chatbot', [\App\Http\Controllers\Client\ObrolanController::class, 'chatbot']);
+  Route::get('obrolan/sub_chatbot/{id}', [\App\Http\Controllers\Client\ObrolanController::class, 'sub_chatbot']);
+  Route::get('obrolan/jawaban/{id}', [\App\Http\Controllers\Client\ObrolanController::class, 'jawaban']);
   Route::resource('obrolan', \App\Http\Controllers\Client\ObrolanController::class);
+
 
   Route::get('tiket/menunggu', [\App\Http\Controllers\Client\TiketController::class, 'menunggu']);
   Route::get('tiket/proses', [\App\Http\Controllers\Client\TiketController::class, 'proses']);

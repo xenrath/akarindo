@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tiket Menunggu')
+@section('title', 'Obrolan')
 
 @section('content')
   <!-- Content Header (Page header) -->

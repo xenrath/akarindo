@@ -4,13 +4,30 @@ namespace App\Http\Controllers\Client;
 
 use App\Events\Realtime;
 use App\Http\Controllers\Controller;
+use App\Models\Chatbot;
+use App\Models\DetailChatbot;
 use App\Models\DetailObrolan;
 use App\Models\Obrolan;
+use App\Models\SubChatbot;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ObrolanController extends Controller
 {
+    public function index()
+    {
+        $jam = Carbon::now()->format('H:i');
+
+        if ($jam >= '08:00' && $jam <= '16:00') {
+            $is_jam = true;
+        } else {
+            $is_jam = false;
+        }
+
+        return view('client.obrolan.index', compact('is_jam'));
+    }
+
     // menampilkan halaman tambah obrolan
 
     public function create()
@@ -84,5 +101,26 @@ class ObrolanController extends Controller
         ])->first();
 
         return $obrolan;
+    }
+
+    public function chatbot()
+    {
+        $chatbots = Chatbot::all();
+
+        return view('client.obrolan.chatbot', compact('chatbots'));
+    }
+
+    public function sub_chatbot($id)
+    {
+        $subchatbots = SubChatbot::where('chatbot_id', $id)->get();
+
+        return $subchatbots;
+    }
+
+    public function jawaban($id)
+    {
+        $sub_chatbot = SubChatbot::where('id', $id)->first();
+
+        return $sub_chatbot;
     }
 }
